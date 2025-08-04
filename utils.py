@@ -67,7 +67,7 @@ for i in range(len(class_list)):
 model = YOLO("yolov8n.pt", "v8") # load a pretrained YOLOv8n model
 EDFlag = False
 #Voice Related
-TRIGGER_RMS = 10  # start recording above 10
+TRIGGER_RMS = 3  # start recording above 3 (lowered from 10 for more sensitivity)
 RATE = 16000  # sample rate
 TIMEOUT_SECS = 3  # silence time after which recording stops
 FRAME_SECS = 0.25  # length of frame(chunks) to be processed at once in secs
@@ -79,7 +79,7 @@ SHORT_WIDTH = 2
 CHUNK = int(RATE * FRAME_SECS)
 CUSHION_FRAMES = int(CUSHION_SECS / FRAME_SECS)
 TIMEOUT_FRAMES = int(TIMEOUT_SECS / FRAME_SECS)
-f_name_directory = 'C:/Users/kaungmyat/PycharmProjects/BestOnlineExamProctor/static/OuputAudios'
+f_name_directory = 'static/OutputAudios'  # Fixed path to use relative directory
 # Capture
 cap = None
 
@@ -114,23 +114,72 @@ def move_file_to_output_folder(file_name,folder_name='OutputVideos'):
         print(f"Error: Failed to move the file. {e}")
 
 #Function to reduce video file's data rate to 100 kbps
-def reduceBitRate (input_file,output_file):
-   target_bitrate = "1000k"  # Set your desired target bitrate here
-   # Specify the full path to the FFmpeg executable
-   ffmpeg_path = "C:/Users/kaungmyat/Downloads/ffmpeg-2023-08-28-git-b5273c619d-essentials_build/ffmpeg-2023-08-28-git-b5273c619d-essentials_build/bin/ffmpeg.exe"  # Replace with the actual path to ffmpeg.exe on your system
-   # Run FFmpeg command to lower the bitrate
-   command = [
-      ffmpeg_path,
-      "-i", input_file,
-      "-b:v", target_bitrate,
-      "-c:v", "libx264",
-      "-c:a", "aac",
-      "-strict", "experimental",
-      "-b:a", "192k",
-      output_file
-   ]
-   subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-   print("Bitrate conversion completed.")
+def reduceBitRate(input_file, output_file):
+    target_bitrate = "1000k"  # Set your desired target bitrate here
+    
+    # Try to find FFmpeg executable
+    ffmpeg_paths = [
+        "ffmpeg",  # If FFmpeg is in PATH
+        "C:/Program Files/ffmpeg/bin/ffmpeg.exe",
+        "C:/ffmpeg/bin/ffmpeg.exe",
+        "C:/Users/kaungmyat/Downloads/ffmpeg-2023-08-28-git-b5273c619d-essentials_build/ffmpeg-2023-08-28-git-b5273c619d-essentials_build/bin/ffmpeg.exe"
+    ]
+    
+    ffmpeg_path = None
+    for path in ffmpeg_paths:
+        try:
+            # Test if FFmpeg exists and is executable
+            result = subprocess.run([path, "-version"], 
+                                  capture_output=True, 
+                                  text=True, 
+                                  timeout=5)
+            if result.returncode == 0:
+                ffmpeg_path = path
+                break
+        except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
+            continue
+    
+    if not ffmpeg_path:
+        print("FFmpeg not found. Skipping bitrate conversion.")
+        print("Install FFmpeg or add it to PATH for video compression.")
+        # Just copy the file if FFmpeg is not available
+        try:
+            shutil.copy2(input_file, output_file)
+            print(f"Copied {input_file} to {output_file} (no compression)")
+        except Exception as e:
+            print(f"Error copying file: {e}")
+        return
+    
+    # Run FFmpeg command to lower the bitrate
+    command = [
+        ffmpeg_path,
+        "-i", input_file,
+        "-b:v", target_bitrate,
+        "-c:v", "libx264",
+        "-c:a", "aac",
+        "-strict", "experimental",
+        "-b:a", "192k",
+        "-y",  # Overwrite output file
+        output_file
+    ]
+    
+    try:
+        result = subprocess.run(command, 
+                              capture_output=True, 
+                              text=True, 
+                              timeout=30)
+        if result.returncode == 0:
+            print("Bitrate conversion completed.")
+        else:
+            print(f"FFmpeg error: {result.stderr}")
+            # Fallback to copying
+            shutil.copy2(input_file, output_file)
+    except subprocess.TimeoutExpired:
+        print("FFmpeg timeout. Copying file without compression.")
+        shutil.copy2(input_file, output_file)
+    except Exception as e:
+        print(f"Error during conversion: {e}")
+        shutil.copy2(input_file, output_file)
 
 #Recordings related
 #Recording Function for Face Verification
@@ -171,7 +220,7 @@ def faceDetectionRecording(img, text):
                 move_file_to_output_folder(outputVideo)
             os.remove(video[0])
             print(recorded_durations)
-            video[0] = str(random.randint(1, 50000)) + ".mp4"
+            video[0] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[0] = cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width, height))
             flag[0] = False
     prev_state[0] = text
@@ -207,7 +256,7 @@ def Head_record_duration(text,img):
             os.remove(video[1])
             print(recorded_durations)
             start_time[1] = time.time()
-            video[1] = str(random.randint(1, 50000)) + ".mp4"
+            video[1] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[1] = cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height))
             flag[1] = False
         elif str(text) == prev_state[1] and (time.time() - start_time[1]) > 3:
@@ -240,7 +289,7 @@ def Head_record_duration(text,img):
                 move_file_to_output_folder(outputVideo)
             os.remove(video[1])
             print(recorded_durations)
-            video[1] = str(random.randint(1, 50000)) + ".mp4"
+            video[1] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[1] = cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height))
             flag[1] = False
         prev_state[1] = text
@@ -283,7 +332,7 @@ def MTOP_record_duration(text, img):
                 move_file_to_output_folder(outputVideo)
             os.remove(video[2])
             print(recorded_durations)
-            video[2] = str(random.randint(1, 50000)) + ".mp4"
+            video[2] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[2] = cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height))
             flag[2] = False
     prev_state[2] = text
@@ -327,7 +376,7 @@ def SD_record_duration(text, img):
                 move_file_to_output_folder(outputVideo)
             os.remove(video[3])
             print(recorded_durations)
-            video[3] = str(random.randint(1, 50000)) + ".mp4"
+            video[3] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[3] = cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), 15, (1920, 1080))
             flag[3] = False
     prev_state[3] = text
@@ -374,7 +423,7 @@ def EDD_record_duration(text, img):
                 reduceBitRate(video[4], outputVideo)
                 move_file_to_output_folder(outputVideo)
             os.remove(video[4])
-            video[4]= str(random.randint(1, 50000)) + ".mp4"
+            video[4]= os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[4] = cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), 10 , (EDWidth,EDHeight))
             flag[4] = False
     prev_state[4] = text
@@ -382,14 +431,17 @@ def EDD_record_duration(text, img):
 #system Related
 def deleteTrashVideos():
     global video
-    video_folder = 'C:/Users/kaungmyat/PycharmProjects/BestOnlineExamProctor'
-    # Iterate through files in the folder
-    for filename in os.listdir(video_folder):
+    # Use current directory instead of hardcoded path
+    current_directory = os.getcwd()
+    # Iterate through files in the current folder
+    for filename in os.listdir(current_directory):
         if filename.lower().endswith('.mp4'):
             try:
-                os.remove(filename)
-            except OSError:
-                pass
+                file_path = os.path.join(current_directory, filename)
+                os.remove(file_path)
+                print(f"Deleted temporary video: {filename}")
+            except OSError as e:
+                print(f"Error deleting {filename}: {e}")
 
 #Models Related
 #One: Face Detection Function
@@ -415,13 +467,22 @@ class FaceRecognition:
         self.encode_faces()
 
     def encode_faces(self):
+        # Only process image files (jpg, jpeg, png)
+        valid_extensions = ('.jpg', '.jpeg', '.png', '.bmp', '.gif')
         for image in os.listdir('static/Profiles'):
-            face_image = face_recognition.load_image_file(f"static/Profiles/{image}")
-            face_encoding = face_recognition.face_encodings(face_image)[0]
-
-            self.known_face_encodings.append(face_encoding)
-            self.known_face_names.append(image)
-        print(self.known_face_names)
+            if image.lower().endswith(valid_extensions):
+                try:
+                    face_image = face_recognition.load_image_file(f"static/Profiles/{image}")
+                    face_encodings = face_recognition.face_encodings(face_image)
+                    if face_encodings:  # Check if any faces were found
+                        face_encoding = face_encodings[0]
+                        self.known_face_encodings.append(face_encoding)
+                        self.known_face_names.append(image)
+                    else:
+                        print(f"No face found in {image}")
+                except Exception as e:
+                    print(f"Error processing {image}: {e}")
+        print(f"Loaded {len(self.known_face_names)} face profiles: {self.known_face_names}")
 
     def run_recognition(self):
         global Globalflag
@@ -559,14 +620,14 @@ def headMovmentDetection(image, face_mesh):
             y = angles[1] * 360
             # print(y)
             textHead = ''
-            # See where the user's head tilting
-            if y < -10:
+            # See where the user's head tilting (made more sensitive and balanced)
+            if y < -8:  # Made more sensitive (was -10)
                 textHead = "Looking Left"
-            elif y > 15:
+            elif y > 8:  # Made more balanced (was 15)
                 textHead = "Looking Right"
-            elif x < -8:
+            elif x < -10:  # Made slightly less sensitive (was -8)
                 textHead = "Looking Down"
-            elif x > 15:
+            elif x > 12:  # Made more balanced (was 15)
                 textHead = "Looking Up"
             else:
                 textHead = "Forward"
@@ -739,46 +800,63 @@ class Recorder:
         return rms * 1000
 
     def __init__(self):
-        self.p = pyaudio.PyAudio()
-        self.stream = self.p.open(format=FORMAT,
-                                  channels=CHANNELS,
-                                  rate=RATE,
-                                  input=True,
-                                  output=True,
-                                  frames_per_buffer=CHUNK)
-        self.time = time.time()
-        self.quiet = []
-        self.quiet_idx = -1
-        self.timeout = 0
+        try:
+            self.p = pyaudio.PyAudio()
+            self.stream = self.p.open(format=FORMAT,
+                                      channels=CHANNELS,
+                                      rate=RATE,
+                                      input=True,
+                                      output=True,
+                                      frames_per_buffer=CHUNK)
+            self.time = time.time()
+            self.quiet = []
+            self.quiet_idx = -1
+            self.timeout = 0
+            self.microphone_available = True
+            print("Microphone initialized successfully")
+        except Exception as e:
+            print(f"Error initializing microphone: {e}")
+            self.microphone_available = False
+            self.p = None
+            self.stream = None
 
     def record(self):
         global Globalflag
         print('')
         print(f'Voice Flag is {Globalflag}')
+        
+        if not hasattr(self, 'microphone_available') or not self.microphone_available:
+            print("Microphone not available, skipping audio recording")
+            return
+            
         sound = []
         start = time.time()
         begin_time = None
         while Globalflag:
-            data = self.stream.read(CHUNK)
-            rms_val = self.rms(data)
-            if self.inSound(data):
-                sound.append(data)
-                if begin_time == None:
-                    begin_time = datetime.datetime.now()
-            else:
-                if len(sound) > 0:
-                    duration=math.floor((datetime.datetime.now()-begin_time).total_seconds())
-                    self.write(sound, begin_time, duration)
-                    sound.clear()
-                    begin_time = None
+            try:
+                data = self.stream.read(CHUNK)
+                rms_val = self.rms(data)
+                if self.inSound(data):
+                    sound.append(data)
+                    if begin_time == None:
+                        begin_time = datetime.datetime.now()
                 else:
-                    self.queueQuiet(data)
+                    if len(sound) > 0:
+                        duration=math.floor((datetime.datetime.now()-begin_time).total_seconds())
+                        self.write(sound, begin_time, duration)
+                        sound.clear()
+                        begin_time = None
+                    else:
+                        self.queueQuiet(data)
 
-            curr = time.time()
-            secs = int(curr - start)
-            tout = 0 if self.timeout == 0 else int(self.timeout - curr)
-            label = 'Listening' if self.timeout == 0 else 'Recording'
-            print('[+] %s: Level=[%4.2f] Secs=[%d] Timeout=[%d]' % (label, rms_val, secs, tout), end='\r')
+                curr = time.time()
+                secs = int(curr - start)
+                tout = 0 if self.timeout == 0 else int(self.timeout - curr)
+                label = 'Listening' if self.timeout == 0 else 'Recording'
+                print('[+] %s: Level=[%4.2f] Secs=[%d] Timeout=[%d]' % (label, rms_val, secs, tout), end='\r')
+            except Exception as e:
+                print(f"Error in audio recording: {e}")
+                break
 
     # quiet is a circular buffer of size cushion
     def queueQuiet(self, data):
@@ -850,6 +928,25 @@ class Recorder:
         }
         write_json(voiceViolation)
         print('[+] Saved: {}'.format(pathname))
+
+    def test_microphone(self):
+        """Test microphone sensitivity and display real-time audio levels"""
+        if not hasattr(self, 'microphone_available') or not self.microphone_available:
+            print("Microphone not available for testing")
+            return
+            
+        print("Testing microphone... Make some noise! Press Ctrl+C to stop")
+        try:
+            for i in range(100):  # Test for ~25 seconds
+                data = self.stream.read(CHUNK)
+                rms_val = self.rms(data)
+                trigger_status = "TRIGGERED" if rms_val > TRIGGER_RMS else "quiet"
+                print(f'Audio Level: {rms_val:.2f} | Trigger: {TRIGGER_RMS} | Status: {trigger_status}')
+                time.sleep(0.25)
+        except KeyboardInterrupt:
+            print("\nMicrophone test stopped")
+        except Exception as e:
+            print(f"Error during microphone test: {e}")
 
 def cheat_Detection1():
     deleteTrashVideos()

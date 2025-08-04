@@ -30,7 +30,7 @@ os.path.dirname("../templates")
 #Flak's Database Configuration
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_PASSWORD'] = 'password'
 app.config['MYSQL_DB'] = 'examproctordb'
 mysql = MySQL(app)
 
@@ -79,7 +79,7 @@ def login():
             flash('Your Email or Password is incorrect, try again.', category='error')
             return redirect(url_for('main'))
         else:
-            id, name, email,password, role = data
+            id, name, email, password, role, created_at, updated_at = data
             studentInfo={ "Id": id, "Name": name, "Email": email, "Password": password}
             if role == 'STUDENT':
                 utils.Student_Name = name
@@ -256,6 +256,42 @@ def updateStudent():
             """, (name, email, password, id_data))
         mysql.connection.commit()
         return redirect(url_for('adminStudents'))
+
+#Debug Routes for Testing
+@app.route('/test-audio')
+def testAudio():
+    """Test route to check audio detection system"""
+    return '''
+    <h2>Audio Detection Test</h2>
+    <p>Current Globalflag: ''' + str(utils.Globalflag) + '''</p>
+    <p>Microphone available: ''' + str(getattr(utils.a, 'microphone_available', 'Unknown')) + '''</p>
+    <p>Trigger sensitivity: ''' + str(utils.TRIGGER_RMS) + '''</p>
+    <p>Output directory: ''' + utils.f_name_directory + '''</p>
+    <a href="/test-audio/start">Start Audio Test (Set Globalflag=True)</a><br>
+    <a href="/test-audio/stop">Stop Audio Test (Set Globalflag=False)</a><br>
+    <a href="/">Back to Login</a>
+    '''
+
+@app.route('/test-audio/start')
+def startAudioTest():
+    """Start audio detection for testing"""
+    utils.Globalflag = True
+    return '''
+    <h2>Audio Test Started</h2>
+    <p>Globalflag set to True. Audio detection is now active.</p>
+    <p>Make some noise! Audio will be detected when level > ''' + str(utils.TRIGGER_RMS) + '''</p>
+    <a href="/test-audio">Back to Test Page</a>
+    '''
+
+@app.route('/test-audio/stop')
+def stopAudioTest():
+    """Stop audio detection"""
+    utils.Globalflag = False
+    return '''
+    <h2>Audio Test Stopped</h2>
+    <p>Globalflag set to False. Audio detection is now inactive.</p>
+    <a href="/test-audio">Back to Test Page</a>
+    '''
 
 if __name__ == '__main__':
     app.run(debug=True)
