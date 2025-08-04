@@ -1,0 +1,30 @@
+# Temporary video files created during testing/operation
+*.mp4
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# IDE files
+.vscode/
+.idea/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Temporary violation files
+result.json
+violation.json
+
+# Log files
+*.log
+
+# Temporary audio files
+*.wav

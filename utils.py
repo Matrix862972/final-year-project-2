@@ -444,14 +444,22 @@ def deleteTrashVideos():
     # Use current directory instead of hardcoded path
     current_directory = os.getcwd()
     # Iterate through files in the current folder
+    deleted_count = 0
     for filename in os.listdir(current_directory):
-        if filename.lower().endswith('.mp4'):
+        if filename.lower().endswith('.mp4') and filename.isdigit() or filename.endswith('.mp4'):
             try:
                 file_path = os.path.join(current_directory, filename)
-                os.remove(file_path)
-                print(f"Deleted temporary video: {filename}")
+                # Only delete temporary MP4 files (numeric names or specific patterns)
+                if (filename.replace('.mp4', '').isdigit() or 
+                    'Violation' in filename or 
+                    len(filename.replace('.mp4', '')) < 10):  # Temporary files typically have short names
+                    os.remove(file_path)
+                    deleted_count += 1
+                    print(f"Deleted temporary video: {filename}")
             except OSError as e:
                 print(f"Error deleting {filename}: {e}")
+    if deleted_count > 0:
+        print(f"Cleaned up {deleted_count} temporary video files")
 
 #Models Related
 #One: Face Detection Function
