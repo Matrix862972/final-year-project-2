@@ -56,11 +56,11 @@ writer = [cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,
 #More than One Person Related
 mpFaceDetection = mp.solutions.face_detection  # Detect the face
 mpDraw = mp.solutions.drawing_utils  # Draw the required Things for BBox
-faceDetection = mpFaceDetection.FaceDetection(0.75)# It has 0 to 1 (Change this to make it more detectable) Default is 0.5 and higher means more detection.
+faceDetection = mpFaceDetection.FaceDetection(0.5)# Increased sensitivity: 0.75 -> 0.5 for better multiple person detection
 #Screen Related
 shorcuts = []
 active_window = None # Store the initial active window and its title
-active_window_title = "Exam — Mozilla Firefox"
+active_window_title = "Google Chrome"  # Updated for Chrome browser
 exam_window_title = active_window_title
 #ED Related
 my_file = open("utils/coco.txt", "r") # opening the file in read mode
@@ -763,18 +763,35 @@ def screenDetection():
     new_active_window = gw.getActiveWindow()
     frame = capture_screen()
 
+    # Define allowed browser window titles for Chrome
+    allowed_browser_titles = [
+        "Google Chrome",
+        "Chrome", 
+        "Exam — Google Chrome",
+        "Online Exam Proctor",
+        "localhost:5000"
+    ]
+
     # Check if the active window has changed
-    if new_active_window is not None and new_active_window.title != exam_window_title:
-        # Check if the active window is a browser or a tab
-        if new_active_window.title != active_window_title:
-            print("Moved to Another Window: ", new_active_window.title)
-            # Update the active window and its title
-            active_window = new_active_window
-            active_window_title = active_window.title
-        textScreen = "Move away from the Test"
-    else:
-        if new_active_window is not None:
+    if new_active_window is not None:
+        current_title = new_active_window.title
+        
+        # Check if current window is a browser/exam window
+        is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
+        
+        if not is_exam_window:
+            # Check if the active window is a browser or a tab
+            if current_title != active_window_title:
+                print("Moved to Another Window: ", current_title)
+                # Update the active window and its title
+                active_window = new_active_window
+                active_window_title = active_window.title
+            textScreen = "Move away from the Test"
+        else:
             textScreen = "Stay in the Test"
+    else:
+        textScreen = "No active window detected"
+        
     SD_record_duration(textScreen, frame)
     print(textScreen)
 
@@ -782,7 +799,7 @@ def screenDetection():
 def electronicDevicesDetection(frame):
     global model, EDFlag
     # Predict on image
-    detect_params = model.predict(source=[frame], conf=0.45, save=False)
+    detect_params = model.predict(source=[frame], conf=0.25, save=False)  # Increased sensitivity: 0.45 -> 0.25
     # Convert tensor array to numpy
     DP = detect_params[0].numpy()
     for result in detect_params:  # iterate results
@@ -799,7 +816,7 @@ def electronicDevicesDetection(frame):
         textED = "No Electronic Device Detected"
     EDD_record_duration(textED, frame)
     print(textED)
-    EDFlag = False
+    # Note: EDFlag is NOT reset here anymore - it will be managed by the caller
 
 #Sixth Function : Voice Detection
 class Recorder:
@@ -980,7 +997,7 @@ def cheat_Detection1():
     deleteTrashVideos()
 
 def cheat_Detection2():
-    global Globalflag, shorcuts
+    global Globalflag, shorcuts, EDFlag
     print(f'CD2 Flag is {Globalflag}')
 
     deleteTrashVideos()
@@ -988,8 +1005,17 @@ def cheat_Detection2():
         success, image = cap.read()
         image1 = image
         image2 = image
+        image3 = image
+        
+        # Reset electronic device flag before detection
+        EDFlag = False
+        
         MTOP_Detection(image1)
         screenDetection()
+        electronicDevicesDetection(image3)  # Added electronic device detection
+        
+        # EDFlag will remain True if device was detected, False otherwise
+        
     deleteTrashVideos()
     if Globalflag:
         cap.release()

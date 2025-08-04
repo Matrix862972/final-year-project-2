@@ -52,8 +52,8 @@ def test_electronic_device_detection():
             print("❌ Failed to read from camera")
             break
         
-        # Run YOLO detection
-        results = model(frame, verbose=False)
+        # Run YOLO detection with increased sensitivity
+        results = model(frame, conf=0.25, verbose=False)  # Matching utils.py sensitivity
         
         current_devices = []
         
@@ -66,7 +66,7 @@ def test_electronic_device_detection():
                     confidence = float(box.conf[0])
                     
                     # Check if it's an electronic device with good confidence
-                    if class_id in electronic_devices and confidence > 0.5:
+                    if class_id in electronic_devices and confidence > 0.25:  # Lowered from 0.5 to match detection sensitivity
                         device_name = electronic_devices[class_id]
                         current_devices.append(device_name)
                         detected_devices.add(device_name)

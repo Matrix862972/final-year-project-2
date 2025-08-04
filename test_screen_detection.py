@@ -17,10 +17,11 @@ def test_screen_detection():
     
     # Expected exam window title (should match your browser)
     exam_window_titles = [
-        "Exam — Mozilla Firefox",
+        "Chrome",
+        "Google Chrome",
+        "Exam — Google Chrome",
         "Online Exam Proctor",
         "Mozilla Firefox",
-        "Chrome",
         "Edge"
     ]
     
