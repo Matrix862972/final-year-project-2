@@ -1,0 +1,7 @@
+# Video Evidence Folder
+
+This folder stores video recordings of violations detected during exams.
+
+Videos are automatically generated when the AI monitoring system detects suspicious behavior.
+
+File format: {RandomID}.mp4

@@ -37,11 +37,21 @@ capb= cv2.VideoCapture(0)
 width= int(capb.get(cv2.CAP_PROP_FRAME_WIDTH))
 height= int(capb.get(cv2.CAP_PROP_FRAME_HEIGHT))
 capb.release()
-capa = cv2.VideoCapture("test_V.mp4")
-EDWidth=int(capa.get(cv2.CAP_PROP_FRAME_WIDTH))
-EDHeight=int(capa.get(cv2.CAP_PROP_FRAME_HEIGHT))
-capa.release()
-video = [(str(random.randint(1,50000))+".mp4"), (str(random.randint(1,50000))+".mp4"), (str(random.randint(1,50000))+".mp4"), (str(random.randint(1,50000))+".mp4"), (str(random.randint(1,50000))+".mp4")]
+# Set default dimensions for electronic device detection (can be adjusted as needed)
+EDWidth = 1920
+EDHeight = 1080
+# Ensure the OutputVideos directory exists
+video_dir = os.path.join("static", "OutputVideos")
+os.makedirs(video_dir, exist_ok=True)
+
+# Create video files in the proper directory
+video = [
+    os.path.join(video_dir, str(random.randint(1,50000))+".mp4"),
+    os.path.join(video_dir, str(random.randint(1,50000))+".mp4"),
+    os.path.join(video_dir, str(random.randint(1,50000))+".mp4"),
+    os.path.join(video_dir, str(random.randint(1,50000))+".mp4"),
+    os.path.join(video_dir, str(random.randint(1,50000))+".mp4")
+]
 writer = [cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), 15, (1920, 1080)), cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), 20 , (EDWidth,EDHeight))]
 #More than One Person Related
 mpFaceDetection = mp.solutions.face_detection  # Detect the face
@@ -67,7 +77,7 @@ for i in range(len(class_list)):
 model = YOLO("yolov8n.pt", "v8") # load a pretrained YOLOv8n model
 EDFlag = False
 #Voice Related
-TRIGGER_RMS = 3  # start recording above 3 (lowered from 10 for more sensitivity)
+TRIGGER_RMS = 30  # start recording above 30 (increased to handle very loud fan noise)
 RATE = 16000  # sample rate
 TIMEOUT_SECS = 3  # silence time after which recording stops
 FRAME_SECS = 0.25  # length of frame(chunks) to be processed at once in secs
@@ -620,14 +630,14 @@ def headMovmentDetection(image, face_mesh):
             y = angles[1] * 360
             # print(y)
             textHead = ''
-            # See where the user's head tilting (made more sensitive and balanced)
-            if y < -8:  # Made more sensitive (was -10)
+            # See where the user's head tilting (relaxed thresholds for natural movement)
+            if y < -15:  # Relaxed from -5 to allow more natural left movement
                 textHead = "Looking Left"
-            elif y > 8:  # Made more balanced (was 15)
+            elif y > 15:  # Relaxed from 5 to allow more natural right movement
                 textHead = "Looking Right"
-            elif x < -10:  # Made slightly less sensitive (was -8)
+            elif x < -15:  # Relaxed from -8 to allow more natural down movement
                 textHead = "Looking Down"
-            elif x > 12:  # Made more balanced (was 15)
+            elif x > 20:  # Relaxed from 10 to allow more natural up movement
                 textHead = "Looking Up"
             else:
                 textHead = "Forward"

@@ -1,0 +1,7 @@
+# Student Profile Photos
+
+This folder stores captured student profile photos for face verification.
+
+Photos are automatically saved here when students complete the face input step during exam setup.
+
+File format: {StudentName}_{ResultID}Profile.jpg
