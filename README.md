@@ -1,6 +1,11 @@
 # The-Online-Exam-Proctor :globe_with_meridians: :writing_hand: :rotating_light:
 
-The Online Exam Proctor System is a computer vision-based project designed to ensure the integrity and fairness of online exams. As the popularity of remote learning and online education grows, the need for a robust proctoring system becomes crucial to prevent cheating and maintain the credibility of the examination process. This project will leverage computer vision and AI technologies to monitor and analyze students' behavior during the examination to detect any suspicious activities. It also has the ability to detect speeches to stay one step ahead of the students and to strengthen the anti-cheating methods.
+The Online Exam Proctor System is a computer vision-based project designed to ensure the integrity and fairness of online exams. As the popularity of remote learning and online education grows, the need for a robust proctoring system becomes crucial to prevent cheating and maintain the credibility of the examination process. This project leverages computer vision and AI technologies to monitor and analyze students' behavior during the examination to detect any suspicious activities. It also has the ability to detect speech and common noises to strengthen anti-cheating methods.
+
+---
+**Note:**  
+This project is actively maintained and improved. If you are testing or making changes, please use version control (Git) to track your work. You can always revert to a previous state if needed.
+---
 
 ## The System Architecture
 
@@ -41,10 +46,14 @@ The features included in the project are as follows:
 8. PyAutoGUI
 9. PyGetWindow
 
+
 ## Getting Started
-- First, you need to clone the repo: `https://github.com/aungkhantmyat/The-Online-Exam-Proctor.git`
-- Run the `requirement.txt` file for the installation.
-- Run the `app.py` file.
+- Clone this repository (or your fork) to your local machine.
+- Install dependencies from `requirements.txt` (or `pip install -r requirements.txt`).
+- Run the `app.py` file to start the Flask server.
+
+**Tip:**  
+If you are making experimental changes, commit your work regularly. You can always roll back to a previous version using Git.
 
 ![fff](https://github.com/aungkhantmyat/The-Online-Exam-Proctor/assets/48421405/4721d814-7557-453e-8dc8-c792e229f937)
 
