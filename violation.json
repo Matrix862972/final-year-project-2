@@ -294,5 +294,549 @@
         "Mark": 22.5,
         "Link": "",
         "RId": 6
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 00:28:56",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "HeadViolationstatic\\OutputVideos\\45241.mp4",
+        "RId": 7
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 00:33:51",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "HeadViolationstatic\\OutputVideos\\13712.mp4",
+        "RId": 7
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 00:39:34",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation16560.mp4",
+        "RId": 7
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 00:39:42",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation3420.mp4",
+        "RId": 7
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 00:39:50",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation3378.mp4",
+        "RId": 7
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 00:40:52",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation10520.mp4",
+        "RId": 7
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 00:41:04",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation4227.mp4",
+        "RId": 7
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 7
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 00:46:16",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation3177.mp4",
+        "RId": 8
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 00:46:24",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation24572.mp4",
+        "RId": 8
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 00:46:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation1594.mp4",
+        "RId": 8
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 00:46:37",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation41149.mp4",
+        "RId": 8
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 8
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 00:53:42",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation44766.mp4",
+        "RId": 9
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 00:54:04",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation4646.mp4",
+        "RId": 9
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 00:54:10",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation27278.mp4",
+        "RId": 9
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 9
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 00:58:21",
+        "Duration": "2 seconds",
+        "Mark": 2,
+        "Link": "static\\OutputVideos\\HeadViolation20018.mp4",
+        "RId": 10
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 00:58:43",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation18267.mp4",
+        "RId": 10
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 10
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:03:25",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation9274.mp4",
+        "RId": 11
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 01:03:30",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation34212.mp4",
+        "RId": 11
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 01:04:11",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation31949.mp4",
+        "RId": 11
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 01:04:33",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation23940.mp4",
+        "RId": 11
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 11
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:12:46",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation14723.mp4",
+        "RId": 12
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:13:33",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation11264.mp4",
+        "RId": 12
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:26:53",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation37361.mp4",
+        "RId": 12
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 01:27:19",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation45282.mp4",
+        "RId": 12
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 01:27:30",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation42460.mp4",
+        "RId": 12
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 01:27:38",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation20259.mp4",
+        "RId": 12
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 12
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:33:35",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation2602.mp4",
+        "RId": 13
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 01:33:50",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation47008.mp4",
+        "RId": 13
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 01:34:11",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation30333.mp4",
+        "RId": 13
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 01:34:22",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation13330.mp4",
+        "RId": 13
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 13
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 01:35:20",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation7242.mp4",
+        "RId": 14
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 01:35:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation18946.mp4",
+        "RId": 14
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 01:35:47",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation21849.mp4",
+        "RId": 14
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:35:52",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation33634.mp4",
+        "RId": 14
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 14
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:48:32",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation21521.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 01:48:41",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation4521.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 01:48:50",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation36137.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 01:49:16",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation31592.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 01:49:30",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation44322.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 01:49:36",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation21025.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:51:45",
+        "Duration": "2 seconds",
+        "Mark": 2,
+        "Link": "static\\OutputVideos\\HeadViolation4840.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 01:52:14",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation20352.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-07 01:52:15",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\FDViolation32893.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-07 01:52:11",
+        "Duration": "7 seconds",
+        "Mark": 14,
+        "Link": "static\\OutputVideos\\SDViolation20800.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 01:52:41",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation8716.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-07 01:52:38",
+        "Duration": "6 seconds",
+        "Mark": 12,
+        "Link": "static\\OutputVideos\\SDViolation40223.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 01:53:03",
+        "Duration": "2 seconds",
+        "Mark": 2,
+        "Link": "static\\OutputVideos\\HeadViolation6003.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-07 01:53:01",
+        "Duration": "7 seconds",
+        "Mark": 14,
+        "Link": "static\\OutputVideos\\SDViolation9230.mp4",
+        "RId": 15
+    },
+    {
+        "Name": "Common Noise is detected.",
+        "Time": "2025-08-07 01:53:24",
+        "Duration": "3 seconds",
+        "Mark": 3,
+        "Link": "10664VoiceViolation.wav",
+        "RId": 15
+    },
+    {
+        "Name": "Common Noise is detected.",
+        "Time": "2025-08-07 01:53:28",
+        "Duration": "3 seconds",
+        "Mark": 3,
+        "Link": "5092VoiceViolation.wav",
+        "RId": 15
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 15
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:58:55",
+        "Duration": "2 seconds",
+        "Mark": 2,
+        "Link": "static\\OutputVideos\\HeadViolation25437.mp4",
+        "RId": 16
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-07 01:58:54",
+        "Duration": "9 seconds",
+        "Mark": 18,
+        "Link": "static\\OutputVideos\\SDViolation17362.mp4",
+        "RId": 16
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 01:59:34",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation13622.mp4",
+        "RId": 16
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 01:59:46",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation7802.mp4",
+        "RId": 16
+    },
+    {
+        "Name": "Looking Right",
+        "Time": "2025-08-07 01:59:55",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation12783.mp4",
+        "RId": 16
+    },
+    {
+        "Name": "Looking Down",
+        "Time": "2025-08-07 02:00:12",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation31267.mp4",
+        "RId": 16
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-07 02:01:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "EDViolationstatic\\OutputVideos\\36119.mp4",
+        "RId": 16
+    },
+    {
+        "Name": "Common Noise is detected.",
+        "Time": "2025-08-07 02:02:04",
+        "Duration": "3 seconds",
+        "Mark": 3,
+        "Link": "13436VoiceViolation.wav",
+        "RId": 16
+    },
+    {
+        "Name": "Prohibited Shorcuts (F3,Ctrl+Z,Ctrl+A) are detected.",
+        "Time": "4 Counts",
+        "Duration": "",
+        "Mark": 6.0,
+        "Link": "",
+        "RId": 16
     }
 ]

@@ -214,7 +214,7 @@ def faceDetectionRecording(img, text):
             writer[0].release()
             end_time[0] = time.time()
             duration = math.ceil((end_time[0] - start_time[0]) / 3)
-            outputVideo = 'FDViolation' + video[0]
+            outputVideo = os.path.join(video_dir, 'FDViolation' + os.path.basename(video[0]))
             FDViolation = {
                 "Name": prev_state[0],
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[0])),
@@ -249,7 +249,7 @@ def Head_record_duration(text,img):
             writer[1].release()
             end_time[1] = time.time()
             duration = math.ceil((end_time[1] - start_time[1])/7)
-            outputVideo = 'HeadViolation' + video[1]
+            outputVideo = os.path.join(video_dir, 'HeadViolation' + os.path.basename(video[1]))
             HeadViolation = {
                 "Name": prev_state[1],
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[1])),
@@ -283,7 +283,7 @@ def Head_record_duration(text,img):
             writer[1].release()
             end_time[1] = time.time()
             duration = math.ceil((end_time[1] - start_time[1])/7)
-            outputVideo = 'HeadViolation' + video[1]
+            outputVideo = os.path.join(video_dir, 'HeadViolation' + os.path.basename(video[1]))
             HeadViolation = {
                 "Name": prev_state[1],
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[1])),
@@ -326,7 +326,7 @@ def MTOP_record_duration(text, img):
             writer[2].release()
             end_time[2] = time.time()
             duration = math.ceil((end_time[2] - start_time[2])/3)
-            outputVideo = 'MTOPViolation' + video[2]
+            outputVideo = os.path.join(video_dir, 'MTOPViolation' + os.path.basename(video[2]))
             MTOPViolation = {
                 "Name": prev_state[2],
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[2])),
@@ -370,7 +370,7 @@ def SD_record_duration(text, img):
             writer[3].release()
             end_time[3] = time.time()
             duration = math.ceil((end_time[3] - start_time[3])/4)
-            outputVideo = 'SDViolation' + video[3]
+            outputVideo = os.path.join(video_dir, 'SDViolation' + os.path.basename(video[3]))
             SDViolation = {
                 "Name": prev_state[3],
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[3])),
@@ -440,26 +440,139 @@ def EDD_record_duration(text, img):
 
 #system Related
 def deleteTrashVideos():
-    global video
-    # Use current directory instead of hardcoded path
-    current_directory = os.getcwd()
-    # Iterate through files in the current folder
+    global video, writer
+    
+    # First, safely release any active video writers to unlock files
+    try:
+        for i, vid_writer in enumerate(writer):
+            if vid_writer is not None:
+                vid_writer.release()
+                print(f"Released video writer {i}")
+    except Exception as e:
+        print(f"Error releasing video writers: {e}")
+    
+    # Check both root directory and OutputVideos directory for temp files
+    directories_to_check = [
+        os.getcwd(),  # Current directory (root of project)
+        os.path.join(os.getcwd(), "static", "OutputVideos")  # OutputVideos directory
+    ]
+    
     deleted_count = 0
-    for filename in os.listdir(current_directory):
-        if filename.lower().endswith('.mp4') and filename.isdigit() or filename.endswith('.mp4'):
-            try:
-                file_path = os.path.join(current_directory, filename)
-                # Only delete temporary MP4 files (numeric names or specific patterns)
-                if (filename.replace('.mp4', '').isdigit() or 
-                    'Violation' in filename or 
-                    len(filename.replace('.mp4', '')) < 10):  # Temporary files typically have short names
+    current_video_files = [os.path.basename(v) for v in video if v]  # Get current active video filenames
+    
+    for directory in directories_to_check:
+        if not os.path.exists(directory):
+            continue
+            
+        print(f"Checking directory: {directory}")
+        for filename in os.listdir(directory):
+            file_path = os.path.join(directory, filename)
+            
+            # Check if it's a file (not directory)
+            if not os.path.isfile(file_path):
+                continue
+                
+            # For MP4 files: delete small temporary files with numeric names
+            if filename.lower().endswith('.mp4'):
+                # Only delete if:
+                # 1. Filename is purely numeric (temp files)
+                # 2. File size is very small (< 10KB) indicating incomplete/temp file
+                # 3. Does NOT contain "Violation" (those are important processed files)
+                # 4. NOT currently being used by video writers
+                
+                if (filename.replace('.mp4', '').isdigit() and 
+                    'Violation' not in filename and
+                    filename not in current_video_files):
+                    
+                    try:
+                        # Check file size - delete if very small (indicates temp/incomplete file)
+                        file_size = os.path.getsize(file_path)
+                        if file_size < 10240:  # Less than 10KB
+                            os.remove(file_path)
+                            deleted_count += 1
+                            print(f"Deleted small temporary video: {file_path} ({file_size} bytes)")
+                        else:
+                            print(f"Keeping larger file: {filename} ({file_size} bytes)")
+                    except OSError as e:
+                        print(f"Error deleting {filename} (file may be in use): {e}")
+            
+            # For WAV files: delete temporary voice violation files in root directory  
+            elif (filename.lower().endswith('.wav') and 
+                  'VoiceViolation' in filename and
+                  directory == os.getcwd()):  # Only delete wav files from root, not OutputAudios
+                try:
                     os.remove(file_path)
                     deleted_count += 1
-                    print(f"Deleted temporary video: {filename}")
-            except OSError as e:
-                print(f"Error deleting {filename}: {e}")
+                    print(f"Deleted temporary audio: {file_path}")
+                except OSError as e:
+                    print(f"Error deleting {filename}: {e}")
+    
     if deleted_count > 0:
-        print(f"Cleaned up {deleted_count} temporary video files")
+        print(f"Cleaned up {deleted_count} temporary files")
+    else:
+        print("No temporary files found to delete")
+    
+    # Reinitialize video writers after cleanup
+    reinitialize_video_writers()
+
+def reinitialize_video_writers():
+    """Reinitialize video writers after cleanup"""
+    global video, writer, video_dir, width, height, EDWidth, EDHeight
+    
+    try:
+        # Create new video file paths
+        video = [
+            os.path.join(video_dir, str(random.randint(1,50000))+".mp4"),
+            os.path.join(video_dir, str(random.randint(1,50000))+".mp4"),
+            os.path.join(video_dir, str(random.randint(1,50000))+".mp4"),
+            os.path.join(video_dir, str(random.randint(1,50000))+".mp4"),
+            os.path.join(video_dir, str(random.randint(1,50000))+".mp4")
+        ]
+        
+        # Create new video writers
+        writer = [
+            cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), 
+            cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), 
+            cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), 
+            cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), 15, (1920, 1080)), 
+            cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), 20, (EDWidth,EDHeight))
+        ]
+        
+        print("Video writers reinitialized successfully")
+        
+    except Exception as e:
+        print(f"Error reinitializing video writers: {e}")
+
+def cleanup_all_videos():
+    """Complete cleanup function for application shutdown - releases all writers and cleans temp files"""
+    global video, writer, Globalflag
+    
+    print("Starting complete video cleanup...")
+    
+    # Stop all detection processes
+    Globalflag = False
+    
+    # Release all video writers and remove temp files
+    try:
+        for i, vid_writer in enumerate(writer):
+            if vid_writer is not None:
+                vid_writer.release()
+                print(f"Released video writer {i}")
+                
+                # Remove the temp file after releasing writer
+                if i < len(video) and video[i] and os.path.exists(video[i]):
+                    try:
+                        os.remove(video[i])
+                        print(f"Removed temp file: {video[i]}")
+                    except OSError as e:
+                        print(f"Could not remove {video[i]}: {e}")
+    except Exception as e:
+        print(f"Error during writer cleanup: {e}")
+    
+    # Now clean any remaining temp files
+    deleteTrashVideos()
+    
+    print("Complete video cleanup finished")
 
 #Models Related
 #One: Face Detection Function
