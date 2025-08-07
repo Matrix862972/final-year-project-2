@@ -35,7 +35,6 @@ def start_loop():
 - Added `started` flag to prevent multiple thread creation
 - Added `utils.Globalflag = True` to enable detection loops
 
-
 ## 🐞 Bug 2: SQL Injection Vulnerability in Login Function
 
 **File:** `app.py`
@@ -116,7 +115,7 @@ Make sure to also update the variable name in the HTML template (ResultDetails.h
 
 return render_template('ResultDetails.html', resultDetails=result_Details)
 
-``````
+`````
 Make sure to also update the variable name in the HTML template (ResultDetails.html) to match this corrected spelling if necessary.
 
 🛠️ Will be resolved in the next patch phase.
@@ -153,8 +152,7 @@ Optionally, implement a JavaScript confirmation modal on the front-end before th
 📌 Priority:
 High – Security vulnerability and bad REST practice.
 
-```
-
+`````
 ## 🐞 Bug 6: Passwords Stored in Plain Text
 
 ### 📌 Description
@@ -210,25 +208,28 @@ is_valid = check_password_hash(stored_hashed_password, entered_password)
 🏷️ Severity
 Critical
 
-````
-## 🐞 Bug 7: Recorded Videos and Audio Do Not Play in Admin Dashboard
+`````
+
+## ✅ Bug 7: Recorded Videos and Audio Do Not Play in Admin Dashboard [FIXED]
 
 ### Affected Views
 
 - `ResultDetails.html`
-- Playback controls are visible, but clicking play does nothing.
-- In some cases, the file might not be found (404 error) or the path may be invalid.
-- MIME type issues: Flask may not be configured to serve `.mp4`, `.webm`, or `.wav` properly.
+- Playback controls were visible, but clicking play did nothing.
+- In some cases, the file was not found (404 error) or the path was invalid.
+- MIME type issues: Flask was not configured to serve `.mp4`, `.webm`, or `.wav` properly.
 
-### ✅ Recommendation
+### 🛠️ Fix Implemented
 
-- Ensure media files are saved under the `static/` directory and use `url_for('static', filename='...')` to reference them in templates.
-- Verify the paths stored in `result.json` are valid and accessible.
-- Confirm that file writing logic in `utils.a.record` and video capture functions properly closes and saves files.
+- All media files are now saved under the `static/` directory.
+- Jinja2 templates (e.g., `ResultDetails.html`) now use `url_for('static', filename=...)` to reference video and audio files, ensuring correct static file serving.
+- Path cleanup logic was added to templates to handle Windows-style backslashes and remove redundant `static/` prefixes.
+- Audio playback MIME type was corrected in the template.
+- The backend logic for recording and saving files was reviewed to ensure files are properly closed and saved.
 
-### 🏷️ Severity
+### 🏷️ Status
 
-**High** — Prevents key admin review functionality.
+**FIXED** — Media playback in the admin dashboard is now fully functional.
 
 ## 🐞 Bug 8: Potential Filename Collision in Video Output
 
@@ -260,7 +261,7 @@ Add a check: if os.path.exists(path): regenerate
 ✅ Status:
 Unresolved — requires implementation of uniqueness guarantee
 
-`````python
+````python
 import uuid
 
 video = [
@@ -294,7 +295,7 @@ active_window_title = "Google Chrome"
 exam_window_title = active_window_title
 
 
-``````
+````
 
 ### 🐞 Bug 10: No File Existence or Empty File Handling in write_json
 
@@ -372,7 +373,7 @@ Copy code
 
 ```
 
-## ✅ Bug 11: Faulty Conditional Logic in Video Deletion
+## ✅ Bug 11: Faulty Conditional Logic in Video Deletion[FIXED]
 
 ### **Bug Title**
 

@@ -115,7 +115,7 @@
 						</thead>
 						<tbody>
 						{% if resultDetials['Violation']|length %}
-  							  {% for violation in resultDetials['Violation'] %}
+							  {% for violation in resultDetials['Violation'] %}
 							<tr>
 								<td>
 									{{ violation['Name'] }}
@@ -125,10 +125,10 @@
 								</td>
 								<td>{{ violation['Duration'] }}</td>
 								<td>
-									{% set Type = violation['Link'].split('.') %}
-									{% if Type[1] == 'mp4' %}
-									{% set VideoInfo = violation['Link']~ ';' ~ resultDetials['Result'][0]['Id']  %}
-									<a href="{{ url_for('adminResultDetailsVideo', videoInfo= VideoInfo) }}" >Video Link</a>
+				{% set Type = violation['Link'].split('.') %}
+				{% if Type[1] == 'mp4' %}
+				{% set clean_link = violation['Link'].replace('static\\', '').replace('static/', '').replace('\\', '/').replace(' ', '') %}
+				<a href="{{ url_for('static', filename=clean_link) }}" target="_blank">Video Link</a>
 									{% elif Type[1] == 'wav' %}
 									<a href="#" name="{{ violation['Link'] }}" onclick="playAudio(name)">Audio Link</a>
 									{% else %}
@@ -138,7 +138,7 @@
 							</tr>
 						 {% endfor %}
 						{% else %}
-    							<tr>
+								<tr>
 								<td colspan="3">
 									<p class="text-center">No violation record is found.</p>
 								</td>
@@ -154,50 +154,50 @@
 	</section>
 	<!-- CONTENT -->
 	<section class="sec1">
-      <span class="overlay1"></span>
-      <div class="modal-box">
-        <img src="{{ url_for('static', filename='img/mic-unmute.png') }}" alt="Icon" width="70" height="70" />
-        <h2>Your audio record</h2>
-        <br>
-        <audio controls id="audio">
-          <source src="" type="audio/mpeg" id= "audioSource">
-        </audio>
-        <div class="buttons">
-          <button class="close-btn">Close</button>
-        </div>
-      </div>
-    </section>
+	  <span class="overlay1"></span>
+	  <div class="modal-box">
+		<img src="{{ url_for('static', filename='img/mic-unmute.png') }}" alt="Icon" width="70" height="70" />
+		<h2>Your audio record</h2>
+		<br>
+		<audio controls id="audio">
+		  <source src="" type="audio/wav" id= "audioSource">
+		</audio>
+		<div class="buttons">
+		  <button class="close-btn">Close</button>
+		</div>
+	  </div>
+	</section>
 
 	<script src="{{url_for('static', filename='js/TrStudent.js')}}"></script>
 <script>
 		function playAudio(parameter) {
 		console.log(parameter);
   // Execute this code when the page finishes loading
-        const section = document.querySelector(".sec1"),
-          overlay = document.querySelector(".overlay1"),
-          closeBtn = document.querySelector(".close-btn");
-          var audio = document.getElementById('audio');
-          var source = document.getElementById('audioSource');
-          var par = parameter;
-          var filepath = "{{ url_for('static', filename='OuputAudios/') }}" + par ;
-          console.log(filepath);
-  		source.src =  filepath;
-  		audio.load();
+		const section = document.querySelector(".sec1"),
+		  overlay = document.querySelector(".overlay1"),
+		  closeBtn = document.querySelector(".close-btn");
+		  var audio = document.getElementById('audio');
+		  var source = document.getElementById('audioSource');
+		  var par = parameter;
+		  var filepath = "{{ url_for('static', filename='OutputAudios/') }}" + par ;
+		  console.log(filepath);
+		source.src =  filepath;
+		audio.load();
 
-        section.classList.add("active");
+		section.classList.add("active");
 
-        // Close the modal when clicking outside or on the "Ok, Close" button
-        overlay.addEventListener("click", () => {
+		// Close the modal when clicking outside or on the "Ok, Close" button
+		overlay.addEventListener("click", () => {
   section.classList.remove("active");
   audio.pause();
 });
-        closeBtn.addEventListener("click", () => {
+		closeBtn.addEventListener("click", () => {
   section.classList.remove("active");
   audio.pause();
 });
 
 
-      };
+	  };
 	</script>
 </body>
 </html>

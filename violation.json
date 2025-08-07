@@ -838,5 +838,93 @@
         "Mark": 6.0,
         "Link": "",
         "RId": 16
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-07 21:23:41",
+        "Duration": "7 seconds",
+        "Mark": 7,
+        "Link": "static\\OutputVideos\\HeadViolation31034.mp4",
+        "RId": 17
+    },
+    {
+        "Name": "Prohibited Shorcuts (Ctrl+C,Ctrl+V,Window,F3) are detected.",
+        "Time": "13 Counts",
+        "Duration": "",
+        "Mark": 19.5,
+        "Link": "",
+        "RId": 17
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 18
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-07 23:09:41",
+        "Duration": "11 seconds",
+        "Mark": 22,
+        "Link": "static\\OutputVideos\\SDViolation42117.mp4",
+        "RId": 19
+    },
+    {
+        "Name": "Common Noise is detected.",
+        "Time": "2025-08-07 23:09:43",
+        "Duration": "57 seconds",
+        "Mark": 57,
+        "Link": "5926VoiceViolation.wav",
+        "RId": 19
+    },
+    {
+        "Name": "Common Noise is detected.",
+        "Time": "2025-08-07 23:10:52",
+        "Duration": "3 seconds",
+        "Mark": 3,
+        "Link": "3597VoiceViolation.wav",
+        "RId": 19
+    },
+    {
+        "Name": "Common Noise is detected.",
+        "Time": "2025-08-07 23:10:56",
+        "Duration": "16 seconds",
+        "Mark": 16,
+        "Link": "46499VoiceViolation.wav",
+        "RId": 19
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-07 23:11:13",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation18196.mp4",
+        "RId": 19
+    },
+    {
+        "Name": "Common Noise is detected.",
+        "Time": "2025-08-07 23:11:15",
+        "Duration": "4 seconds",
+        "Mark": 4,
+        "Link": "3668VoiceViolation.wav",
+        "RId": 19
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-07 23:10:28",
+        "Duration": "15 seconds",
+        "Mark": 30,
+        "Link": "static\\OutputVideos\\SDViolation36165.mp4",
+        "RId": 19
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 19
     }
 ]
