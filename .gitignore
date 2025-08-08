@@ -28,3 +28,24 @@ violation.json
 
 # Temporary audio files
 *.wav
+
+# Ignore YOLO model files
+*.pt
+# Ignore other large files
+*.weights
+*.pdf
+# Ignore output videos and audios
+static/OutputVideos/
+static/OutputAudios/
+# Ignore profile images
+static/Profiles/*.jpg
+static/Profiles/*.png
+# Ignore large static images
+static/img/*.png
+static/img/*.jpg
+static/img/*.gif
+# Ignore violation and result logs
+violation.json
+result.json
+# Ignore other temp files
+*.tmp
