@@ -74,7 +74,7 @@ for i in range(len(class_list)):
     g = random.randint(0, 255)
     b = random.randint(0, 255)
     detection_colors.append((b, g, r))
-model = YOLO("yolov8n.pt", "v8") # load a pretrained YOLOv8n model
+model = YOLO("yolo11x.pt")
 EDFlag = False
 #Voice Related
 TRIGGER_RMS = 30  # start recording above 30 (increased to handle very loud fan noise)
@@ -439,7 +439,7 @@ def EDD_record_duration(text, img):
             EDD_record_duration.frame_count = 0
             writer[4].release()
             end_time[4] = time.time()
-            duration = math.ceil((end_time[4] - start_time[4])/10)
+            duration = math.ceil(end_time[4] - start_time[4])
             base_filename = os.path.basename(video[4])
             outputVideo = os.path.join(video_dir, 'EDViolation' + base_filename)
             EDViolation = {
