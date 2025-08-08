@@ -56,9 +56,38 @@ The features included in the project are as follows:
 
 ## Getting Started
 
-- Clone this repository (or your fork) to your local machine.
-- Install dependencies from `requirements.txt` (or `pip install -r requirements.txt`).
-- Run the `app.py` file to start the Flask server.
+
+### Installation Instructions
+
+1. **Clone the repository**
+	```powershell
+	git clone https://github.com/Matrix862972/final-year-project-2.git
+	cd final-year-project-2/The-Online-Exam-Proctor
+	```
+
+2. **Install Python dependencies**
+	```powershell
+	pip install -r requirements.txt
+	```
+
+3. **Special Note: Installing dlib (Windows)**
+	dlib can be difficult to install on Windows due to compiler requirements. If you encounter errors, use one of the following methods:
+	- **Recommended:** Install a pre-built dlib wheel from [https://www.lfd.uci.edu/~gohlke/pythonlibs/#dlib](https://www.lfd.uci.edu/~gohlke/pythonlibs/#dlib)
+	  - Download the wheel matching your Python version and system (e.g., `dlib‑19.24.2‑cp310‑cp310‑win_amd64.whl`)
+	  - Install it:
+		 ```powershell
+		 pip install path\to\dlib‑19.24.2‑cp310‑cp310‑win_amd64.whl
+		 ```
+	- **Alternative:** Install Visual Studio Build Tools, then run:
+	  ```powershell
+	  pip install dlib
+	  ```
+	- If you still have issues, see the [dlib install guide](https://www.pyimagesearch.com/2017/03/27/how-to-install-dlib/) or ask for help in the repository issues.
+
+4. **Run the Flask server**
+	```powershell
+	python app.py
+	```
 
 **Tip:**  
 If you are making experimental changes, commit your work regularly. You can always roll back to a previous version using Git.
