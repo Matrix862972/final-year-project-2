@@ -2678,5 +2678,213 @@
         "Mark": 0.0,
         "Link": "",
         "RId": 21
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 22:15:21",
+        "Duration": "7 seconds",
+        "Mark": 10,
+        "Link": "static\\OutputVideos\\EDViolation23707.mp4",
+        "RId": 22
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 22:15:36",
+        "Duration": "5 seconds",
+        "Mark": 7,
+        "Link": "static\\OutputVideos\\EDViolation7800.mp4",
+        "RId": 22
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 22
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-08 22:17:50",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation25739.mp4",
+        "RId": 23
+    },
+    {
+        "Name": "Looking Up",
+        "Time": "2025-08-08 22:17:56",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation11950.mp4",
+        "RId": 23
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 22:18:16",
+        "Duration": "5 seconds",
+        "Mark": 7,
+        "Link": "static\\OutputVideos\\EDViolation2039.mp4",
+        "RId": 23
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 23
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 22:34:59",
+        "Duration": "1 seconds",
+        "Mark": 2,
+        "Link": "static\\OutputVideos\\SDViolation5018.mp4",
+        "RId": 24
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 22:35:04",
+        "Duration": "3 seconds",
+        "Mark": 6,
+        "Link": "static\\OutputVideos\\SDViolation45591.mp4",
+        "RId": 24
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 22:35:26",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation44954.mp4",
+        "RId": 24
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 22:35:32",
+        "Duration": "1 seconds",
+        "Mark": 2,
+        "Link": "static\\OutputVideos\\SDViolation4511.mp4",
+        "RId": 24
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 22:35:42",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation13962.mp4",
+        "RId": 24
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 22:35:57",
+        "Duration": "1 seconds",
+        "Mark": 2,
+        "Link": "static\\OutputVideos\\SDViolation20205.mp4",
+        "RId": 24
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 24
+    },
+    {
+        "Name": "Prohibited Shorcuts (Window,Ctrl+V) are detected.",
+        "Time": "8 Counts",
+        "Duration": "",
+        "Mark": 12.0,
+        "Link": "",
+        "RId": 25
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 22:40:31",
+        "Duration": "4 seconds",
+        "Mark": 8,
+        "Link": "static\\OutputVideos\\SDViolation1796.mp4",
+        "RId": 26
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 26
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 22:55:40",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation4665.mp4",
+        "RId": 27
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 23:04:49",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation49044.mp4",
+        "RId": 27
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 23:05:58",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation44290.mp4",
+        "RId": 27
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 23:12:43",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation2209.mp4",
+        "RId": 27
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 23:12:58",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation45377.mp4",
+        "RId": 27
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 23:19:32",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation6665.mp4",
+        "RId": 27
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 23:19:43",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation24262.mp4",
+        "RId": 27
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-08 23:19:58",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\SDViolation30964.mp4",
+        "RId": 27
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 27
     }
 ]

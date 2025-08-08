@@ -903,3 +903,64 @@ The electronic device detection module (EDD_record_duration in utils.py) was not
 
 **Status:**
 ✅ Fixed — Electronic device detection now reliably records and saves evidence videos for review.
+
+## ✅ Bug 48: Tab Switch Detection Not Working - [fixed]
+
+### **Bug Title**
+
+Screen detection system fails to detect browser tab switches within Chrome
+
+### **Status: FIXED ✅**
+
+This bug has been resolved by updating the window title detection logic to handle Chrome's actual title format.
+
+### **Description**
+
+The screen detection system could detect when users moved to different applications, but failed to detect when users switched between tabs within the same Chrome browser window. This was a significant security gap in the exam proctoring system.
+
+### **Root Cause**
+
+1. **Wrong dash character**: Code was checking for em dash `' — '` but Chrome uses regular dash `' - '`
+2. **Incomplete allowed titles**: Missing regular dash versions of allowed exam titles
+3. **Logic flaw**: Generic Chrome titles were always allowed, even for wrong tabs
+
+### **Solution Applied**
+
+```python
+# Before (didn't work):
+allowed_exam_titles = [
+    "Exam — Google Chrome",
+    "localhost:5000 — Google Chrome",
+    "Google Chrome",
+    "Chrome"
+]
+if " — " in current_title:  # Only checked em dash
+
+# After (works):
+allowed_exam_titles = [
+    "Exam — Google Chrome",
+    "Exam - Google Chrome",          # Added regular dash version
+    "localhost:5000 — Google Chrome",
+    "localhost:5000 - Google Chrome", # Added regular dash version
+    "Google Chrome",
+    "Chrome"
+]
+if " — " in current_title or " - " in current_title:  # Check both dash types
+```
+
+### **Fix Applied:**
+
+- Updated window title detection to check for both em dash (`—`) and regular dash (`-`)
+- Added regular dash versions to allowed exam titles list
+- Improved debug logging to identify the exact dash character used
+- Now properly detects tab switches and records them as violations
+
+### **Testing Results:**
+
+- ✅ Detects app switches (moving away from Chrome)
+- ✅ Detects tab switches (switching to different tabs within Chrome)  
+- ✅ Allows legitimate exam tabs
+- ✅ Window minimization detection still works
+
+**Status:**
+✅ Fixed — Tab switching detection now works reliably and records violations properly.

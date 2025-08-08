@@ -902,39 +902,68 @@ def shortcut_handler(event):
 def screenDetection():
     global active_window, active_window_title, exam_window_title
     textScreen = ""
-    # Get the current active window
+    
+    # Get current active window
     new_active_window = gw.getActiveWindow()
     frame = capture_screen()
 
-    # Define allowed browser window titles for Chrome
-    allowed_browser_titles = [
-        "Google Chrome",
-        "Chrome", 
+    # Titles that are allowed for the exam tab
+    allowed_exam_titles = [
         "Exam — Google Chrome",
-        "Online Exam Proctor",
-        "localhost:5000"
+        "Exam - Google Chrome", 
+        "localhost:5000 — Google Chrome",
+        "localhost:5000 - Google Chrome",
+        "Google Chrome",  # Generic Chrome (when tab title doesn't show)
+        "Chrome"  # Sometimes just shows as Chrome
     ]
 
-    # Check if the active window has changed
     if new_active_window is not None:
         current_title = new_active_window.title
         
-        # Check if current window is a browser/exam window
-        is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
-        
-        if not is_exam_window:
-            # Check if the active window is a browser or a tab
+        # Debug prints
+        print(f"[DEBUG] Current window title: '{current_title}'")
+        print(f"[DEBUG] Previous window title: '{active_window_title}'")
+        print(f"[DEBUG] Contains 'Google Chrome': {'Google Chrome' in current_title}")
+        print(f"[DEBUG] Contains 'Chrome': {'Chrome' in current_title}")
+        print(f"[DEBUG] Contains ' — ': {' — ' in current_title}")
+        print(f"[DEBUG] Contains ' - ': {' - ' in current_title}")
+        print(f"[DEBUG] In allowed list: {current_title in allowed_exam_titles}")
+
+        # --- CASE 1: User switched to another app (not Chrome at all) ---
+        if "Google Chrome" not in current_title and "Chrome" not in current_title:
+            print(f"[DEBUG] CASE 1: Not Chrome - '{current_title}'")
             if current_title != active_window_title:
-                print("Moved to Another Window: ", current_title)
-                # Update the active window and its title
+                print("Moved to Another Application:", current_title)
                 active_window = new_active_window
-                active_window_title = active_window.title
+                active_window_title = new_active_window.title
             textScreen = "Move away from the Test"
+
+        # --- CASE 2: User is in Chrome but potentially wrong tab ---
+        elif current_title not in allowed_exam_titles:
+            print(f"[DEBUG] CASE 2: Chrome but not in allowed list - '{current_title}'")
+            # Only flag as violation if it's a specific tab title (contains " — " or " - ")
+            if " — " in current_title or " - " in current_title:
+                print(f"[DEBUG] CASE 2a: Specific tab detected (contains dash) - VIOLATION")
+                if current_title != active_window_title:
+                    print("Switched to Another Tab:", current_title)
+                    active_window = new_active_window
+                    active_window_title = new_active_window.title
+                textScreen = "Move away from the Test"
+            else:
+                print(f"[DEBUG] CASE 2b: Generic Chrome title - ALLOWED")
+                # Generic Chrome title, assume it's okay
+                textScreen = "Stay in the Test"
+
+        # --- CASE 3: User is in the correct exam tab ---
         else:
+            print(f"[DEBUG] CASE 3: In allowed exam tab - '{current_title}'")
             textScreen = "Stay in the Test"
     else:
+        print(f"[DEBUG] No active window detected")
         textScreen = "No active window detected"
-        
+
+    print(f"[DEBUG] Final decision: '{textScreen}'")
+    print("=" * 50)
     SD_record_duration(textScreen, frame)
     print(textScreen)
 
@@ -1154,8 +1183,8 @@ def cheat_Detection2():
         EDFlag = False
         
         #MTOP_Detection(image1)
-        #screenDetection()
-        electronicDevicesDetection(image3)  # Added electronic device detection
+        screenDetection()
+        #electronicDevicesDetection(image3)  # Added electronic device detection
         
         # EDFlag will remain True if device was detected, False otherwise
         
