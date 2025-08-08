@@ -11,8 +11,11 @@ This project is actively maintained and improved. If you are testing or making c
 
 ## The System Architecture
 
+
 ![Drawing3](https://github.com/aungkhantmyat/The-Online-Exam-Proctor/assets/48421405/d1d1673a-a11f-4adb-9eae-d32f15e647fe)
 ![Drawing3 (1)](https://github.com/aungkhantmyat/The-Online-Exam-Proctor/assets/48421405/98bed9a3-6b34-4d05-b55f-4e2f3875a38b)
+
+> **Note:** The system architecture diagram uses a purple color scheme, which may be hard to see on some screens. For better visibility, download the image and view it locally or adjust your display settings.
 
 ## Main Features
 
@@ -70,19 +73,18 @@ The features included in the project are as follows:
 	pip install -r requirements.txt
 	```
 
+
 3. **Special Note: Installing dlib (Windows)**
-	dlib can be difficult to install on Windows due to compiler requirements. If you encounter errors, use one of the following methods:
-	- **Recommended:** Install a pre-built dlib wheel from [https://www.lfd.uci.edu/~gohlke/pythonlibs/#dlib](https://www.lfd.uci.edu/~gohlke/pythonlibs/#dlib)
-	  - Download the wheel matching your Python version and system (e.g., `dlib‑19.24.2‑cp310‑cp310‑win_amd64.whl`)
-	  - Install it:
-		 ```powershell
-		 pip install path\to\dlib‑19.24.2‑cp310‑cp310‑win_amd64.whl
-		 ```
-	- **Alternative:** Install Visual Studio Build Tools, then run:
-	  ```powershell
-	  pip install dlib
-	  ```
-	- If you still have issues, see the [dlib install guide](https://www.pyimagesearch.com/2017/03/27/how-to-install-dlib/) or ask for help in the repository issues.
+	dlib is known to be difficult to install directly via pip on Windows. The most reliable method is:
+	- **Recommended (Long Way):**
+	  1. Install [Visual Studio Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/).
+	  2. Install [CMake](https://cmake.org/download/).
+	  3. Open a terminal and run:
+		  ```powershell
+		  pip install dlib
+		  ```
+	- This process will compile dlib from source and works for most users. If you encounter issues, see the [dlib install guide](https://www.pyimagesearch.com/2017/03/27/how-to-install-dlib/) or ask for help in the repository issues.
+	- **Alternative:** Try a pre-built wheel from [Gohlke's Python libs](https://www.lfd.uci.edu/~gohlke/pythonlibs/#dlib), but this may not work for all Python versions.
 
 4. **Run the Flask server**
 	```powershell
