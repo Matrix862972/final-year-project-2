@@ -1,6 +1,6 @@
 # 🐞 Known Bugs
 
-## ✅ Bug 1: Repeated Thread Execution on Every Request - [Not fixed]
+## ✅ Bug 1: Repeated Thread Execution on Every Request - [fixed]
 
 ### **Bug Title**
 
@@ -56,7 +56,8 @@ Potentially execute destructive SQL commands
 
 This vulnerability arises because the SQL engine interprets user input as part of the SQL syntax rather than as data.
 
-`````
+``
+
 ## 🐞 Bug 3: Logout Does Not Clear Session Data
 
 ### 📍 File:
@@ -85,7 +86,7 @@ def logout():
 def logout():
     return render_template('login.html')
 
-`````
+````
 
 ## Bug 4: Typo in Variable Name Passed to Template
 
@@ -115,19 +116,21 @@ Make sure to also update the variable name in the HTML template (ResultDetails.h
 
 return render_template('ResultDetails.html', resultDetails=result_Details)
 
-`````
+```
 Make sure to also update the variable name in the HTML template (ResultDetails.html) to match this corrected spelling if necessary.
 
 🛠️ Will be resolved in the next patch phase.
 
 ```
+
 ## ⚠️ Bug 5: Insecure Deletion Method via GET
 
 ### ❌ Bug Title:
+
 Destructive Action (Student Deletion) Triggered via GET Request
 
-
 ### 🧱 Description:
+
 The `deleteStudent` route currently uses a `GET` request to trigger a database deletion:
 
 ```python
@@ -152,7 +155,8 @@ Optionally, implement a JavaScript confirmation modal on the front-end before th
 📌 Priority:
 High – Security vulnerability and bad REST practice.
 
-`````
+```
+
 ## 🐞 Bug 6: Passwords Stored in Plain Text
 
 ### 📌 Description
@@ -181,7 +185,7 @@ cur.close()
 
 Example:
 
-````sql
+```sql
 INSERT INTO students (Name, Email, Password, Role) VALUES (...)
 python
 Copy code
@@ -208,7 +212,7 @@ is_valid = check_password_hash(stored_hashed_password, entered_password)
 🏷️ Severity
 Critical
 
-`````
+```
 
 ## ✅ Bug 7: Recorded Videos and Audio Do Not Play in Admin Dashboard [FIXED]
 
@@ -297,7 +301,7 @@ exam_window_title = active_window_title
 
 ````
 
-### 🐞 Bug 10: No File Existence or Empty File Handling in write_json
+### 🐞 Bug 9: No File Existence or Empty File Handling in write_json
 
 🔍 Description
 The function write_json(new_data, filename='violation.json') assumes that the violation.json file:
@@ -373,7 +377,7 @@ Copy code
 
 ```
 
-## ✅ Bug 11: Faulty Conditional Logic in Video Deletion[FIXED]
+## ✅ Bug 10: Faulty Conditional Logic in Video Deletion[FIXED]
 
 ### **Bug Title**
 
@@ -416,7 +420,7 @@ Now only .mp4 files that meet the specific criteria for temporary files will be 
 
 ``
 
-## Bug 12: Potential Bug in screenDetection()
+## Bug 11: Potential Bug in screenDetection()
 
 📌 Issue Summary
 The line:
@@ -463,7 +467,7 @@ Log current_title when it's missing for debugging.
 
 Add a default timeout or fallback if gw.getActiveWindow() fails repeatedly.
 
-## 🐞 Bug 13: Potential Bug in electronicDevicesDetection(frame) Function
+## 🐞 Bug 12: Potential Bug in electronicDevicesDetection(frame) Function
 
 Bug Description:
 The function sets the global flag EDFlag = True when an electronic device is detected, but never resets it to False if no such object is found in subsequent frames.
@@ -510,18 +514,29 @@ self.stream.read(CHUNK, exception_on_overflow=False)
 
 ```
 
-## 🐞Bug 14: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞Bug 13: Potential Bugs in Recorder Class (Markdown Format)
 
 SHORT_WIDTH or SHORT_NORMALIZE Not Defined
 Line: count = len(frame) / SHORT_WIDTH
 Issue: If either constant is missing, an error will be raised.
 Fix: Ensure both are defined and match the sample format (typically 2 for 16-bit).
 
-## 🐞 Bug 15: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞 Bug 14: Potential Bugs in Recorder Class (Markdown Format)
 
 self.stream Might Not Be Closed
 Issue: On exceptions or exit, audio stream and PyAudio instance are not released.
 Fix: Implement **del**() or manual close() method to call:
+
+```python
+self.stream.stop_stream()
+self.stream.close()
+self.p.terminate()
+
+```
+
+## 🐞 Bug 15: Potential Bugs in Recorder Class (Markdown Format)
+
+No Reset for EDFlag or Similar Global Flags
 
 ```python
 self.stream.stop_stream()
@@ -849,3 +864,42 @@ def getResultDetails(rid):
         print(f"Unexpected error: {e}")
         return {}
 ```
+
+## Bug 🐞 44: Keyboard doesn't get unhooked after exam has ended
+
+Description: The keyboard hook remains active even after the exam has ended, which can lead to unexpected behavior or resource leaks.
+
+Fix: Ensure that the keyboard hook is properly unhooked and all resources are released when the exam ends.
+
+## Bug 🐞 45: Head movement model caused crashes due to ffmpeg [Fixed]
+
+Description: The head movement detection model was causing crashes in the application, particularly related to the ffmpeg library used for video processing.
+
+Fix: Updated the model implementation and optimized the video processing pipeline to prevent crashes.
+
+## Bug 🐞 46: Screen Detection sometimes not naming video files properly
+
+Description: The screen detection module occasionally fails to generate unique names for the output video files, leading to overwrites or confusion about which file corresponds to which exam session.
+
+Fix: Implement a naming convention that includes timestamps or unique identifiers for each exam session's video files.
+
+## Bug 🐞 47: Electronic Device Detection Did Not Record Proper Violation Videos [FIXED]
+
+**Description:**
+The electronic device detection module (EDD_record_duration in utils.py) was not recording proper violation videos when a device (e.g., cell phone, laptop) was detected. Videos were often empty or too small (<10KB), and FFmpeg would fail to process them. This resulted in missing or unusable evidence for teachers in the admin dashboard.
+
+**Root Cause:**
+
+- The function only wrote a few frames per detection event, resulting in tiny video files.
+- The video writer was sometimes released too early, before enough frames were captured.
+- There was no check for minimum file size before processing with FFmpeg.
+
+**How We Fixed It:**
+
+- Updated the logic to write a frame every time a device is detected, and only release/process the video when detection ends.
+- Added a frame counter and debug statements to confirm enough frames are written per event.
+- Added a file size check before processing violation videos to skip empty/small files.
+- Now, violation videos are properly recorded, stored, and viewable in the admin dashboard.
+
+**Status:**
+✅ Fixed — Electronic device detection now reliably records and saves evidence videos for review.

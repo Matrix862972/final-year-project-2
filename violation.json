@@ -926,5 +926,1757 @@
         "Mark": 0.0,
         "Link": "",
         "RId": 19
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:15:27",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "EDViolationstatic\\OutputVideos\\786.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:29:23",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation20093.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:29:24",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation27362.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:29:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation2493.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:29:33",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation21628.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:29:54",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation37430.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:29:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation7321.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:06",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation34767.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:06",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation15335.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:09",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation12079.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:18",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation29257.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:19",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation39024.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:21",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation35225.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:26",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation263.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:27",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation18013.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:28",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation18558.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:50",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation1798.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:51",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation34394.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:51",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation15977.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:55",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation24090.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:56",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation7159.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:56",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation15718.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:57",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation36233.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation2606.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:30:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation6938.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:00",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation44992.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:00",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation44122.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:01",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation49115.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:01",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation31390.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:02",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation19160.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:07",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation27596.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:26",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation22167.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:47",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation29356.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:48",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation34806.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:48",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation20479.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:49",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation28028.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:49",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation15990.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:31:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation8542.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:32:06",
+        "Duration": "3 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\EDViolation24846.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:32:39",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation10362.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:32:40",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation33120.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:32:40",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation11774.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:32:42",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation22192.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:32:42",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation45594.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:32:43",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation18079.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:32:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation38689.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:00",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation15391.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:54",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation40171.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:54",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation39393.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:55",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation20443.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:56",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation43408.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:56",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation48521.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:56",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation43061.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:57",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation42266.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:58",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation29108.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation15449.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:33:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation30811.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:00",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation20124.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:06",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation16716.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:06",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation23327.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:07",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation44077.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:07",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation18637.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:07",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation25371.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:08",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation33899.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:09",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation43000.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:10",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation27721.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:10",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation4668.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:10",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation32848.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:14",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation28633.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:16",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation14673.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:17",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation30068.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:18",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation34818.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:18",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation3955.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:18",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation10443.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:19",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation4677.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:20",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation17323.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:21",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation4538.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:22",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation6533.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:24",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation6054.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:25",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation32534.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:25",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation17030.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:25",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation25070.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:26",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation34747.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:26",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation41929.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:28",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation16046.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation43392.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation5330.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:30",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation37870.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:30",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation10101.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:31",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation43939.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:32",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation41997.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:32",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation46845.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:33",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation1293.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:34",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation587.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:35",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation41499.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:38",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation12821.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:39",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation9076.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:39",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation7033.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:39",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation49600.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:40",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation43557.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:41",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation21775.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:42",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation26847.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:44",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation31466.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:45",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation25334.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:46",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation32964.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:46",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation49054.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:48",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation27804.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:48",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation12021.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:48",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation43480.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:49",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation3797.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:51",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation29729.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:52",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation26828.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:57",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation16042.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:58",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation5554.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:58",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation38753.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation44978.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:34:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation30107.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:00",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation25727.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:00",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation25479.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:01",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation19899.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:03",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation24440.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:03",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation20136.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:04",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation8975.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:04",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation26981.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:05",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation28877.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:05",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation5476.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:06",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation40419.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:07",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation42608.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:09",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation16781.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:10",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation5831.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:14",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation5666.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:14",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation5877.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:15",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation44518.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:16",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation13876.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:18",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation10167.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:19",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation43815.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:20",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation13115.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:21",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation18301.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:21",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation17075.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:22",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation19527.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:22",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation43708.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:23",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation12822.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:25",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation45784.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:26",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation28997.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:26",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation24880.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:28",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation36774.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation21667.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation15264.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:30",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation42347.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:31",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation45176.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:31",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation34166.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:32",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation7205.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:32",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation4151.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:32",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation10983.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:33",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation40456.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:34",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation28058.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:34",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation40288.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:34",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation653.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:35",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation25964.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:41",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation23851.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:48",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation15759.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:48",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation26391.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:49",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation565.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:53",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation28910.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:54",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation10425.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:54",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation31618.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:55",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation32684.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:56",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation42586.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:35:57",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation28733.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:00",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation25465.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:02",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation39263.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:02",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation49468.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:03",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation29046.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:04",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation32587.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:04",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation31512.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:05",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation19525.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:05",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation12941.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:06",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation10392.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:07",
+        "Duration": "2 seconds",
+        "Mark": 3,
+        "Link": "static\\OutputVideos\\EDViolation17942.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:22",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation37913.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:22",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation47380.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:25",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation24251.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:27",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation30764.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:27",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation13227.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation46801.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation20537.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:30",
+        "Duration": "2 seconds",
+        "Mark": 3,
+        "Link": "static\\OutputVideos\\EDViolation32285.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:50",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation29745.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:50",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation7743.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:52",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation21160.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:52",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation38572.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:36:53",
+        "Duration": "2 seconds",
+        "Mark": 3,
+        "Link": "static\\OutputVideos\\EDViolation17588.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:37:04",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation18238.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:37:05",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation12755.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:37:07",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation44824.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:37:07",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation37859.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:37:10",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation23550.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:37:11",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation10599.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:37:11",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation47316.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 18:37:26",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation16591.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:08:55",
+        "Duration": "3 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\EDViolation18184.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:14:58",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation3755.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:15:08",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation4651.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:15:14",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation47270.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:15:24",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation46557.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:15:32",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation6745.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:20:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation20187.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:20:59",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation2733.mp4",
+        "RId": 20
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 20
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:39:57",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation42297.mp4",
+        "RId": 21
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:40:07",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation20905.mp4",
+        "RId": 21
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:40:17",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation20622.mp4",
+        "RId": 21
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:41:18",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation49517.mp4",
+        "RId": 21
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:42:29",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation16831.mp4",
+        "RId": 21
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:42:38",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation24393.mp4",
+        "RId": 21
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:42:43",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation1247.mp4",
+        "RId": 21
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:42:51",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation21677.mp4",
+        "RId": 21
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-08 19:42:57",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\EDViolation22480.mp4",
+        "RId": 21
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 21
     }
 ]

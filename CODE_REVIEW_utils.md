@@ -256,76 +256,47 @@ Compresses a given video file by reducing its bitrate using FFmpeg. If FFmpeg is
 
 ### **Code with Comments**
 ```python
-# Function to reduce video file's data rate to 100 kbps
 def reduceBitRate(input_file, output_file):
     target_bitrate = "1000k"  # ⚙️ Set your desired target bitrate here
 
     # 📍 Try to find FFmpeg executable from common install paths
     ffmpeg_paths = [
         "ffmpeg",  # Check if FFmpeg is available in system PATH
-        "C:/Program Files/ffmpeg/bin/ffmpeg.exe",
         "C:/ffmpeg/bin/ffmpeg.exe",
         "C:/Users/kaungmyat/Downloads/ffmpeg-2023-08-28-git-b5273c619d-essentials_build/ffmpeg-2023-08-28-git-b5273c619d-essentials_build/bin/ffmpeg.exe"
-    ]
-
-    ffmpeg_path = None  # Will hold the valid FFmpeg path if found
-
     for path in ffmpeg_paths:
-        try:
             # 🧪 Check if FFmpeg runs successfully
             result = subprocess.run([path, "-version"],
                                     capture_output=True,
-                                    text=True,
-                                    timeout=5)
             if result.returncode == 0:
                 ffmpeg_path = path
                 break
         except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
             continue
-
-    if not ffmpeg_path:
         # 🚫 FFmpeg not found – fallback to copying
-        print("FFmpeg not found. Skipping bitrate conversion.")
         print("Install FFmpeg or add it to PATH for video compression.")
         try:
             shutil.copy2(input_file, output_file)
-            print(f"Copied {input_file} to {output_file} (no compression)")
-        except Exception as e:
             print(f"Error copying file: {e}")
         return
 
     # ▶️ FFmpeg command to compress video
-    command = [
         ffmpeg_path,
         "-i", input_file,         # Input video
         "-b:v", target_bitrate,   # Set video bitrate
-        "-c:v", "libx264",        # Use H.264 codec for video
-        "-c:a", "aac",            # Use AAC codec for audio
-        "-strict", "experimental",
-        "-b:a", "192k",           # Set audio bitrate
         "-y",                     # Overwrite if output exists
         output_file               # Output path
     ]
 
-    try:
         # 🚀 Run FFmpeg compression
         result = subprocess.run(command,
-                                capture_output=True,
                                 text=True,
-                                timeout=30)
         if result.returncode == 0:
             print("Bitrate conversion completed.")
-        else:
-            print(f"FFmpeg error: {result.stderr}")
             shutil.copy2(input_file, output_file)
-    except subprocess.TimeoutExpired:
         print("FFmpeg timeout. Copying file without compression.")
         shutil.copy2(input_file, output_file)
-    except Exception as e:
-        print(f"Error during conversion: {e}")
-        shutil.copy2(input_file, output_file)
 
-````
 
 ## 🎥 Function: faceDetectionRecording(img, text)
 
@@ -334,14 +305,9 @@ def reduceBitRate(input_file, output_file):
 This function records face detection violations during an online exam session and logs them. It detects when the verified student disappears and records that period for violation review.
 
 ---
-
 ### **Code with Inline Explanations**
 
-````python
-def faceDetectionRecording(img, text):
-    # Global state variables used for tracking timing and recording
     global start_time, end_time, recorded_durations, prev_state, flag, writer, width, height
-
     print("Running FaceDetection Recording Function")
     print(text)
 
@@ -351,38 +317,24 @@ def faceDetectionRecording(img, text):
         for _ in range(2): writer[0].write(img)  # Start recording
 
     # Ongoing violation > 3 sec
-    elif text != 'Verified Student appeared' and str(text) == prev_state[0] and (time.time() - start_time[0]) > 3:
         flag[0] = True  # Mark this as a real violation
         for _ in range(2): writer[0].write(img)
-
     # Ongoing violation < 3 sec
-    elif text != 'Verified Student appeared' and str(text) == prev_state[0] and (time.time() - start_time[0]) <= 3:
         flag[0] = False  # Short disturbance — ignore
         for _ in range(2): writer[0].write(img)
-
-    # Student reappeared — stop recording
     else:
-        if prev_state[0] != "Verified Student appeared":
             writer[0].release()
             end_time[0] = time.time()
-            duration = math.ceil((end_time[0] - start_time[0]) / 3)
-            outputVideo = 'FDViolation' + video[0]
 
-            FDViolation = {
                 "Name": prev_state[0],
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[0])),
                 "Duration": str(duration) + " seconds",
                 "Mark": math.floor(2 * duration),
                 "Link": outputVideo,
                 "RId": get_resultId()
-            }
 
             if flag[0]:
-                recorded_durations.append(FDViolation)
-                write_json(FDViolation)
-                reduceBitRate(video[0], outputVideo)
                 move_file_to_output_folder(outputVideo)
-
             os.remove(video[0])  # Delete original
             print(recorded_durations)
 
@@ -391,24 +343,15 @@ def faceDetectionRecording(img, text):
             writer[0] = cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width, height))
             flag[0] = False
 
-    prev_state[0] = text  # Update state
 
 
-Purpose
 This function detects when a student moves their head away from the "Forward" position and logs that as a violation during the exam. It records a short video segment of the incident and writes metadata such as duration, timestamp, and severity.
-
 Code with Line-by-Line Explanation
 ```python
-# Function to record head movement violations
-def Head_record_duration(text, img):
     # Access global variables for tracking violation states and video writers
-    global start_time, end_time, recorded_durations, prev_state, flag, writer, width, height
 
     print("Running HeadMovement Recording Function")
-    print(text)  # Print the current detected direction (e.g., Left, Right, etc.)
-
     # Case: Student is not looking "Forward"
-    if text != "Forward":
         # If student just moved away from forward direction
         if str(text) != prev_state[1] and prev_state[1] == "Forward":
             start_time[1] = time.time()  # Start timer for violation
@@ -417,38 +360,24 @@ def Head_record_duration(text, img):
 
         # If student changes head direction again during violation
         elif str(text) != prev_state[1] and prev_state[1] != "Forward":
-            writer[1].release()  # Stop recording
             end_time[1] = time.time()  # Mark end time
             duration = math.ceil((end_time[1] - start_time[1])/7)  # Approximate violation duration
-
-            outputVideo = 'HeadViolation' + video[1]  # Create filename for violation video
-
             # Create a metadata dictionary for this violation
-            HeadViolation = {
                 "Name": prev_state[1],  # Direction that caused violation
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[1])),
                 "Duration": str(duration) + " seconds",
                 "Mark": duration,  # Penalty score
                 "Link": outputVideo,
                 "RId": get_resultId()
-            }
 
             # Save the violation only if flagged as valid
-            if flag[1]:
                 recorded_durations.append(HeadViolation)
-                write_json(HeadViolation)
                 reduceBitRate(video[1], outputVideo)  # Compress the video
                 move_file_to_output_folder(outputVideo)  # Move it to output folder
-
-            os.remove(video[1])  # Delete raw video
             print(recorded_durations)
-
             # Prepare a new writer for the next violation
             start_time[1] = time.time()
-            video[1] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
-            writer[1] = cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height))
             flag[1] = False  # Reset the flag
-
         # If student continues facing the same direction for more than 3 seconds
         elif str(text) == prev_state[1] and (time.time() - start_time[1]) > 3:
             flag[1] = True  # Mark as valid violation
@@ -457,103 +386,63 @@ def Head_record_duration(text, img):
 
         # If direction hasn't changed and duration is short (< 3s)
         elif str(text) == prev_state[1] and (time.time() - start_time[1]) <= 3:
-            flag[1] = False  # Do not mark as violation
             for _ in range(2):
                 writer[1].write(img)
 
-        # Update previous state
-        prev_state[1] = text
-
-    # Case: Student is now looking forward again
     else:
         # If the previous state was a violation, wrap it up
         if prev_state[1] != "Forward":
             writer[1].release()
             end_time[1] = time.time()
             duration = math.ceil((end_time[1] - start_time[1])/7)
-            outputVideo = 'HeadViolation' + video[1]
 
             # Create violation metadata
-            HeadViolation = {
                 "Name": prev_state[1],
-                "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[1])),
                 "Duration": str(duration) + " seconds",
                 "Mark": duration,
-                "Link": outputVideo,
-                "RId": get_resultId()
             }
-
             # Save violation if valid
             if flag[1]:
-                recorded_durations.append(HeadViolation)
-                write_json(HeadViolation)
                 reduceBitRate(video[1], outputVideo)
-                move_file_to_output_folder(outputVideo)
 
             os.remove(video[1])  # Delete raw video
             print(recorded_durations)
 
             # Prepare for next round of recording
-            video[1] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[1] = cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height))
             flag[1] = False
-
-        # Update state
-        prev_state[1] = text
-
 🧑‍🤝‍🧑 MTOP_record_duration Function
-Purpose
 This function monitors if more than one person is detected in front of the camera during an online exam session. If a second person is detected, it records a violation video, logs metadata like duration and timestamp, and stores the footage for review.
 
 Code with Line-by-Line Explanation
-python
-Copy code
-# Recording Function for More Than One Person Detection
 def MTOP_record_duration(text, img):
     # Use global variables needed for tracking violations
     global start_time, end_time, recorded_durations, prev_state, flag, writer, width, height
 
     print("Running MTOP Recording Function")
-    print(text)  # Log the current detection message for debugging
-
-    # ➤ Case 1: Violation just started (a second person is newly detected)
-    if text != 'Only one person is detected' and prev_state[2] == 'Only one person is detected':
-        start_time[2] = time.time()  # Start the timer
         for _ in range(2):
-            writer[2].write(img)  # Record a couple of frames to initialize
 
     # ➤ Case 2: Ongoing violation for more than 3 seconds
     elif text != 'Only one person is detected' and str(text) == prev_state[2] and (time.time() - start_time[2]) > 3:
         flag[2] = True  # Mark this as a valid violation
         for _ in range(2):
             writer[2].write(img)  # Record frames
-
     # ➤ Case 3: Ongoing violation but < 3 seconds
     elif text != 'Only one person is detected' and str(text) == prev_state[2] and (time.time() - start_time[2]) <= 3:
-        flag[2] = False  # Don't mark as violation yet
         for _ in range(2):
-            writer[2].write(img)
 
     # ➤ Case 4: User is back to single-person state after violation
     else:
         if prev_state[2] != "Only one person is detected":
             writer[2].release()  # Stop recording
-            end_time[2] = time.time()  # Get end time of violation
-            duration = math.ceil((end_time[2] - start_time[2]) / 3)  # Calculate duration
 
-            outputVideo = 'MTOPViolation' + video[2]  # Create a name for the output file
 
             # Prepare metadata for this violation
             MTOPViolation = {
                 "Name": prev_state[2],  # The previous state that caused the violation
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[2])),
                 "Duration": str(duration) + " seconds",
-                "Mark": math.floor(1.5 * duration),  # Penalty scoring logic
-                "Link": outputVideo,  # Path to the saved violation video
-                "RId": get_resultId()  # Associated result ID for this session
-            }
 
-            # Save the violation if it lasted long enough
             if flag[2]:
                 recorded_durations.append(MTOPViolation)
                 write_json(MTOPViolation)  # Log violation to JSON
@@ -562,200 +451,112 @@ def MTOP_record_duration(text, img):
 
             os.remove(video[2])  # Delete raw uncompressed video
             print(recorded_durations)
-
             # Reinitialize for next violation
             video[2] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[2] = cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width, height))
             flag[2] = False  # Reset the violation flag
 
     # ➤ Update the previous state for comparison in the next frame
-    prev_state[2] = text
-
-
-
-    # 🖥️ Screen Detection Violation Recorder
-def SD_record_duration(text, img):
     global start_time, end_time, prev_state, flag, writer, width, height
-
     print("Running SD Recording Function")
     print(text)
 
     # 🚨 Violation just started (user moved away from test screen)
     if text != "Stay in the Test" and prev_state[3] == "Stay in the Test":
-        start_time[3] = time.time()
         print(f"Start SD Recording, start time is {start_time[3]} and array is {start_time}")
         for _ in range(2):
-            writer[3].write(img)
-
-    # ⏳ Violation is ongoing for more than 3 seconds
-    elif text != "Stay in the Test" and str(text) == prev_state[3] and (time.time() - start_time[3]) > 3:
-        flag[3] = True
-        for _ in range(2):
-            writer[3].write(img)
-
     # ⚠️ Violation ongoing but less than 3 seconds
-    elif text != "Stay in the Test" and str(text) == prev_state[3] and (time.time() - start_time[3]) <= 3:
         flag[3] = False
         for _ in range(2):
-            writer[3].write(img)
-
-    # ✅ Back to normal (user returned to test screen)
     else:
-        if prev_state[3] != "Stay in the Test":
             writer[3].release()
             end_time[3] = time.time()
-            duration = math.ceil((end_time[3] - start_time[3])/4)
-            outputVideo = 'SDViolation' + video[3]
-
             # 📦 Violation metadata
-            SDViolation = {
                 "Name": prev_state[3],
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[3])),
                 "Duration": str(duration) + " seconds",
                 "Mark": (2 * duration),
                 "Link": outputVideo,
                 "RId": get_resultId()
-            }
 
             # 💾 Save and archive if flagged
-            if flag[3]:
-                recorded_durations.append(SDViolation)
-                write_json(SDViolation)
                 reduceBitRate(video[3], outputVideo)
-                move_file_to_output_folder(outputVideo)
 
             os.remove(video[3])
             print(recorded_durations)
-
             # 🔄 Reset for next violation
             video[3] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
-            writer[3] = cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), 15, (1920, 1080))
-            flag[3] = False
 
-    # 🔁 Update previous state
     prev_state[3] = text
 
-
     # 📸 Function to capture a screenshot and convert it into an OpenCV-compatible NumPy array
-def capture_screen():
     # Take a screenshot using PyAutoGUI (returns a PIL image in RGB format)
     screenshot = pyautogui.screenshot()
-
-    # Convert the PIL image to a NumPy array (for OpenCV processing)
     frame = np.array(screenshot)
-
     # Convert the color format from RGB (PIL) to BGR (OpenCV standard)
     frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-
-    # Return the processed frame
     return frame
-
 
 # 📹 Recording Function for Electronic Devices Detection
 def EDD_record_duration(text, img):
     # Access global variables used for tracking and recording
     global start_time, end_time, prev_state, flag, writer, recorded_Images, EDD_Duration, video, EDWidth, EDHeight
 
-    print(text)  # Debug print to show current detection text
 
     # 📍 Start recording when a new device is detected
-    if text == "Electronic Device Detected" and prev_state[4] == "No Electronic Device Detected":
-        start_time[4] = time.time()
-        for _ in range(2):  # Write a couple of frames for context
             writer[4].write(img)
-
     # 🔁 Continue writing if violation persists beyond minimal time
     elif text == "Electronic Device Detected" and str(text) == prev_state[4] and (time.time() - start_time[4]) > 0:
         flag[4] = True
-        for _ in range(2):
             writer[4].write(img)
 
-    # 🔁 Short violation — don’t mark, but record
-    elif text == "Electronic Device Detected" and str(text) == prev_state[4] and (time.time() - start_time[4]) <= 0:
         flag[4] = False
-        for _ in range(2):
             writer[4].write(img)
 
-    # ✅ End of violation — release video, calculate stats, and save
     else:
-        if prev_state[4] == "Electronic Device Detected":
             writer[4].release()
             end_time[4] = time.time()
-            duration = math.ceil((end_time[4] - start_time[4]) / 10)  # Normalize duration
-            outputVideo = 'EDViolation' + video[4]  # New filename for violation
 
-            # Build the violation record
             EDViolation = {
                 "Name": prev_state[4],
-                "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[4])),
-                "Duration": str(duration) + " seconds",
                 "Mark": math.floor(1.5 * duration),
-                "Link": outputVideo,
                 "RId": get_resultId()
             }
 
             # If it's a real violation, save it
             if flag[4]:
                 write_json(EDViolation)
-                reduceBitRate(video[4], outputVideo)
                 move_file_to_output_folder(outputVideo)
 
-            os.remove(video[4])  # Delete old video
-            # Prepare a new writer for next possible violation
-            video[4] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[4] = cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), 10, (EDWidth, EDHeight))
-            flag[4] = False  # Reset flag
 
     # Update previous state
     prev_state[4] = text
-
 ````
-
-## 🔄 deleteTrashVideos()
 
 This function scans the current working directory and removes temporary `.mp4` video files based on name patterns.
 
 ### 🎯 Purpose:
 
-- To clean up leftover or auto-generated video recordings that are:
-  - Numerically named (e.g., `12345.mp4`)
-  - Labeled with `"Violation"` (e.g., `FDViolation12345.mp4`)
-  - Have short names indicating they are likely temporary
-
-### 🧠 Logic:
+- Numerically named (e.g., `12345.mp4`)
+- Have short names indicating they are likely temporary
 
 - Uses `os.listdir()` to iterate through files.
-- Filters for `.mp4` files with:
   - Numeric-only names
   - Short length (<10 characters, excluding extension)
-  - `"Violation"` in the filename
-- Deletes matching files using `os.remove()`
-
-### ⚠️ Note:
 
 There’s a potential **logic bug** in:
 
 ```python
 if filename.lower().endswith('.mp4') and filename.isdigit() or filename.endswith('.mp4'):
 
-
 ```
-
-# 📷 FaceRecognition Class
 
 ## Purpose
 
 A real-time facial recognition system that identifies a verified student and triggers recordings if they disappear during an exam.
 
----
-
-## 📁 Initialization
-
 - `__init__()`: Loads known faces from `static/Profiles` using `face_recognition`.
-
----
-
-## 🔍 Face Encoding
 
 - **Method**: `encode_faces()`
 - Filters and encodes image files (.jpg, .png, etc.).
@@ -765,43 +566,27 @@ A real-time facial recognition system that identifies a verified student and tri
 
 ---
 
-## 🎥 Recognition Loop
-
 - **Method**: `run_recognition()`
-- Captures video while `Globalflag` is True.
 - Skips every alternate frame for performance.
 - Converts image from BGR → RGB.
-- Detects faces and matches with known encodings.
 - Applies confidence threshold (≥ 84%) to identify a verified student.
 
 ---
 
-## 🎯 Display and Recording
-
 - Draws boxes and name labels using OpenCV.
-- Calls `faceDetectionRecording()`:
   - If student disappears → triggers video logging.
 
 ---
 
 ## ⚠️ Dependencies
 
-- `face_recognition`, `cv2`, `numpy`, system webcam.
-
 ---
 
-## ✅ Example Output
-
-- `"Verified Student appeared"` – Student matched and active.
 - `"Verified Student disappeared"` – No face or mismatch.
-
----
 
 Let me know if you want a **diagram or flowchart** of how this works end-to-end.
 
 # 🤖 Head Movement Detection Function
-
-## Function: `headMovmentDetection(image, face_mesh)`
 
 ### 🎯 Purpose
 
@@ -811,47 +596,31 @@ Detects head direction (left, right, up, down, forward) using facial landmarks w
 
 ## ⚙️ Steps
 
-1. **Preprocess Image**
-
-   - Flips and converts to RGB for MediaPipe processing.
+- Flips and converts to RGB for MediaPipe processing.
 
 2. **Detect Facial Landmarks**
 
    - Uses `face_mesh.process()` to get landmarks.
 
-3. **Extract Specific Key Points**
-
    - Nose, eyes, mouth corners, chin are used to estimate head pose.
 
-4. **Estimate Pose**
+3. **Estimate Pose**
 
-   - Uses PnP and rotation matrix to calculate head angles.
-
-5. **Interpret Head Direction**
-
+4. **Interpret Head Direction**
    - Based on X and Y angles, determines head direction:
      - `Looking Left`
      - `Looking Right`
      - `Looking Up`
      - `Looking Down`
      - `Forward`
-
-6. **Draw and Record**
+5. **Draw and Record**
    - Annotates frame with head direction.
-   - Triggers recording logic via `Head_record_duration()`.
-
----
-
-## 🧠 Notes
 
 - Uses relaxed angle thresholds for natural movement.
-- Records only when a change from "Forward" is detected.
 
 # 🧍‍♂️🧍 More Than One Person Detection (MTOP)
 
 ## Function: `MTOP_Detection(img)`
-
-### 🎯 Purpose
 
 Detects whether **more than one person** is present in the video frame using face detection and triggers the MTOP recording system.
 

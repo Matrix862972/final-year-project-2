@@ -56,9 +56,9 @@ def capture_by_frames():
 @app.before_request
 def start_loop():
     task1 = executor.submit(utils.cheat_Detection2)
-    task2 = executor.submit(utils.cheat_Detection1)
-    task3 = executor.submit(utils.fr.run_recognition)
-    task4 = executor.submit(utils.a.record)
+    #task2 = executor.submit(utils.cheat_Detection1)
+    #task3 = executor.submit(utils.fr.run_recognition)
+    #task4 = executor.submit(utils.a.record)
 
 
 #Login Related

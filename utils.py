@@ -402,36 +402,66 @@ def capture_screen():
 def EDD_record_duration(text, img):
     global start_time, end_time, prev_state, flag, writer,recorded_Images,EDD_Duration, video, EDWidth, EDHeight
     print(text)
-    if text == "Electronic Device Detected" and prev_state[4] == "No Electronic Device Detected":
-        start_time[4] = time.time()
-        for _ in range(2):
-            writer[4].write(img)
-    elif text == "Electronic Device Detected" and str(text) == prev_state[4] and (time.time() - start_time[4]) > 0:
-        flag[4] = True
-        for _ in range(2):
-            writer[4].write(img)
-    elif text == "Electronic Device Detected" and str(text) == prev_state[4] and (time.time() - start_time[4]) <= 0:
-        flag[4] = False
-        for _ in range(2):
-            writer[4].write(img)
+    if text == "Electronic Device Detected":
+        if prev_state[4] == "No Electronic Device Detected":
+            start_time[4] = time.time()
+            # Initialize frame counter for this detection event
+            EDD_record_duration.frame_count = 0
+        # Debug: Check frame shape and writer properties
+        print(f"[DEBUG] Frame shape: {img.shape}")
+        print(f"[DEBUG] Writer[4] is opened: {writer[4].isOpened()}")
+        print(f"[DEBUG] Writer[4] size: {EDWidth}x{EDHeight}")
+        # Ensure frame matches writer dimensions
+        if img.shape[1] != EDWidth or img.shape[0] != EDHeight:
+            print(f"[DEBUG] Resizing frame from {img.shape[1]}x{img.shape[0]} to {EDWidth}x{EDHeight}")
+            img = cv2.resize(img, (EDWidth, EDHeight))
+        writer[4].write(img)
+        # Increment and print frame counter
+        if not hasattr(EDD_record_duration, 'frame_count'):
+            EDD_record_duration.frame_count = 1
+        else:
+            EDD_record_duration.frame_count += 1
+        print(f"[DEBUG] Frame written to video. Total frames this event: {EDD_record_duration.frame_count}")
+        print("debugging----------")
+        print("Writing frame to video")
+        print("Size of writer[4]:", writer[4].get(cv2.CAP_PROP_FRAME_COUNT))
+        print(f"flag value: {flag[4]}")
+        # If detected for more than 3 seconds, set flag
+        if (time.time() - start_time[4]) > 3:
+            flag[4] = True
+        else:
+            flag[4] = False
     else:
+        # Detection ended, process video
         if prev_state[4] == "Electronic Device Detected":
+            print(f"[DEBUG] Total frames written for last event: {getattr(EDD_record_duration, 'frame_count', 'N/A')}")
+            # Reset frame counter for next event
+            EDD_record_duration.frame_count = 0
             writer[4].release()
             end_time[4] = time.time()
             duration = math.ceil((end_time[4] - start_time[4])/10)
-            outputVideo = 'EDViolation' + video[4]
+            base_filename = os.path.basename(video[4])
+            outputVideo = os.path.join(video_dir, 'EDViolation' + base_filename)
             EDViolation = {
                 "Name": prev_state[4],
                 "Time": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(start_time[4])),
                 "Duration": str(duration) + " seconds",
                 "Mark": math.floor(1.5 * duration),
-                "Link": outputVideo,
+                "Link": os.path.relpath(outputVideo, start=os.getcwd()),
                 "RId": get_resultId()
             }
             if flag[4]:
-                write_json(EDViolation)
-                reduceBitRate(video[4], outputVideo)
-                move_file_to_output_folder(outputVideo)
+                try:
+                    file_size = os.path.getsize(video[4])
+                except Exception as e:
+                    print(f"Error checking file size for {video[4]}: {e}")
+                    file_size = 0
+                if file_size > 10240:
+                    write_json(EDViolation)
+                    reduceBitRate(video[4], outputVideo)
+                    move_file_to_output_folder(outputVideo)
+                else:
+                    print(f"Skipped processing violation video {video[4]} due to small file size ({file_size} bytes)")
             os.remove(video[4])
             video[4]= os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[4] = cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), 10 , (EDWidth,EDHeight))
@@ -1123,8 +1153,8 @@ def cheat_Detection2():
         # Reset electronic device flag before detection
         EDFlag = False
         
-        MTOP_Detection(image1)
-        screenDetection()
+        #MTOP_Detection(image1)
+        #screenDetection()
         electronicDevicesDetection(image3)  # Added electronic device detection
         
         # EDFlag will remain True if device was detected, False otherwise
