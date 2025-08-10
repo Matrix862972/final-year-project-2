@@ -1,39 +1,35 @@
 # 🐞 Known Bugs
 
-## ✅ Bug 1: Repeated Thread Execution on Every Request - [fixed]
+❌ Bug 1: Repeated Thread Execution on Every Request – [NOT FIXED]
+Bug Title
+Flask @app.before_request starts background threads multiple times
 
-### **Bug Title**
+Status: NOT FIXED ❌
+This bug is still present. Background threads are initialized multiple times due to the @app.before_request hook triggering on each HTTP request.
 
-Flask `@app.before_request` starts background threads multiple times
+Description
+The start_loop() function decorated with @app.before_request continues to initialize multiple background threads using ThreadPoolExecutor on every HTTP request, which can lead to excessive resource usage.
 
-### **Status: FIXED ✅**
-
-This bug has been resolved by implementing a global flag to ensure threads are only started once.
-
-### **Description**
-
-The `start_loop()` function decorated with `@app.before_request` was initializing multiple background threads using `ThreadPoolExecutor` on every HTTP request, causing resource exhaustion.
-
-### **Solution Applied**
-
-```python
+Attempted Solution
+python
+Copy code
 started = False
 @app.before_request
 def start_loop():
-    global started
-    if not started:
-        started = True
-        utils.Globalflag = True  # Enable detection systems
-        task1 = executor.submit(utils.cheat_Detection2)
-        task2 = executor.submit(utils.cheat_Detection1)
-        task3 = executor.submit(utils.fr.run_recognition)
-        task4 = executor.submit(utils.a.record)
-```
+global started
+if not started:
+started = True
+utils.Globalflag = True # Enable detection systems
+task1 = executor.submit(utils.cheat_Detection2)
+task2 = executor.submit(utils.cheat_Detection1)
+task3 = executor.submit(utils.fr.run_recognition)
+task4 = executor.submit(utils.a.record)
+Notes:
+The started flag approach has not fully resolved the issue — it may not persist correctly between different contexts or processes in Flask’s deployment.
 
-### **Fix Applied:**
+Multiple thread creation still occurs under certain conditions.
 
-- Added `started` flag to prevent multiple thread creation
-- Added `utils.Globalflag = True` to enable detection loops
+``
 
 ## 🐞 Bug 2: SQL Injection Vulnerability in Login Function
 
@@ -865,11 +861,17 @@ def getResultDetails(rid):
         return {}
 ```
 
-## Bug 🐞 44: Keyboard doesn't get unhooked after exam has ended
+## ✅ Bug 🐞 44: Keyboard doesn't get unhooked after exam has ended [FIXED]
 
-Description: The keyboard hook remains active even after the exam has ended, which can lead to unexpected behavior or resource leaks.
+Description: The keyboard hook remained active even after the exam ended, causing unexpected behavior and resource leaks.
 
-Fix: Ensure that the keyboard hook is properly unhooked and all resources are released when the exam ends.
+**Fix Applied:**
+
+- Added `keyboard.unhook_all()` in the `/exam` POST route after the exam ends to ensure all keyboard hooks are released.
+- Now, keyboard shortcuts are no longer detected after the exam finishes.
+
+**Status:**
+✅ Fixed — Keyboard hook is properly unhooked and resources are released when the exam ends.
 
 ## Bug 🐞 45: Head movement model caused crashes due to ffmpeg [Fixed]
 
@@ -958,7 +960,7 @@ if " — " in current_title or " - " in current_title:  # Check both dash types
 ### **Testing Results:**
 
 - ✅ Detects app switches (moving away from Chrome)
-- ✅ Detects tab switches (switching to different tabs within Chrome)  
+- ✅ Detects tab switches (switching to different tabs within Chrome)
 - ✅ Allows legitimate exam tabs
 - ✅ Window minimization detection still works
 
