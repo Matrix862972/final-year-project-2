@@ -52,10 +52,15 @@ def capture_by_frames():
         yield (b'--frame\r\n'
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+
 #Function to run Cheat Detection when we start run the Application
 @app.before_request
 def start_loop():
-    task1 = executor.submit(utils.cheat_Detection2)
+    print("Starting cheat detection...")
+    print(f"Current thread: {threading.current_thread().name}")
+    print("Active threads:", threading.enumerate())
+    print("Thread count:", threading.active_count())
+    #task1 = executor.submit(utils.cheat_Detection2)
     #task2 = executor.submit(utils.cheat_Detection1)
     #task3 = executor.submit(utils.fr.run_recognition)
     #task4 = executor.submit(utils.a.record)
@@ -153,6 +158,12 @@ def examAction():
         if(examData['input']!=''):
             utils.Globalflag= False
             utils.cap.release()
+            # Unhook keyboard after exam ends (Bug #44 fix)
+            try:
+                import keyboard
+                keyboard.unhook_all()
+            except Exception as e:
+                print(f"Keyboard unhook error: {e}")
             utils.write_json({
                 "Name": ('Prohibited Shorcuts (' + ','.join(list(dict.fromkeys(utils.shorcuts))) + ') are detected.'),
                 "Time": (str(len(utils.shorcuts)) + " Counts"),
@@ -187,6 +198,7 @@ def examAction():
             resultStatus= studentInfo['Name']+';'+str(totalMark)+';'+status+';'+time.strftime("%Y-%m-%d", time.localtime(time.time()))
         else:
             utils.Globalflag = True
+            print(f"Global flag = {utils.Globalflag}")
             print('sfdsfsdsfdsfdsfdsfdsfdsfdsfds')
             resultStatus=''
     return jsonify({"output": resultStatus, "link": link})

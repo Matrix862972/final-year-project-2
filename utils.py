@@ -1182,9 +1182,9 @@ def cheat_Detection2():
         # Reset electronic device flag before detection
         EDFlag = False
         
-        #MTOP_Detection(image1)
+        MTOP_Detection(image1)
         screenDetection()
-        #electronicDevicesDetection(image3)  # Added electronic device detection
+        electronicDevicesDetection(image3)  # Added electronic device detection
         
         # EDFlag will remain True if device was detected, False otherwise
         
