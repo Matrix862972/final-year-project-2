@@ -2886,5 +2886,285 @@
         "Mark": 0.0,
         "Link": "",
         "RId": 27
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-11 23:34:57",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation21689.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:35:26",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\FDViolation5139.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-11 23:35:32",
+        "Duration": "3 seconds",
+        "Mark": 6,
+        "Link": "static\\OutputVideos\\SDViolation24791.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-11 23:36:13",
+        "Duration": "4 seconds",
+        "Mark": 8,
+        "Link": "static\\OutputVideos\\SDViolation17538.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-11 23:35:20",
+        "Duration": "76 seconds",
+        "Mark": 114,
+        "Link": "static\\OutputVideos\\EDViolation25550.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:36:31",
+        "Duration": "4 seconds",
+        "Mark": 8,
+        "Link": "static\\OutputVideos\\FDViolation39068.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-11 23:36:38",
+        "Duration": "14 seconds",
+        "Mark": 21,
+        "Link": "static\\OutputVideos\\EDViolation1362.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:37:15",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\FDViolation7991.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Common Noise is detected.",
+        "Time": "2025-08-11 23:37:17",
+        "Duration": "3 seconds",
+        "Mark": 3,
+        "Link": "24856VoiceViolation.wav",
+        "RId": 28
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:37:25",
+        "Duration": "3 seconds",
+        "Mark": 6,
+        "Link": "static\\OutputVideos\\FDViolation28544.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-11 23:37:32",
+        "Duration": "4 seconds",
+        "Mark": 8,
+        "Link": "static\\OutputVideos\\SDViolation45655.mp4",
+        "RId": 28
+    },
+    {
+        "Name": "Prohibited Shorcuts (Window,Ctrl+V) are detected.",
+        "Time": "7 Counts",
+        "Duration": "",
+        "Mark": 10.5,
+        "Link": "",
+        "RId": 28
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:41:58",
+        "Duration": "4 seconds",
+        "Mark": 8,
+        "Link": "static\\OutputVideos\\FDViolation35407.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:42:10",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\FDViolation1866.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:42:16",
+        "Duration": "3 seconds",
+        "Mark": 6,
+        "Link": "static\\OutputVideos\\FDViolation34684.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:42:25",
+        "Duration": "3 seconds",
+        "Mark": 6,
+        "Link": "static\\OutputVideos\\FDViolation15214.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-11 23:42:36",
+        "Duration": "14 seconds",
+        "Mark": 21,
+        "Link": "static\\OutputVideos\\EDViolation43754.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:43:08",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\FDViolation28192.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "More than one person is detected.",
+        "Time": "2025-08-11 23:43:12",
+        "Duration": "4 seconds",
+        "Mark": 6,
+        "Link": "static\\OutputVideos\\MTOPViolation13467.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "Looking Left",
+        "Time": "2025-08-11 23:43:49",
+        "Duration": "1 seconds",
+        "Mark": 1,
+        "Link": "static\\OutputVideos\\HeadViolation2697.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-11 23:43:36",
+        "Duration": "9 seconds",
+        "Mark": 18,
+        "Link": "static\\OutputVideos\\SDViolation42536.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-11 23:44:15",
+        "Duration": "4 seconds",
+        "Mark": 8,
+        "Link": "static\\OutputVideos\\SDViolation1250.mp4",
+        "RId": 29
+    },
+    {
+        "Name": "Prohibited Shorcuts (Window,Ctrl+V) are detected.",
+        "Time": "7 Counts",
+        "Duration": "",
+        "Mark": 10.5,
+        "Link": "",
+        "RId": 29
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-11 23:46:45",
+        "Duration": "6 seconds",
+        "Mark": 12,
+        "Link": "static\\OutputVideos\\SDViolation23279.mp4",
+        "RId": 30
+    },
+    {
+        "Name": "Prohibited Shorcuts () are detected.",
+        "Time": "0 Counts",
+        "Duration": "",
+        "Mark": 0.0,
+        "Link": "",
+        "RId": 30
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-11 23:48:32",
+        "Duration": "18 seconds",
+        "Mark": 27,
+        "Link": "static\\OutputVideos\\EDViolation19170.mp4",
+        "RId": 31
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:48:29",
+        "Duration": "21 seconds",
+        "Mark": 42,
+        "Link": "static\\OutputVideos\\FDViolation27738.mp4",
+        "RId": 31
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-11 23:48:59",
+        "Duration": "40 seconds",
+        "Mark": 60,
+        "Link": "static\\OutputVideos\\EDViolation6295.mp4",
+        "RId": 31
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-11 23:49:30",
+        "Duration": "7 seconds",
+        "Mark": 14,
+        "Link": "static\\OutputVideos\\SDViolation33020.mp4",
+        "RId": 31
+    },
+    {
+        "Name": "Move away from the Test",
+        "Time": "2025-08-11 23:50:02",
+        "Duration": "3 seconds",
+        "Mark": 6,
+        "Link": "static\\OutputVideos\\SDViolation26957.mp4",
+        "RId": 31
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-11 23:49:46",
+        "Duration": "39 seconds",
+        "Mark": 58,
+        "Link": "static\\OutputVideos\\EDViolation19217.mp4",
+        "RId": 31
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:50:29",
+        "Duration": "2 seconds",
+        "Mark": 4,
+        "Link": "static\\OutputVideos\\FDViolation22528.mp4",
+        "RId": 31
+    },
+    {
+        "Name": "Verified Student disappeared",
+        "Time": "2025-08-11 23:50:33",
+        "Duration": "3 seconds",
+        "Mark": 6,
+        "Link": "static\\OutputVideos\\FDViolation34024.mp4",
+        "RId": 31
+    },
+    {
+        "Name": "Electronic Device Detected",
+        "Time": "2025-08-11 23:50:37",
+        "Duration": "28 seconds",
+        "Mark": 42,
+        "Link": "static\\OutputVideos\\EDViolation13334.mp4",
+        "RId": 31
+    },
+    {
+        "Name": "Prohibited Shorcuts (Window,Ctrl+V) are detected.",
+        "Time": "7 Counts",
+        "Duration": "",
+        "Mark": 10.5,
+        "Link": "",
+        "RId": 31
     }
 ]

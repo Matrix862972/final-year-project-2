@@ -31,8 +31,20 @@ Student_Name = ''
 start_time = [0, 0, 0, 0, 0]
 end_time = [0, 0, 0, 0, 0]
 recorded_durations = []
-prev_state = ['Verified Student appeared', "Forward", "Only one person is detected", "Stay in the Test", "No Electronic Device Detected"]
+prev_state = ['Verified Student appeared', 
+              "Forward", 
+              "Only one person is detected",
+              "Stay in the Test",
+              "No Electronic Device Detected"]
 flag = [False, False, False, False, False]
+
+# Individual FPS variables for each video writer
+FACE_DETECTION_FPS = 20      # Writer[0] - Face Detection violations
+HEAD_MOVEMENT_FPS = 20       # Writer[1] - Head Movement violations  
+MTOP_DETECTION_FPS = 20      # Writer[2] - Multiple Person violations
+SCREEN_DETECTION_FPS = 2    # Writer[3] - Screen Detection violations
+ELECTRONIC_DEVICE_FPS = 2   # Writer[4] - Electronic Device violations
+
 capb= cv2.VideoCapture(0)
 width= int(capb.get(cv2.CAP_PROP_FRAME_WIDTH))
 height= int(capb.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -52,7 +64,11 @@ video = [
     os.path.join(video_dir, str(random.randint(1,50000))+".mp4"),
     os.path.join(video_dir, str(random.randint(1,50000))+".mp4")
 ]
-writer = [cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), 15, (1920, 1080)), cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), 20 , (EDWidth,EDHeight))]
+writer = [cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), FACE_DETECTION_FPS, (width,height)), 
+          cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), HEAD_MOVEMENT_FPS, (width,height)), 
+          cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), MTOP_DETECTION_FPS, (width,height)), 
+          cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), SCREEN_DETECTION_FPS, (1920, 1080)), 
+          cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), ELECTRONIC_DEVICE_FPS , (EDWidth,EDHeight))]
 #More than One Person Related
 mpFaceDetection = mp.solutions.face_detection  # Detect the face
 mpDraw = mp.solutions.drawing_utils  # Draw the required Things for BBox
@@ -231,7 +247,7 @@ def faceDetectionRecording(img, text):
             os.remove(video[0])
             print(recorded_durations)
             video[0] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
-            writer[0] = cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width, height))
+            writer[0] = cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), FACE_DETECTION_FPS, (width, height))
             flag[0] = False
     prev_state[0] = text
 
@@ -267,7 +283,7 @@ def Head_record_duration(text,img):
             print(recorded_durations)
             start_time[1] = time.time()
             video[1] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
-            writer[1] = cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height))
+            writer[1] = cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), HEAD_MOVEMENT_FPS, (width,height))
             flag[1] = False
         elif str(text) == prev_state[1] and (time.time() - start_time[1]) > 3:
             flag[1] = True
@@ -300,7 +316,7 @@ def Head_record_duration(text,img):
             os.remove(video[1])
             print(recorded_durations)
             video[1] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
-            writer[1] = cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height))
+            writer[1] = cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), HEAD_MOVEMENT_FPS, (width,height))
             flag[1] = False
         prev_state[1] = text
 
@@ -343,7 +359,7 @@ def MTOP_record_duration(text, img):
             os.remove(video[2])
             print(recorded_durations)
             video[2] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
-            writer[2] = cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height))
+            writer[2] = cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), MTOP_DETECTION_FPS, (width,height))
             flag[2] = False
     prev_state[2] = text
 
@@ -387,7 +403,7 @@ def SD_record_duration(text, img):
             os.remove(video[3])
             print(recorded_durations)
             video[3] = os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
-            writer[3] = cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), 15, (1920, 1080))
+            writer[3] = cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), SCREEN_DETECTION_FPS, (1920, 1080))
             flag[3] = False
     prev_state[3] = text
 
@@ -464,7 +480,7 @@ def EDD_record_duration(text, img):
                     print(f"Skipped processing violation video {video[4]} due to small file size ({file_size} bytes)")
             os.remove(video[4])
             video[4]= os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
-            writer[4] = cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), 10 , (EDWidth,EDHeight))
+            writer[4] = cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), ELECTRONIC_DEVICE_FPS , (EDWidth,EDHeight))
             flag[4] = False
     prev_state[4] = text
 
@@ -477,9 +493,8 @@ def deleteTrashVideos():
         for i, vid_writer in enumerate(writer):
             if vid_writer is not None:
                 vid_writer.release()
-                print(f"Released video writer {i}")
     except Exception as e:
-        print(f"Error releasing video writers: {e}")
+        pass
     
     # Check both root directory and OutputVideos directory for temp files
     directories_to_check = [
@@ -494,7 +509,6 @@ def deleteTrashVideos():
         if not os.path.exists(directory):
             continue
             
-        print(f"Checking directory: {directory}")
         for filename in os.listdir(directory):
             file_path = os.path.join(directory, filename)
             
@@ -520,11 +534,8 @@ def deleteTrashVideos():
                         if file_size < 10240:  # Less than 10KB
                             os.remove(file_path)
                             deleted_count += 1
-                            print(f"Deleted small temporary video: {file_path} ({file_size} bytes)")
-                        else:
-                            print(f"Keeping larger file: {filename} ({file_size} bytes)")
                     except OSError as e:
-                        print(f"Error deleting {filename} (file may be in use): {e}")
+                        pass
             
             # For WAV files: delete temporary voice violation files in root directory  
             elif (filename.lower().endswith('.wav') and 
@@ -533,14 +544,8 @@ def deleteTrashVideos():
                 try:
                     os.remove(file_path)
                     deleted_count += 1
-                    print(f"Deleted temporary audio: {file_path}")
                 except OSError as e:
-                    print(f"Error deleting {filename}: {e}")
-    
-    if deleted_count > 0:
-        print(f"Cleaned up {deleted_count} temporary files")
-    else:
-        print("No temporary files found to delete")
+                    pass
     
     # Reinitialize video writers after cleanup
     reinitialize_video_writers()
@@ -561,17 +566,15 @@ def reinitialize_video_writers():
         
         # Create new video writers
         writer = [
-            cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), 
-            cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), 
-            cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), 20, (width,height)), 
-            cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), 15, (1920, 1080)), 
-            cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), 20, (EDWidth,EDHeight))
+            cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), FACE_DETECTION_FPS, (width,height)), 
+            cv2.VideoWriter(video[1], cv2.VideoWriter_fourcc(*'mp4v'), HEAD_MOVEMENT_FPS, (width,height)), 
+            cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), MTOP_DETECTION_FPS, (width,height)), 
+            cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), SCREEN_DETECTION_FPS, (1920, 1080)), 
+            cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), ELECTRONIC_DEVICE_FPS, (EDWidth,EDHeight))
         ]
         
-        print("Video writers reinitialized successfully")
-        
     except Exception as e:
-        print(f"Error reinitializing video writers: {e}")
+        pass
 
 def cleanup_all_videos():
     """Complete cleanup function for application shutdown - releases all writers and cleans temp files"""

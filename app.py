@@ -60,10 +60,10 @@ def start_loop():
     print(f"Current thread: {threading.current_thread().name}")
     print("Active threads:", threading.enumerate())
     print("Thread count:", threading.active_count())
-    #task1 = executor.submit(utils.cheat_Detection2)
-    #task2 = executor.submit(utils.cheat_Detection1)
-    #task3 = executor.submit(utils.fr.run_recognition)
-    #task4 = executor.submit(utils.a.record)
+    task1 = executor.submit(utils.cheat_Detection2)
+    task2 = executor.submit(utils.cheat_Detection1)
+    task3 = executor.submit(utils.fr.run_recognition)
+    task4 = executor.submit(utils.a.record)
 
 
 #Login Related
