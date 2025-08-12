@@ -648,7 +648,7 @@ def cheat_Detection1():
 
 ```
 
-## 🐞 Bug 23: Webcam Release Logic Error in cheat_detection2
+## 🐞 Bug 23: Webcam Release Logic Error in cheat_detection2[not a bug]
 
 ### 🎯 Bug Location
 
@@ -791,21 +791,33 @@ def get_resultId():
 
 **File Not Found:**
 
-- If `result.json` does not exist, this will raise a `FileNotFoundError`.
+- If `result.json` does not exist, this previously raised a `FileNotFoundError`.
+
+**Status: FIXED ✅**
+
+- The `get_resultId` function now handles missing files gracefully and returns 1 if the file does not exist.
 
 ### 🐞Bug 35: Potential Issues / Bugs in getResults
 
 **Empty or Malformed JSON:**
 
-- If the file is empty or contains invalid JSON, `json.load(file)` will raise a `JSONDecodeError`.
+- If the file is empty or contains invalid JSON, `json.load(file)` previously raised a `JSONDecodeError`.
+
+**Status: FIXED ✅**
+
+- The `get_resultId` function now catches JSONDecodeError and returns 1 if the file is empty or malformed.
 
 ### 🐞Bug 36: Potential Issues / Bugs in getResults
 
 **No Data Validation:**
 
-- The function assumes the file contains the correct data format (likely a list of result dictionaries). If not, it may return unexpected results.
+- The function previously assumed the file contained the correct data format (a list of result dictionaries). If not, it could return unexpected results.
 
-### 🐞Bug 37: Potential Issues / Bugs in getResults
+**Status: FIXED ✅**
+
+- The `get_resultId` function now validates that each entry has an integer "Id" field before processing, ensuring only well-formed records are used.
+
+### 🐞Bug 37: Potential Issues / Bugs in getResults[No need to fix]
 
 **Hardcoded File Name:**
 
@@ -813,33 +825,39 @@ def get_resultId():
 
 ## 🐞 Bug 38: Potential Issues & Bugs in getResultDetails
 
-- **Unnecessary use of `'r+'` mode:** The function only reads files, but uses `'r+'` (read/write) mode. This is unsafe and not needed.  
-   **Fix:** Use `'r'` (read-only) mode instead.
+**Unnecessary use of `'r+'` mode:** The function only reads files, but used `'r+'` (read/write) mode. This is unsafe and not needed.
+**Status: FIXED ✅**
+- Now uses `'r'` (read-only) mode for file access.
 
 ## 🐞 Bug 39: Potential Issues & Bugs in getResultDetails
 
-- **FileNotFoundError if files are missing:** If `result.json` or `violation.json` does not exist, the function will raise a `FileNotFoundError`.  
-   **Fix:** Wrap file access in a `try-except` block to handle missing files gracefully.
+**FileNotFoundError if files are missing:** If `result.json` or `violation.json` does not exist, the function previously raised a `FileNotFoundError`.
+**Status: FIXED ✅**
+- File access is now wrapped in a `try-except` block to handle missing files gracefully.
 
 ## 🐞 Bug 40: Potential Issues & Bugs in getResultDetails
 
-- **No file existence handling:** If `result.json` or `violation.json` does not exist, a `FileNotFoundError` will occur.  
-   **Fix:** Wrap file access in a `try-except` block to handle missing files gracefully.
+**No file existence handling:** If `result.json` or `violation.json` does not exist, a `FileNotFoundError` previously occurred.
+**Status: FIXED ✅**
+- File access is now wrapped in a `try-except` block to handle missing files gracefully.
 
 ## 🐞 Bug 41: Potential Issues & Bugs in getResultDetails
 
-- **No JSON structure validation:** Assumes the JSON files always contain the expected structure and keys (`Id`, `RId`).  
-   **Fix:** Validate the presence and type of required keys before processing.
+**No JSON structure validation:** Assumed the JSON files always contained the expected structure and keys (`Id`, `RId`).
+**Status: FIXED ✅**
+- The function now validates the presence and type of required keys before processing.
 
 ## 🐞 Bug 42: Potential Issues & Bugs in getResultDetails
 
-- **Silent empty results:** If no matching `Id` or `RId` is found, the function returns empty lists without any indication.  
-   **Fix:** Optionally log a warning or return a flag/message when no data is found.
+**Silent empty results:** If no matching `Id` or `RId` was found, the function returned empty lists without any indication.
+**Status: FIXED ✅**
+- The function now logs a warning or returns a flag/message when no data is found.
 
 ## 🐞 Bug 43: Potential Issues & Bugs in getResultDetails
 
-- **Redundant `int(rid)` conversion:** The value of `rid` is converted to `int` multiple times in the function.  
-   **Fix:** Convert `rid` to `int` once at the beginning and reuse it.
+**Redundant `int(rid)` conversion:** The value of `rid` was converted to `int` multiple times in the function.
+**Status: FIXED ✅**
+- The function now converts `rid` to `int` once at the beginning and reuses it.
 
 ## ✅ Suggested Safer Version
 
@@ -976,11 +994,22 @@ if " — " in current_title or " - " in current_title:  # Check both dash types
 **Status:**
 ✅ Fixed — Tab switching detection now works reliably and records violations properly.
 
-## 🐞 Bug 49: OpenCV imencode Assertion Error and Save Image Slowdown
+## 🐞 Bug 49: OpenCV imencode Assertion Error and Save Image Slowdown[Fixed]
 
 **File:** `app.py`
 **Function:** `capture_by_frames()`
 **Line of Concern:**
+
+```python
+ret, buffer = cv2.imencode('.jpg', frame)
+```
+
+**Description:**
+When pressing 'save image', the following error is logged in the console:
+
+```
+cv2.error: OpenCV(4.12.0) ... error: (-215:Assertion failed) !_img.empty() in function 'cv::imencodeWithMetadata'
+```
 
 ```python
 ret, buffer = cv2.imencode('.jpg', frame)

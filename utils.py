@@ -1198,12 +1198,23 @@ def cheat_Detection2():
 #Query Related
 #Function to give the next resut id
 def get_resultId():
-    with open('result.json','r+') as file:
-        # First we load existing data into a dict.
-        file_data = json.load(file)
-        #sort json by ID
-        file_data.sort(key=lambda x: x["Id"])
-        return file_data[-1]['Id']+1
+    try:
+        with open('result.json', 'r') as file:
+            try:
+                file_data = json.load(file)
+                if not file_data:
+                    return 1
+                valid_data = [entry for entry in file_data if isinstance(entry.get("Id"), int)]
+                if not valid_data:
+                    return 1
+                valid_data.sort(key=lambda x: x["Id"])
+                return valid_data[-1]["Id"] + 1
+            except json.JSONDecodeError:
+                # File is empty or malformed
+                return 1
+    except FileNotFoundError:
+        # File does not exist
+        return 1
 
 #Function to give the trust score
 def get_TrustScore(Rid):
@@ -1223,19 +1234,29 @@ def getResults():
 
 #Function to give result details
 def getResultDetails(rid):
-    with open('result.json', 'r+') as file:
-        # First we load existing data into a dict.
-        result_data = json.load(file)
-        filtered_result = [item for item in result_data if item["Id"] == int(rid)]
-    with open('violation.json', 'r+') as file:
-        # First we load existing data into a dict.
-        violation_data = json.load(file)
-        filtered_violations = [item for item in violation_data if item["RId"] == int(rid)]
-    resultDetails = {
+    try:
+        rid = int(rid)
+        with open('result.json', 'r') as res_file:
+            result_data = json.load(res_file)
+            filtered_result = [item for item in result_data if item.get("Id") == rid]
+
+        with open('violation.json', 'r') as vio_file:
+            violation_data = json.load(vio_file)
+            filtered_violations = [item for item in violation_data if item.get("RId") == rid]
+
+        return {
             "Result": filtered_result,
             "Violation": filtered_violations
         }
-    return resultDetails
+    except FileNotFoundError as e:
+        print(f"File missing: {e.filename}")
+        return {}
+    except json.JSONDecodeError:
+        print("Invalid JSON format in result or violation file.")
+        return {}
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        return {}
 
 a = Recorder()
 fr = FaceRecognition()
