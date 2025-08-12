@@ -1,6 +1,7 @@
 # 🐞 Known Bugs
 
 # ✅ Bug 1: Repeated Thread Execution on Every Request – [FIXED]
+
 Bug Title
 Flask @app.before_request starts background threads multiple times
 
@@ -975,11 +976,12 @@ if " — " in current_title or " - " in current_title:  # Check both dash types
 **Status:**
 ✅ Fixed — Tab switching detection now works reliably and records violations properly.
 
-## 🐞 Bug 3: OpenCV imencode Assertion Error and Save Image Slowdown
+## 🐞 Bug 49: OpenCV imencode Assertion Error and Save Image Slowdown
 
 **File:** `app.py`
 **Function:** `capture_by_frames()`
 **Line of Concern:**
+
 ```python
 ret, buffer = cv2.imencode('.jpg', frame)
 ```
@@ -995,6 +997,7 @@ cv2.error: OpenCV(4.12.0) ... error: (-215:Assertion failed) !_img.empty() in fu
 - The error causes a 3-4 second slowdown in the save operation, but does not break functionality.
 - The bug is intermittent and only affects performance, not correctness.
 
-**Status:** NOT FIXED ❌
-- Needs investigation to prevent slowdown and error logging when saving image.
-- Possible solution: Add a check for `success` before calling `cv2.imencode`.
+**Status:** FIXED ✅
+
+- Bug resolved by adding a check for `success` and frame validity before calling `cv2.imencode` in `capture_by_frames()`. Now, bad frames are skipped and no error or slowdown occurs.
+- Commit: Skips empty frames, no blank frame is yielded.

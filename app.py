@@ -42,6 +42,8 @@ def capture_by_frames():
     utils.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
     while True:
         success, frame = utils.cap.read()  # read the camera frame
+        if not success or frame is None or frame.size == 0:
+            continue  # Just skip bad frames, don't yield blank
         detector=cv2.CascadeClassifier('Haarcascades/haarcascade_frontalface_default.xml')
         faces=detector.detectMultiScale(frame,1.2,6)
          #Draw the rectangle around each face
