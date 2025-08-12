@@ -1037,7 +1037,6 @@ cv2.error: OpenCV(4.12.0) ... error: (-215:Assertion failed) !_img.empty() in fu
 - Bug resolved by adding a check for `success` and frame validity before calling `cv2.imencode` in `capture_by_frames()`. Now, bad frames are skipped and no error or slowdown occurs.
 - Commit: Skips empty frames, no blank frame is yielded.
 
-
 ## 🐞 Bug 50: Thread Interference in Detection Systems (Screen Detection Delay)[Fixed]
 
 **Description:**
@@ -1063,3 +1062,34 @@ Previously, multiple detection systems (screen detection, multiple person detect
 **Status: FIXED ✅**
 
 - Screen detection and other systems now operate reliably and in parallel, with no thread interference.
+
+## 🐞 Bug 51: Camera Race Condition in Detection Threads [FIXED]
+
+**Description:**
+When multiple detection threads (face, head movement, MTOP, electronic device, etc.) attempted to access the camera simultaneously, a race condition occurred. Each thread tried to read frames directly from the camera, leading to unpredictable behavior, missed frames, and failures in slower detection systems (especially YOLO-based electronic device detection). This caused some threads to starve, others to skip frames, and overall system instability.
+
+**Root Cause:**
+
+- All detection threads competed for direct access to the camera hardware.
+- Fast threads (e.g., face/head movement) could consume frames before slower threads (e.g., YOLO electronic device detection) had a chance to process them.
+- This led to inconsistent frame delivery, missed detections, and unreliable evidence recording.
+
+**Impact:**
+
+- Electronic device detection often failed or skipped frames due to camera contention.
+- Some detection threads received blank or outdated frames.
+- Overall system reliability and evidence quality were compromised.
+
+**Solution:**
+
+- Implemented a **producer-consumer pattern** for camera access:
+  - A single camera producer thread reads frames from the camera at a fixed rate and stores the latest frame in a shared variable.
+  - All detection threads (consumers) retrieve a copy of the current frame from the shared variable when ready to process.
+  - Thread safety is ensured using a lock and event mechanism, so each consumer gets an independent copy of the frame.
+- This approach eliminates camera contention, synchronizes frame delivery, and ensures all detection systems work with the same up-to-date frame.
+
+**Status: FIXED ✅**
+
+- Camera race condition is resolved.
+- All detection threads now receive synchronized frame copies, regardless of their processing speed.
+- System stability and detection reliability are greatly improved.
