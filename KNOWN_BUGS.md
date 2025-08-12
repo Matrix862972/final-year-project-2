@@ -1,14 +1,22 @@
 # 🐞 Known Bugs
 
-❌ Bug 1: Repeated Thread Execution on Every Request – [NOT FIXED]
+✅ Bug 1: Repeated Thread Execution on Every Request – [FIXED]
 Bug Title
 Flask @app.before_request starts background threads multiple times
 
-Status: NOT FIXED ❌
-This bug is still present. Background threads are initialized multiple times due to the @app.before_request hook triggering on each HTTP request.
+Status: FIXED ✅
+This bug has been resolved by removing the @app.before_request hook and implementing proper thread management in the exam route.
 
 Description
-The start_loop() function decorated with @app.before_request continues to initialize multiple background threads using ThreadPoolExecutor on every HTTP request, which can lead to excessive resource usage.
+The start_loop() function decorated with @app.before_request was initializing multiple background threads using ThreadPoolExecutor on every HTTP request, which led to excessive resource usage and thread conflicts. This has been resolved by moving thread management to the exam route.
+
+Solution Implemented  
+Moved camera initialization and thread management to the exam route:
+
+- Camera initialization moved to exam GET route (when page loads)
+- Thread detection starts only when exam POST route is called (when user starts exam)
+- Eliminates race conditions and thread conflicts
+- Fixed in commit: c1ca091
 
 Attempted Solution
 python
