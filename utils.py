@@ -1171,26 +1171,38 @@ def cheat_Detection1():
         cap.release()
     deleteTrashVideos()
 
-def cheat_Detection2():
-    global Globalflag, shorcuts, EDFlag
-    print(f'CD2 Flag is {Globalflag}')
-
+def screen_detection_thread():
+    global Globalflag
+    print(f'Screen Detection Thread Flag is {Globalflag}')
     deleteTrashVideos()
     while Globalflag:
         success, image = cap.read()
-        image1 = image
-        image2 = image
-        image3 = image
-        
-        # Reset electronic device flag before detection
-        EDFlag = False
-        
-        MTOP_Detection(image1)
+        if not success or image is None:
+            continue
         screenDetection()
-        electronicDevicesDetection(image3)  # Added electronic device detection
-        
-        # EDFlag will remain True if device was detected, False otherwise
-        
+    deleteTrashVideos()
+
+def mtop_detection_thread():
+    global Globalflag
+    print(f'MTOP Detection Thread Flag is {Globalflag}')
+    deleteTrashVideos()
+    while Globalflag:
+        success, image = cap.read()
+        if not success or image is None:
+            continue
+        MTOP_Detection(image)
+    deleteTrashVideos()
+
+def electronic_device_detection_thread():
+    global Globalflag, EDFlag
+    print(f'Electronic Device Detection Thread Flag is {Globalflag}')
+    deleteTrashVideos()
+    while Globalflag:
+        success, image = cap.read()
+        if not success or image is None:
+            continue
+        EDFlag = False
+        electronicDevicesDetection(image)
     deleteTrashVideos()
     if Globalflag:
         cap.release()

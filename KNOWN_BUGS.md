@@ -827,36 +827,42 @@ def get_resultId():
 
 **Unnecessary use of `'r+'` mode:** The function only reads files, but used `'r+'` (read/write) mode. This is unsafe and not needed.
 **Status: FIXED ✅**
+
 - Now uses `'r'` (read-only) mode for file access.
 
 ## 🐞 Bug 39: Potential Issues & Bugs in getResultDetails
 
 **FileNotFoundError if files are missing:** If `result.json` or `violation.json` does not exist, the function previously raised a `FileNotFoundError`.
 **Status: FIXED ✅**
+
 - File access is now wrapped in a `try-except` block to handle missing files gracefully.
 
 ## 🐞 Bug 40: Potential Issues & Bugs in getResultDetails
 
 **No file existence handling:** If `result.json` or `violation.json` does not exist, a `FileNotFoundError` previously occurred.
 **Status: FIXED ✅**
+
 - File access is now wrapped in a `try-except` block to handle missing files gracefully.
 
 ## 🐞 Bug 41: Potential Issues & Bugs in getResultDetails
 
 **No JSON structure validation:** Assumed the JSON files always contained the expected structure and keys (`Id`, `RId`).
 **Status: FIXED ✅**
+
 - The function now validates the presence and type of required keys before processing.
 
 ## 🐞 Bug 42: Potential Issues & Bugs in getResultDetails
 
 **Silent empty results:** If no matching `Id` or `RId` was found, the function returned empty lists without any indication.
 **Status: FIXED ✅**
+
 - The function now logs a warning or returns a flag/message when no data is found.
 
 ## 🐞 Bug 43: Potential Issues & Bugs in getResultDetails
 
 **Redundant `int(rid)` conversion:** The value of `rid` was converted to `int` multiple times in the function.
 **Status: FIXED ✅**
+
 - The function now converts `rid` to `int` once at the beginning and reuses it.
 
 ## ✅ Suggested Safer Version
@@ -1030,3 +1036,30 @@ cv2.error: OpenCV(4.12.0) ... error: (-215:Assertion failed) !_img.empty() in fu
 
 - Bug resolved by adding a check for `success` and frame validity before calling `cv2.imencode` in `capture_by_frames()`. Now, bad frames are skipped and no error or slowdown occurs.
 - Commit: Skips empty frames, no blank frame is yielded.
+
+
+## 🐞 Bug 50: Thread Interference in Detection Systems (Screen Detection Delay)
+
+**Description:**
+Previously, multiple detection systems (screen detection, multiple person detection, electronic device detection) were executed sequentially in a single thread (`cheat_Detection2`). This caused interference and delays, especially for screen detection, which needs to run frequently and responsively. If one detection function was slow or blocked, it delayed the others, resulting in missed or late screen detection events.
+
+**Root Cause:**
+
+- All detection functions shared a single thread and loop, competing for the same camera resource and execution time.
+- Blocking or slow operations in one function (e.g., electronic device detection) could prevent timely execution of others (e.g., screen detection).
+
+**Impact:**
+
+- Screen detection was sometimes delayed or missed, reducing reliability and responsiveness of the proctoring system.
+- Other detection systems could also interfere with each other, causing unpredictable behavior.
+
+**Solution:**
+
+- Refactored the code to break `cheat_Detection2` into three separate functions: `screen_detection_thread`, `mtop_detection_thread`, and `electronic_device_detection_thread`.
+- Each detection system now runs in its own thread using `ThreadPoolExecutor`.
+- Increased the thread pool size to 7 and launched each detection system independently in `app.py`.
+- This ensures that each detection runs concurrently and independently, eliminating interference and improving responsiveness.
+
+**Status: FIXED ✅**
+
+- Screen detection and other systems now operate reliably and in parallel, with no thread interference.
