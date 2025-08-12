@@ -34,7 +34,7 @@ app.config['MYSQL_PASSWORD'] = 'password'
 app.config['MYSQL_DB'] = 'examproctordb'
 mysql = MySQL(app)
 
-executor = ThreadPoolExecutor(max_workers=7)  # Increased to match the number of detection threads
+executor = ThreadPoolExecutor(max_workers=8)  # Increased to 8 to include camera producer thread
 
 #Function to show face detection's Rectangle in Face Input Page
 def capture_by_frames():
@@ -60,13 +60,15 @@ def start_cheat_detection():
     print(f"Current thread: {threading.current_thread().name}")
     print("Active threads:", threading.enumerate())
     print("Thread count:", threading.active_count())
+    # Launch camera producer thread first
+    camera_task = executor.submit(utils.camera_producer_thread)
     # Launch each detection system in its own thread
-    task1 = executor.submit(utils.cheat_Detection1)
-    task2 = executor.submit(utils.fr.run_recognition)
-    task3 = executor.submit(utils.a.record)
-    task4 = executor.submit(utils.screen_detection_thread)
-    task5 = executor.submit(utils.mtop_detection_thread)
-    task6 = executor.submit(utils.electronic_device_detection_thread)
+    task1 = executor.submit(utils.electronic_device_detection_thread)
+    task2 = executor.submit(utils.cheat_Detection1)
+    task3 = executor.submit(utils.fr.run_recognition)
+    task4 = executor.submit(utils.a.record)
+    task5 = executor.submit(utils.screen_detection_thread)
+    task6 = executor.submit(utils.mtop_detection_thread)
     # Add more threads here if you have additional detection systems
 
 

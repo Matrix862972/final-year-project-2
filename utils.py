@@ -42,8 +42,8 @@ flag = [False, False, False, False, False]
 FACE_DETECTION_FPS = 20      # Writer[0] - Face Detection violations
 HEAD_MOVEMENT_FPS = 20       # Writer[1] - Head Movement violations  
 MTOP_DETECTION_FPS = 20      # Writer[2] - Multiple Person violations
-SCREEN_DETECTION_FPS = 2    # Writer[3] - Screen Detection violations
-ELECTRONIC_DEVICE_FPS = 2   # Writer[4] - Electronic Device violations
+SCREEN_DETECTION_FPS = 5    # Writer[3] - Screen Detection violations
+ELECTRONIC_DEVICE_FPS = 10   # Writer[4] - Electronic Device violations
 
 capb= cv2.VideoCapture(0)
 width= int(capb.get(cv2.CAP_PROP_FRAME_WIDTH))
@@ -90,7 +90,7 @@ for i in range(len(class_list)):
     g = random.randint(0, 255)
     b = random.randint(0, 255)
     detection_colors.append((b, g, r))
-model = YOLO("yolo11x.pt")
+model = YOLO("yolo11n.pt")
 EDFlag = False
 #Voice Related
 TRIGGER_RMS = 30  # start recording above 30 (increased to handle very loud fan noise)
@@ -108,6 +108,12 @@ TIMEOUT_FRAMES = int(TIMEOUT_SECS / FRAME_SECS)
 f_name_directory = 'static/OutputAudios'  # Fixed path to use relative directory
 # Capture
 cap = None
+
+# Camera Producer-Consumer System (Shared Frame Implementation)
+current_frame = None
+frame_lock = threading.Lock()
+frame_ready = threading.Event()
+camera_thread = None
 
 
 #Database and Files Related
@@ -437,11 +443,6 @@ def EDD_record_duration(text, img):
             EDD_record_duration.frame_count = 1
         else:
             EDD_record_duration.frame_count += 1
-        print(f"[DEBUG] Frame written to video. Total frames this event: {EDD_record_duration.frame_count}")
-        print("debugging----------")
-        print("Writing frame to video")
-        print("Size of writer[4]:", writer[4].get(cv2.CAP_PROP_FRAME_COUNT))
-        print(f"flag value: {flag[4]}")
         # If detected for more than 3 seconds, set flag
         if (time.time() - start_time[4]) > 3:
             flag[4] = True
@@ -450,7 +451,6 @@ def EDD_record_duration(text, img):
     else:
         # Detection ended, process video
         if prev_state[4] == "Electronic Device Detected":
-            print(f"[DEBUG] Total frames written for last event: {getattr(EDD_record_duration, 'frame_count', 'N/A')}")
             # Reset frame counter for next event
             EDD_record_duration.frame_count = 0
             writer[4].release()
@@ -476,8 +476,6 @@ def EDD_record_duration(text, img):
                     write_json(EDViolation)
                     reduceBitRate(video[4], outputVideo)
                     move_file_to_output_folder(outputVideo)
-                else:
-                    print(f"Skipped processing violation video {video[4]} due to small file size ({file_size} bytes)")
             os.remove(video[4])
             video[4]= os.path.join(video_dir, str(random.randint(1, 50000)) + ".mp4")
             writer[4] = cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), ELECTRONIC_DEVICE_FPS , (EDWidth,EDHeight))
@@ -485,6 +483,46 @@ def EDD_record_duration(text, img):
     prev_state[4] = text
 
 #system Related
+def camera_producer_thread():
+    """Single camera producer thread that feeds frames to all detection threads"""
+    global Globalflag, cap, current_frame, frame_lock, frame_ready
+    print("Camera producer thread started")
+    
+    last_frame_time = 0
+    target_fps = 20  # Limit camera FPS to prevent overwhelming
+    frame_interval = 1.0 / target_fps
+    
+    while Globalflag:
+        current_time = time.time()
+        
+        # Rate limiting: only capture at target FPS
+        if current_time - last_frame_time >= frame_interval:
+            if cap is not None and cap.isOpened():
+                success, frame = cap.read()
+                if success and frame is not None and frame.size > 0:
+                    # Update shared frame with thread safety
+                    with frame_lock:
+                        current_frame = frame.copy()  # Store copy in shared variable
+                    frame_ready.set()  # Signal that new frame is available
+                    last_frame_time = current_time
+            else:
+                time.sleep(0.01)  # Small delay if camera not available
+        else:
+            time.sleep(0.001)  # Small sleep to prevent busy waiting
+    
+    print("Camera producer thread stopped")
+
+def get_camera_frame(timeout=1.0):
+    """Get current frame (shared by all threads)"""
+    global current_frame, frame_lock, frame_ready
+    
+    # Wait for frame to be ready with timeout
+    if frame_ready.wait(timeout):
+        with frame_lock:
+            if current_frame is not None:
+                return current_frame.copy()  # Each thread gets its own copy
+    return None
+
 def deleteTrashVideos():
     global video, writer
     
@@ -650,14 +688,15 @@ class FaceRecognition:
 
     def run_recognition(self):
         global Globalflag
-        #video_capture = cv2.VideoCapture(0)
         print(f'Face Detection Flag is {Globalflag}')
         text = ""
-        if not cap.isOpened():
-            sys.exit('Video source not found...')
 
         while Globalflag:
-            ret, frame = cap.read()
+            frame = get_camera_frame()
+            if frame is None:
+                print("No image captured for face detection")
+                continue
+                
             text = "Verified Student disappeared"
             print("Running Face Verification Function")
             # Only process every other frame of video to save time
@@ -974,7 +1013,7 @@ def screenDetection():
 def electronicDevicesDetection(frame):
     global model, EDFlag
     # Predict on image
-    detect_params = model.predict(source=[frame], conf=0.45, save=False)  # Reduced sensitivity: 0.45 -> 0.5
+    detect_params = model.predict(source=[frame], conf=0.25, save=False)  # Reduced sensitivity: 0.45 -> 0.25
     # Convert tensor array to numpy
     DP = detect_params[0].numpy()
     for result in detect_params:  # iterate results
@@ -1165,10 +1204,11 @@ def cheat_Detection1():
     face_mesh = mp_face_mesh.FaceMesh(min_detection_confidence=0.5, min_tracking_confidence=0.5)
     print(f'CD1 Flag is {Globalflag}')
     while Globalflag:
-        success, image = cap.read()
-        headMovmentDetection(image, face_mesh)
-    if Globalflag:
-        cap.release()
+        image = get_camera_frame()
+        if image is not None:
+            headMovmentDetection(image, face_mesh)
+        else:
+            print("No image captured for head movement detection")
     deleteTrashVideos()
 
 def screen_detection_thread():
@@ -1176,10 +1216,9 @@ def screen_detection_thread():
     print(f'Screen Detection Thread Flag is {Globalflag}')
     deleteTrashVideos()
     while Globalflag:
-        success, image = cap.read()
-        if not success or image is None:
-            continue
+        # Screen detection doesn't need camera frames, it captures screen directly
         screenDetection()
+        time.sleep(0.1)  # Small delay for screen detection
     deleteTrashVideos()
 
 def mtop_detection_thread():
@@ -1187,10 +1226,11 @@ def mtop_detection_thread():
     print(f'MTOP Detection Thread Flag is {Globalflag}')
     deleteTrashVideos()
     while Globalflag:
-        success, image = cap.read()
-        if not success or image is None:
-            continue
-        MTOP_Detection(image)
+        image = get_camera_frame()
+        if image is not None:
+            MTOP_Detection(image)
+        else:
+            print("No image captured for MTOP detection")
     deleteTrashVideos()
 
 def electronic_device_detection_thread():
@@ -1198,14 +1238,14 @@ def electronic_device_detection_thread():
     print(f'Electronic Device Detection Thread Flag is {Globalflag}')
     deleteTrashVideos()
     while Globalflag:
-        success, image = cap.read()
-        if not success or image is None:
-            continue
-        EDFlag = False
-        electronicDevicesDetection(image)
+        image = get_camera_frame()
+        if image is not None:
+            EDFlag = False
+            print("Electronic device detection is active")
+            electronicDevicesDetection(image)
+        else:
+            print("No image captured for electronic device detection")
     deleteTrashVideos()
-    if Globalflag:
-        cap.release()
 
 #Query Related
 #Function to give the next resut id

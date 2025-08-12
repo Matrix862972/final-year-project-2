@@ -1038,7 +1038,7 @@ cv2.error: OpenCV(4.12.0) ... error: (-215:Assertion failed) !_img.empty() in fu
 - Commit: Skips empty frames, no blank frame is yielded.
 
 
-## 🐞 Bug 50: Thread Interference in Detection Systems (Screen Detection Delay)
+## 🐞 Bug 50: Thread Interference in Detection Systems (Screen Detection Delay)[Fixed]
 
 **Description:**
 Previously, multiple detection systems (screen detection, multiple person detection, electronic device detection) were executed sequentially in a single thread (`cheat_Detection2`). This caused interference and delays, especially for screen detection, which needs to run frequently and responsively. If one detection function was slow or blocked, it delayed the others, resulting in missed or late screen detection events.
