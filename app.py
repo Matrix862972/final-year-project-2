@@ -53,9 +53,7 @@ def capture_by_frames():
                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
 
-#Function to run Cheat Detection when we start run the Application
-@app.before_request
-def start_loop():
+def start_cheat_detection():
     print("Starting cheat detection...")
     print(f"Current thread: {threading.current_thread().name}")
     print("Active threads:", threading.enumerate())
@@ -198,6 +196,7 @@ def examAction():
             resultStatus= studentInfo['Name']+';'+str(totalMark)+';'+status+';'+time.strftime("%Y-%m-%d", time.localtime(time.time()))
         else:
             utils.Globalflag = True
+            start_cheat_detection()
             print(f"Global flag = {utils.Globalflag}")
             print('sfdsfsdsfdsfdsfdsfdsfdsfdsfds')
             resultStatus=''

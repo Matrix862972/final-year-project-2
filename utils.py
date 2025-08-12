@@ -676,7 +676,7 @@ class FaceRecognition:
                 self.face_names = []
                 for face_encoding in self.face_encodings:
                     # See if the face is a match for the known face(s)
-                    matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
+                    matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding,tolerance=0.85)
                     name = "Unknown"
                     confidence = '???'
 
@@ -974,7 +974,7 @@ def screenDetection():
 def electronicDevicesDetection(frame):
     global model, EDFlag
     # Predict on image
-    detect_params = model.predict(source=[frame], conf=0.25, save=False)  # Increased sensitivity: 0.45 -> 0.25
+    detect_params = model.predict(source=[frame], conf=0.45, save=False)  # Reduced sensitivity: 0.45 -> 0.5
     # Convert tensor array to numpy
     DP = detect_params[0].numpy()
     for result in detect_params:  # iterate results
