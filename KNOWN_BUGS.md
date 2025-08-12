@@ -1,6 +1,6 @@
 # 🐞 Known Bugs
 
-✅ Bug 1: Repeated Thread Execution on Every Request – [FIXED]
+# ✅ Bug 1: Repeated Thread Execution on Every Request – [FIXED]
 Bug Title
 Flask @app.before_request starts background threads multiple times
 
@@ -974,3 +974,27 @@ if " — " in current_title or " - " in current_title:  # Check both dash types
 
 **Status:**
 ✅ Fixed — Tab switching detection now works reliably and records violations properly.
+
+## 🐞 Bug 3: OpenCV imencode Assertion Error and Save Image Slowdown
+
+**File:** `app.py`
+**Function:** `capture_by_frames()`
+**Line of Concern:**
+```python
+ret, buffer = cv2.imencode('.jpg', frame)
+```
+
+**Description:**
+When pressing 'save image', the following error is logged in the console:
+
+```
+cv2.error: OpenCV(4.12.0) ... error: (-215:Assertion failed) !_img.empty() in function 'cv::imencodeWithMetadata'
+```
+
+- This error occurs if `frame` is empty (camera read failed), but the UI still works and the image is saved.
+- The error causes a 3-4 second slowdown in the save operation, but does not break functionality.
+- The bug is intermittent and only affects performance, not correctness.
+
+**Status:** NOT FIXED ❌
+- Needs investigation to prevent slowdown and error logging when saving image.
+- Possible solution: Add a check for `success` before calling `cv2.imencode`.
