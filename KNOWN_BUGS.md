@@ -1093,3 +1093,31 @@ When multiple detection threads (face, head movement, MTOP, electronic device, e
 - Camera race condition is resolved.
 - All detection threads now receive synchronized frame copies, regardless of their processing speed.
 - System stability and detection reliability are greatly improved.
+
+## 🐞 Bug 52: Camera Thread Wait Eliminated with Double Buffering [IMPROVEMENT]
+
+**Description:**
+Previously, the camera producer thread could be forced to wait if a detection (consumer) thread held the lock while reading the current frame. This lock contention could cause the camera thread to miss real-time frame updates, reducing system responsiveness and potentially dropping frames.
+
+**Root Cause:**
+
+- Single-buffered approach required both producer and consumers to acquire the same lock for reading/writing the frame.
+- If a slow consumer held the lock, the producer (camera thread) had to wait, causing delays.
+
+**Solution:**
+
+- Implemented a **double buffering** system:
+  - The camera thread writes to a `write_frame` buffer without locking.
+  - When a new frame is ready, the camera thread quickly swaps `write_frame` into `read_frame` under a lock (very fast).
+  - Consumers only briefly lock to copy the reference to `read_frame`, then process outside the lock.
+- This minimizes lock contention and ensures the camera thread almost never waits for consumers.
+
+**Impact:**
+
+- Camera thread can run at full speed, always capturing the latest frame.
+- Consumers get the most up-to-date frame with minimal delay.
+- System is now more real-time, responsive, and robust under heavy load.
+
+**Status: IMPROVEMENT ✅**
+
+- Double buffering has eliminated camera thread waiting, further improving system performance and reliability.

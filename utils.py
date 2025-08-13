@@ -109,9 +109,10 @@ f_name_directory = 'static/OutputAudios'  # Fixed path to use relative directory
 # Capture
 cap = None
 
-# Camera Producer-Consumer System (Shared Frame Implementation)
-current_frame = None
-frame_lock = threading.Lock()
+# Camera Producer-Consumer System (Double Buffer Implementation)
+write_frame = None  # Producer writes to this buffer
+read_frame = None   # Consumers read from this buffer
+frame_lock = threading.Lock()  # Only for quick buffer swap
 frame_ready = threading.Event()
 camera_thread = None
 
@@ -484,9 +485,9 @@ def EDD_record_duration(text, img):
 
 #system Related
 def camera_producer_thread():
-    """Single camera producer thread that feeds frames to all detection threads"""
-    global Globalflag, cap, current_frame, frame_lock, frame_ready
-    print("Camera producer thread started")
+    """Double-buffered camera producer thread for optimal performance"""
+    global Globalflag, cap, write_frame, read_frame, frame_lock, frame_ready
+    print("Camera producer thread started (double buffering)")
     
     last_frame_time = 0
     target_fps = 20  # Limit camera FPS to prevent overwhelming
@@ -500,9 +501,13 @@ def camera_producer_thread():
             if cap is not None and cap.isOpened():
                 success, frame = cap.read()
                 if success and frame is not None and frame.size > 0:
-                    # Update shared frame with thread safety
+                    # Write to write_frame (no lock needed - producer only)
+                    write_frame = frame.copy()
+                    
+                    # Quick buffer swap (minimal lock time)
                     with frame_lock:
-                        current_frame = frame.copy()  # Store copy in shared variable
+                        read_frame = write_frame
+                    
                     frame_ready.set()  # Signal that new frame is available
                     last_frame_time = current_time
             else:
@@ -513,14 +518,16 @@ def camera_producer_thread():
     print("Camera producer thread stopped")
 
 def get_camera_frame(timeout=1.0):
-    """Get current frame (shared by all threads)"""
-    global current_frame, frame_lock, frame_ready
+    """Get current frame using double buffering (thread-safe but minimal locking)"""
+    global read_frame, frame_lock, frame_ready
     
     # Wait for frame to be ready with timeout
     if frame_ready.wait(timeout):
+        # Quick lock to copy the frame reference (very fast)
         with frame_lock:
-            if current_frame is not None:
-                return current_frame.copy()  # Each thread gets its own copy
+            if read_frame is not None:
+                frame_copy = read_frame.copy()  # Each thread gets its own copy
+                return frame_copy
     return None
 
 def deleteTrashVideos():
