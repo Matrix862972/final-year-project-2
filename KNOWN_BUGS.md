@@ -503,7 +503,7 @@ A reset of EDFlag = False before or at the start of each new frame analysis.
 This ensures EDFlag accurately reflects the presence or absence of devices per frame.
 
 ````
-## 🐞Bug 14: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞Bug 14: Potential Bugs in Recorder Class (Markdown Format)[Exception handling gracefully catches this error but extremely rare, may happen on old slow CPUs]
 
 **Line:** `self.stream.read(CHUNK)`  
 **Issue:** PyAudio may raise `InputOverflowError` if CPU can't process frames fast enough.  
@@ -515,14 +515,14 @@ self.stream.read(CHUNK, exception_on_overflow=False)
 
 
 ```
-## 🐞Bug 13: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞Bug 13: Potential Bugs in Recorder Class (Markdown Format)[not a bug]
 
 SHORT_WIDTH or SHORT_NORMALIZE Not Defined
 Line: count = len(frame) / SHORT_WIDTH
 Issue: If either constant is missing, an error will be raised.
 Fix: Ensure both are defined and match the sample format (typically 2 for 16-bit).
 
-## 🐞 Bug 14: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞 Bug 14: Potential Bugs in Recorder Class (Markdown Format)[not an issue, not important]
 
 self.stream Might Not Be Closed
 Issue: On exceptions or exit, audio stream and PyAudio instance are not released.
@@ -535,7 +535,7 @@ self.p.terminate()
 
 ```
 
-## 🐞 Bug 15: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞 Bug 15: Potential Bugs in Recorder Class (Markdown Format)[not a bug]
 
 No Reset for EDFlag or Similar Global Flags
 
@@ -546,7 +546,7 @@ self.p.terminate()
 
 ```
 
-## 🐞 Bug 16: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞 Bug 16: Potential Bugs in Recorder Class (Markdown Format)[not a bug]
 
 No Reset for EDFlag or Similar Global Flags
 Issue: If EDFlag or similar flags are used, they may persist across function calls unintentionally.
@@ -557,19 +557,19 @@ EDFlag = False  # Reset before analyzing new frame
 
 ```
 
-## 🐞 Bug 17: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞 Bug 17: Potential Bugs in Recorder Class (Markdown Format)[could not re-produce, sound cushions where added before loud sound]
 
 Buffer Overflow in queueQuiet()
 Issue: self.quiet_idx is manually managed; if CUSHION_FRAMES is too small or loop is intensive, the logic can malfunction.
 Fix: Consider using collections.deque(maxlen=CUSHION_FRAMES) for more reliable buffer rotation.
 
-## 🐞 Bug 18: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞 Bug 18: Potential Bugs in Recorder Class (Markdown Format)[not an issue on modern PCs, it could be thrown in ancient PCs although exception handling is present to gracefully handle it, rare bug]
 
 Hardcoded WAV Format
 Issue: If format/channel/rate mismatches occur (e.g., CHANNELS != 1), resulting WAV may be invalid.
 Fix: Validate audio format using pyaudio.get_device_info_by_index() before setup.
 
-## 🐞 Bug 19: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞 Bug 19: Potential Bugs in Recorder Class (Markdown Format)[not a bug]
 
 TRIGGER_RMS and TIMEOUT_SECS Assumed Defined
 Issue: If these constants are not set before use, NameError will be raised.
@@ -579,13 +579,13 @@ python
 TRIGGER_RMS = 0.5
 TIMEOUT_SECS = 2
 
-## 🐞 Bug 20: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞 Bug 20: Potential Bugs in Recorder Class (Markdown Format)[single threaded sound recorder, not a bug]
 
 Race Condition with sound Buffer
 Issue: Concurrent modifications or interruptions during buffer write can cause inconsistent states.
 Fix: Use thread-safe queues or add locking if multi-threading.
 
-## 🐞 Bug 21: Potential Bugs in Recorder Class (Markdown Format)[]
+## 🐞 Bug 21: Potential Bugs in Recorder Class (Markdown Format)[not a bug, already precondition present]
 
 Sound Writing Without Data
 Issue: If sound is empty, self.write() might still be called, writing a zero-length file.

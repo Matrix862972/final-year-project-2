@@ -42,7 +42,7 @@ flag = [False, False, False, False, False]
 FACE_DETECTION_FPS = 20      # Writer[0] - Face Detection violations
 HEAD_MOVEMENT_FPS = 20       # Writer[1] - Head Movement violations  
 MTOP_DETECTION_FPS = 20      # Writer[2] - Multiple Person violations
-SCREEN_DETECTION_FPS = 5    # Writer[3] - Screen Detection violations
+SCREEN_DETECTION_FPS = 5     # Writer[3] - Screen Detection violations
 ELECTRONIC_DEVICE_FPS = 10   # Writer[4] - Electronic Device violations
 
 capb= cv2.VideoCapture(0)
@@ -69,15 +69,18 @@ writer = [cv2.VideoWriter(video[0], cv2.VideoWriter_fourcc(*'mp4v'), FACE_DETECT
           cv2.VideoWriter(video[2], cv2.VideoWriter_fourcc(*'mp4v'), MTOP_DETECTION_FPS, (width,height)), 
           cv2.VideoWriter(video[3], cv2.VideoWriter_fourcc(*'mp4v'), SCREEN_DETECTION_FPS, (1920, 1080)), 
           cv2.VideoWriter(video[4], cv2.VideoWriter_fourcc(*'mp4v'), ELECTRONIC_DEVICE_FPS , (EDWidth,EDHeight))]
+
 #More than One Person Related
 mpFaceDetection = mp.solutions.face_detection  # Detect the face
 mpDraw = mp.solutions.drawing_utils  # Draw the required Things for BBox
 faceDetection = mpFaceDetection.FaceDetection(0.5)# Increased sensitivity: 0.75 -> 0.5 for better multiple person detection
+
 #Screen Related
 shorcuts = []
 active_window = None # Store the initial active window and its title
 active_window_title = "Google Chrome"  # Updated for Chrome browser
 exam_window_title = active_window_title
+
 #ED Related
 my_file = open("utils/coco.txt", "r") # opening the file in read mode
 data = my_file.read() # reading the file
@@ -92,8 +95,9 @@ for i in range(len(class_list)):
     detection_colors.append((b, g, r))
 model = YOLO("yolo11n.pt")
 EDFlag = False
+
 #Voice Related
-TRIGGER_RMS = 30  # start recording above 30 (increased to handle very loud fan noise)
+TRIGGER_RMS = 15  # start recording above 15
 RATE = 16000  # sample rate
 TIMEOUT_SECS = 3  # silence time after which recording stops
 FRAME_SECS = 0.25  # length of frame(chunks) to be processed at once in secs
