@@ -120,15 +120,26 @@ camera_thread = None
 #Database and Files Related
 # function to add data to JSON
 def write_json(new_data, filename='violation.json'):
-    with open(filename,'r+') as file:
-        # First we load existing data into a dict.
-        file_data = json.load(file)
-        # Join new_data with file_data inside emp_details
-        file_data.append(new_data)
-        # Sets file's current position at offset.
-        file.seek(0)
-        # convert back to json.
-        json.dump(file_data, file, indent = 4)
+    # Create file with empty list if it doesn't exist
+    if not os.path.exists(filename):
+        with open(filename, 'w') as f:
+            json.dump([], f)
+
+    # Now open and handle possible empty/corrupt file
+    try:
+        with open(filename, 'r+') as file:
+            try:
+                file_data = json.load(file)
+                if not isinstance(file_data, list):
+                    file_data = []
+            except json.JSONDecodeError:
+                file_data = []
+            file_data.append(new_data)
+            file.seek(0)
+            json.dump(file_data, file, indent=4)
+            file.truncate()
+    except Exception as e:
+        print(f"Error in write_json: {e}")
 
 #Function to move the files to the Output Folders
 def move_file_to_output_folder(file_name,folder_name='OutputVideos'):

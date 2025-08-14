@@ -242,7 +242,7 @@ Critical
 
 **FIXED** — Media playback in the admin dashboard is now fully functional.
 
-## 🐞 Bug 8: Potential Filename Collision in Video Output
+## 🐞 Bug 8: Potential Filename Collision in Video Output[not important]
 
 🐞 Bug: Potential Filename Collision in Video Output
 📄 File/Module:
@@ -308,7 +308,7 @@ exam_window_title = active_window_title
 
 ````
 
-### 🐞 Bug 9: No File Existence or Empty File Handling in write_json
+### 🐞 Bug 9: No File Existence or Empty File Handling in write_json[Fixed]
 
 🔍 Description
 The function write_json(new_data, filename='violation.json') assumes that the violation.json file:
@@ -425,56 +425,55 @@ if filename.lower().endswith('.mp4') and (filename.replace('.mp4', '').isdigit()
 
 Now only .mp4 files that meet the specific criteria for temporary files will be deleted, protecting important recordings like "LectureRecording.mp4" or "Result_JohnDoe.mp4".
 
-``
 
-## Bug 11: Potential Bug in screenDetection()
+## Bug 11: Potential Bug in screenDetection()[could not re-produce, module works as intended]
 
 📌 Issue Summary
 The line:
 
-Copy code
+```python
 is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
+```python
+is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
+```
+
 assumes that current_title is a valid non-empty string. However, some applications or minimized windows can result in:
 This can cause:
 TypeError when trying to use in on None
 
 False positives (detecting a violation even when no app switch occurred)
-Copy code
+
 This will raise:
 
 plaintext
 
-python
-Copy code
+```python
 if current_title:
 is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
 else:
 is_exam_window = False
 Or more robustly:
 
-python
-Copy code
+```python
 current_title = str(new_active_window.title) if new_active_window.title else ""
 is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
 🧰 Patch Summary
 Replace:
 
-python
-Copy code
+```python
 current_title = new_active_window.title
 is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
 With:
 
-python
-Copy code
+```python
 current_title = new_active_window.title or ""
 is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
-⚠️ Additional Suggestions
 Log current_title when it's missing for debugging.
 
 Add a default timeout or fallback if gw.getActiveWindow() fails repeatedly.
 
-## 🐞 Bug 12: Potential Bug in electronicDevicesDetection(frame) Function[not important]
+```
+## 🐞 Bug 12: Potential Bug in electronicDevicesDetection(frame) Function[not a bug]
 
 Bug Description:
 The function sets the global flag EDFlag = True when an electronic device is detected, but never resets it to False if no such object is found in subsequent frames.
@@ -499,16 +498,11 @@ if (detected_obj == 'cell phone' or detected_obj == 'remote' or detected_obj == 
 What’s missing:
 A reset of EDFlag = False before or at the start of each new frame analysis.
 
-✅ Fix Recommendation:
-
-Add this line at the beginning of the function:
-
-```python
-EDFlag = False  # Reset before analyzing new frame
-````
+- The flag is set to False in the electronic_device_detection_thread so this bug is not valid.
 
 This ensures EDFlag accurately reflects the presence or absence of devices per frame.
 
+````
 ## 🐞Bug 14: Potential Bugs in Recorder Class (Markdown Format)
 
 **Line:** `self.stream.read(CHUNK)`  
@@ -519,8 +513,8 @@ This ensures EDFlag accurately reflects the presence or absence of devices per f
 self.stream.read(CHUNK, exception_on_overflow=False)
 
 
-```
 
+```
 ## 🐞Bug 13: Potential Bugs in Recorder Class (Markdown Format)
 
 SHORT_WIDTH or SHORT_NORMALIZE Not Defined
@@ -591,7 +585,7 @@ Race Condition with sound Buffer
 Issue: Concurrent modifications or interruptions during buffer write can cause inconsistent states.
 Fix: Use thread-safe queues or add locking if multi-threading.
 
-## 🐞 Bug 21: Potential Bugs in Recorder Class (Markdown Format)
+## 🐞 Bug 21: Potential Bugs in Recorder Class (Markdown Format)[]
 
 Sound Writing Without Data
 Issue: If sound is empty, self.write() might still be called, writing a zero-length file.
@@ -679,7 +673,7 @@ Updated Final Block
 
 ```
 
-## 🐞Bug 24: Potential Bugs in get_resultId()
+## 🐞Bug 24: Potential Bugs in get_resultId()[Fixed]
 
 Crash on Empty or Invalid JSON
 
@@ -694,7 +688,7 @@ Fix: Wrap json.load() in a try-except block or check if the file is empty before
 
 ```
 
-## 🐞Bug 25: Potential Bugs in get_resultId()
+## 🐞Bug 25: Potential Bugs in get_resultId()[Fixed]
 
 Crash if List is Empty
 
@@ -708,7 +702,7 @@ Fix: Check if file_data is empty before accessing the last element. Return 1 as 
 
 ```
 
-## 🐞Bug 26: Potential Bugs in get_resultId()
+## 🐞Bug 26: Potential Bugs in get_resultId()[Fixed]
 
 Missing or Non-integer Id Field
 
