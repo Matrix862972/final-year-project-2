@@ -19,9 +19,8 @@ Moved camera initialization and thread management to the exam route:
 - Eliminates race conditions and thread conflicts
 - Fixed in commit: c1ca091
 
-Attempted Solution
-python
-Copy code
+Attempted Solution[old]
+```python
 started = False
 @app.before_request
 def start_loop():
@@ -38,8 +37,8 @@ The started flag approach has not fully resolved the issue — it may not persis
 
 Multiple thread creation still occurs under certain conditions.
 
-``
 
+```
 ## 🐞 Bug 2: SQL Injection Vulnerability in Login Function
 
 **File:** `app.py`
@@ -93,7 +92,7 @@ def logout():
 
 ````
 
-## Bug 4: Typo in Variable Name Passed to Template
+## Bug 4: Typo in Variable Name Passed to Template[not important]
 
 📌 Location
 Line:
@@ -167,6 +166,9 @@ High – Security vulnerability and bad REST practice.
 ### 📌 Description
 
 Currently, student passwords are stored in the database in plain text. This is a serious security vulnerability because if the database is ever exposed or breached, all user credentials will be compromised immediately.
+### 🔢 Code Involved
+
+```python
 def insertStudent(name, email, password):
 cur.execute("""
 INSERT INTO students (Name, Email, Password, Role)
@@ -208,7 +210,7 @@ Use bcrypt, werkzeug.security, or similar libraries to hash passwords before sto
 
 On login, compare the hashed password using a secure method.
 
-python
+```python
 from werkzeug.security import generate_password_hash, check_password_hash
 
 # Example usage
@@ -472,7 +474,7 @@ Log current_title when it's missing for debugging.
 
 Add a default timeout or fallback if gw.getActiveWindow() fails repeatedly.
 
-## 🐞 Bug 12: Potential Bug in electronicDevicesDetection(frame) Function
+## 🐞 Bug 12: Potential Bug in electronicDevicesDetection(frame) Function[not important]
 
 Bug Description:
 The function sets the global flag EDFlag = True when an electronic device is detected, but never resets it to False if no such object is found in subsequent frames.
@@ -595,11 +597,11 @@ Sound Writing Without Data
 Issue: If sound is empty, self.write() might still be called, writing a zero-length file.
 Fix: Check if len(sound) > 0: before writing.
 
-## 🐞 Bug 22: Improper Camera Release Condition
+## 🐞 Bug 22: Improper Camera Release Condition[Fixed]
 
 📌 Location
 
-````python
+```python
 if Globalflag:
     cap.release()
 🧠 Description
@@ -648,7 +650,7 @@ def cheat_Detection1():
 
 ```
 
-## 🐞 Bug 23: Webcam Release Logic Error in cheat_detection2[not a bug]
+## 🐞 Bug 23: Webcam Release Logic Error in cheat_detection2[Fixed]
 
 ### 🎯 Bug Location
 
@@ -720,7 +722,7 @@ Fix: Validate each record's "Id" key and its type before processing.
 
 ```
 
-## 🐞Bug 27: Potential Bugs in get_resultId()
+## 🐞Bug 27: Potential Bugs in get_resultId()[not accessed concurrently][Fixed]
 
 Concurrency/File Access Conflict
 Bug: If multiple processes try to read/write to result.json at the same time, it may lead to a race condition or corrupted file.
@@ -749,71 +751,69 @@ def get_resultId():
     except FileNotFoundError:
         return 1
 
-```
 
-### 🐞Bug 28: Potential Issues / Bugs in get_TrustScore
+```
+**Status: FIXED ✅**
+
+### 🐞Bug 28: Potential Issues / Bugs in get_TrustScore[Fixed]
 
 **File Not Found:**
 
 - If `violation.json` does not exist, `open()` will raise a `FileNotFoundError`.
 
-### 🐞Bug 29: Potential Issues / Bugs in get_TrustScore
+### 🐞Bug 29: Potential Issues / Bugs in get_TrustScore[Fixed]
 
 **Empty or Corrupt File:**
 
 - If the JSON is malformed or empty, `json.load(file)` will raise a `JSONDecodeError`.
 
-### 🐞Bug 30: Potential Issues / Bugs in get_TrustScore
+### 🐞Bug 30: Potential Issues / Bugs in get_TrustScore[Fixed]
 
 **KeyError on "RId" or "Mark":**
 
 - If any record in the JSON lacks the `"RId"` or `"Mark"` key, it will raise a `KeyError`.
 
-### 🐞Bug 31: Potential Issues / Bugs in get_TrustScore
+### 🐞Bug 31: Potential Issues / Bugs in get_TrustScore[Fixed]
 
 **Wrong File Mode (`r+`):**
 
 - Since the function only reads the file, `r+` (read/write) is unnecessary. `r` (read-only) would be safer.
 
-### 🐞Bug 32: Potential Issues / Bugs in get_TrustScore
+### 🐞Bug 32: Potential Issues / Bugs in get_TrustScore[Fixed]
 
 **No Matching Records:**
 
 - If `Rid` is not found, `filtered_data` is empty, and `sum()` correctly returns 0 — but if that’s not expected, it could be misleading.
 
-### 🐞Bug 33: Potential Issues / Bugs in getResults
+### 🐞Bug 33: Potential Issues / Bugs in getResults[No need to fix]
 
 **Unnecessary Write Access (`r+`):**
 
 - The function only reads the file, so `r` (read-only) is sufficient. `r+` allows writing, which is unsafe and unnecessary here.
 
-### 🐞Bug 34: Potential Issues / Bugs in getResults
+### 🐞Bug 34: Potential Issues / Bugs in getResults[Fixed]
 
 **File Not Found:**
 
 - If `result.json` does not exist, this previously raised a `FileNotFoundError`.
 
-**Status: FIXED ✅**
+- Fixed by adding FileNotFoundError handling.
 
-- The `get_resultId` function now handles missing files gracefully and returns 1 if the file does not exist.
 
-### 🐞Bug 35: Potential Issues / Bugs in getResults
+### 🐞Bug 35: Potential Issues / Bugs in getResults[Fixed]
 
 **Empty or Malformed JSON:**
 
 - If the file is empty or contains invalid JSON, `json.load(file)` previously raised a `JSONDecodeError`.
 
-**Status: FIXED ✅**
+- Fixed by adding JSONDecodeError handling.
 
-- The `get_resultId` function now catches JSONDecodeError and returns 1 if the file is empty or malformed.
-
-### 🐞Bug 36: Potential Issues / Bugs in getResults
+### 🐞Bug 36: Potential Issues / Bugs in getResults[No need to fix]
 
 **No Data Validation:**
 
 - The function previously assumed the file contained the correct data format (a list of result dictionaries). If not, it could return unexpected results.
 
-**Status: FIXED ✅**
 
 - The `get_resultId` function now validates that each entry has an integer "Id" field before processing, ensuring only well-formed records are used.
 
@@ -823,42 +823,42 @@ def get_resultId():
 
 - The function uses a fixed file path. It would be more flexible to accept the filename as a parameter.
 
-## 🐞 Bug 38: Potential Issues & Bugs in getResultDetails
+## 🐞 Bug 38: Potential Issues & Bugs in getResultDetails[Fixed]
 
 **Unnecessary use of `'r+'` mode:** The function only reads files, but used `'r+'` (read/write) mode. This is unsafe and not needed.
 **Status: FIXED ✅**
 
 - Now uses `'r'` (read-only) mode for file access.
 
-## 🐞 Bug 39: Potential Issues & Bugs in getResultDetails
+## 🐞 Bug 39: Potential Issues & Bugs in getResultDetails[Fixed]
 
 **FileNotFoundError if files are missing:** If `result.json` or `violation.json` does not exist, the function previously raised a `FileNotFoundError`.
 **Status: FIXED ✅**
 
 - File access is now wrapped in a `try-except` block to handle missing files gracefully.
 
-## 🐞 Bug 40: Potential Issues & Bugs in getResultDetails
+## 🐞 Bug 40: Potential Issues & Bugs in getResultDetails[Fixed]
 
 **No file existence handling:** If `result.json` or `violation.json` does not exist, a `FileNotFoundError` previously occurred.
 **Status: FIXED ✅**
 
 - File access is now wrapped in a `try-except` block to handle missing files gracefully.
 
-## 🐞 Bug 41: Potential Issues & Bugs in getResultDetails
+## 🐞 Bug 41: Potential Issues & Bugs in getResultDetails[Fixed]
 
 **No JSON structure validation:** Assumed the JSON files always contained the expected structure and keys (`Id`, `RId`).
 **Status: FIXED ✅**
 
 - The function now validates the presence and type of required keys before processing.
 
-## 🐞 Bug 42: Potential Issues & Bugs in getResultDetails
+## 🐞 Bug 42: Potential Issues & Bugs in getResultDetails[Fixed]
 
 **Silent empty results:** If no matching `Id` or `RId` was found, the function returned empty lists without any indication.
 **Status: FIXED ✅**
 
 - The function now logs a warning or returns a flag/message when no data is found.
 
-## 🐞 Bug 43: Potential Issues & Bugs in getResultDetails
+## 🐞 Bug 43: Potential Issues & Bugs in getResultDetails[Fixed]
 
 **Redundant `int(rid)` conversion:** The value of `rid` was converted to `int` multiple times in the function.
 **Status: FIXED ✅**
@@ -912,7 +912,7 @@ Description: The head movement detection model was causing crashes in the applic
 
 Fix: Updated the model implementation and optimized the video processing pipeline to prevent crashes.
 
-## Bug 🐞 46: Screen Detection sometimes not naming video files properly
+## Bug 🐞 46: Screen Detection sometimes not naming video files properly[Fixed]
 
 Description: The screen detection module occasionally fails to generate unique names for the output video files, leading to overwrites or confusion about which file corresponds to which exam session.
 
@@ -939,7 +939,7 @@ The electronic device detection module (EDD_record_duration in utils.py) was not
 **Status:**
 ✅ Fixed — Electronic device detection now reliably records and saves evidence videos for review.
 
-## ✅ Bug 48: Tab Switch Detection Not Working - [fixed]
+## ✅ Bug 48: Tab Switch Detection Not Working - [Fixed]
 
 ### **Bug Title**
 

@@ -1277,19 +1277,43 @@ def get_resultId():
 
 #Function to give the trust score
 def get_TrustScore(Rid):
-    with open('violation.json', 'r+') as file:
-        # First we load existing data into a dict.
-        file_data = json.load(file)
-        filtered_data = [item for item in file_data if item["RId"] == Rid]
-        total_mark = sum(item["Mark"] for item in filtered_data)
-        return total_mark
+    try:
+        with open('violation.json', 'r') as file:
+            # First we load existing data into a dict.
+            file_data = json.load(file)
+            filtered_data = [item for item in file_data if item.get("RId") == Rid]
+            total_mark = sum(item.get("Mark", 0) for item in filtered_data)
+            return total_mark
+    except FileNotFoundError:
+        # File does not exist
+        print("violation.json not found.")
+        return 0
+    except json.JSONDecodeError:
+        # File is empty or not valid JSON
+        print("violation.json is empty or corrupt.")
+        return 0
+    except Exception as e:
+        # Handle missing keys or other errors
+        print(f"Error in get_TrustScore: {e}")
+        return 0
 
 #Function to give all results
 def getResults():
-    with open('result.json', 'r+') as file:
-        # First we load existing data into a dict.
-        result_data = json.load(file)
-        return result_data
+    try:
+        with open('result.json', 'r+') as file:
+            # First we load existing data into a dict.
+            result_data = json.load(file)
+            return result_data
+    except FileNotFoundError:
+        # File does not exist, return empty list or dict as appropriate
+        return []
+    except json.JSONDecodeError:
+        # File is empty or not valid JSON, return empty list or dict as appropriate
+        return []
+    except Exception as e:
+        # Log or handle other exceptions as needed
+        print(f"Error reading results: {e}")
+        return []
 
 #Function to give result details
 def getResultDetails(rid):
