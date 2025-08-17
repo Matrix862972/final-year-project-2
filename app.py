@@ -84,7 +84,7 @@ def login():
         username = request.form['username']
         password = request.form['password']
         cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM students where Email='" + username + "' and Password='" + password + "'")
+        cur.execute("SELECT * FROM students WHERE Email=%s AND Password=%s", (username, password))
         data = cur.fetchone()
         if data is None:
             flash('Your Email or Password is incorrect, try again.', category='error')

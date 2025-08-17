@@ -20,6 +20,7 @@ Moved camera initialization and thread management to the exam route:
 - Fixed in commit: c1ca091
 
 Attempted Solution[old]
+
 ```python
 started = False
 @app.before_request
@@ -39,26 +40,34 @@ Multiple thread creation still occurs under certain conditions.
 
 
 ```
-## 🐞 Bug 2: SQL Injection Vulnerability in Login Function
+
+## ✅ Bug 2: SQL Injection Vulnerability in Login Function [FIXED]
 
 **File:** `app.py`
 **Function:** `login()`
-**Line of Concern:**
+**Status:** FIXED ✅
+
+**Original Issue:**
+The login function constructed the SQL query by concatenating raw user input directly into the query string:
 
 ```python
 cur.execute("SELECT * FROM students where Email='" + username + "' and Password='" + password + "'")
 ```
 
-Description
-The login function constructs the SQL query by concatenating raw user input directly into the query string. This makes the application vulnerable to SQL Injection, a serious security flaw that can allow attackers to:
+This made the application vulnerable to SQL Injection, allowing attackers to bypass authentication, extract or manipulate database content, or execute destructive SQL commands.
 
-Bypass authentication (log in without valid credentials)
+**How It Was Fixed:**
+The query was updated to use parameterized arguments, which ensures user input is treated as data and not as part of the SQL command. This prevents SQL injection attacks:
 
-Extract or manipulate database content
+```python
+cur.execute("SELECT * FROM students WHERE Email=%s AND Password=%s", (username, password))
+```
 
-Potentially execute destructive SQL commands
+**Summary:**
 
-This vulnerability arises because the SQL engine interprets user input as part of the SQL syntax rather than as data.
+- User input is now safely passed as parameters to the SQL query.
+- The login function is no longer vulnerable to SQL injection.
+- Fix applied in August 2025.
 
 ``
 
@@ -166,9 +175,10 @@ High – Security vulnerability and bad REST practice.
 ### 📌 Description
 
 Currently, student passwords are stored in the database in plain text. This is a serious security vulnerability because if the database is ever exposed or breached, all user credentials will be compromised immediately.
+
 ### 🔢 Code Involved
 
-```python
+````python
 def insertStudent(name, email, password):
 cur.execute("""
 INSERT INTO students (Name, Email, Password, Role)
@@ -219,7 +229,7 @@ is_valid = check_password_hash(stored_hashed_password, entered_password)
 🏷️ Severity
 Critical
 
-```
+````
 
 ## ✅ Bug 7: Recorded Videos and Audio Do Not Play in Admin Dashboard [FIXED]
 
@@ -425,17 +435,16 @@ if filename.lower().endswith('.mp4') and (filename.replace('.mp4', '').isdigit()
 
 Now only .mp4 files that meet the specific criteria for temporary files will be deleted, protecting important recordings like "LectureRecording.mp4" or "Result_JohnDoe.mp4".
 
-
 ## Bug 11: Potential Bug in screenDetection()[could not re-produce, module works as intended]
 
 📌 Issue Summary
 The line:
 
-```python
+````python
 is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
 ```python
 is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
-```
+````
 
 assumes that current_title is a valid non-empty string. However, some applications or minimized windows can result in:
 This can cause:
@@ -447,7 +456,7 @@ This will raise:
 
 plaintext
 
-```python
+````python
 if current_title:
 is_exam_window = any(browser_title in current_title for browser_title in allowed_browser_titles)
 else:
@@ -472,7 +481,8 @@ Log current_title when it's missing for debugging.
 
 Add a default timeout or fallback if gw.getActiveWindow() fails repeatedly.
 
-```
+````
+
 ## 🐞 Bug 12: Potential Bug in electronicDevicesDetection(frame) Function[not a bug]
 
 Bug Description:
@@ -483,7 +493,7 @@ Once an electronic device (e.g., 'cell phone', 'laptop', etc.) is detected, EDFl
 
 Where it happens:
 
-````python
+```python
 def electronicDevicesDetection(frame):
     global EDFlag
     # Reset EDFlag before analyzing new frame
@@ -502,7 +512,8 @@ A reset of EDFlag = False before or at the start of each new frame analysis.
 
 This ensures EDFlag accurately reflects the presence or absence of devices per frame.
 
-````
+```
+
 ## 🐞Bug 14: Potential Bugs in Recorder Class (Markdown Format)[Exception handling gracefully catches this error but extremely rare, may happen on old slow CPUs]
 
 **Line:** `self.stream.read(CHUNK)`  
@@ -515,6 +526,7 @@ self.stream.read(CHUNK, exception_on_overflow=False)
 
 
 ```
+
 ## 🐞Bug 13: Potential Bugs in Recorder Class (Markdown Format)[not a bug]
 
 SHORT_WIDTH or SHORT_NORMALIZE Not Defined
@@ -595,7 +607,7 @@ Fix: Check if len(sound) > 0: before writing.
 
 📌 Location
 
-```python
+````python
 if Globalflag:
     cap.release()
 🧠 Description
@@ -747,6 +759,7 @@ def get_resultId():
 
 
 ```
+
 **Status: FIXED ✅**
 
 ### 🐞Bug 28: Potential Issues / Bugs in get_TrustScore[Fixed]
@@ -793,7 +806,6 @@ def get_resultId():
 
 - Fixed by adding FileNotFoundError handling.
 
-
 ### 🐞Bug 35: Potential Issues / Bugs in getResults[Fixed]
 
 **Empty or Malformed JSON:**
@@ -807,7 +819,6 @@ def get_resultId():
 **No Data Validation:**
 
 - The function previously assumed the file contained the correct data format (a list of result dictionaries). If not, it could return unexpected results.
-
 
 - The `get_resultId` function now validates that each entry has an integer "Id" field before processing, ensuring only well-formed records are used.
 
