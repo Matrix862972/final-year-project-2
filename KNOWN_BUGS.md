@@ -1068,7 +1068,44 @@ Previously, multiple detection systems (screen detection, multiple person detect
 
 - Screen detection and other systems now operate reliably and in parallel, with no thread interference.
 
-## 🐞 Bug 51: Camera Race Condition in Detection Threads [FIXED]
+## 🐞 Bug 52: Screen Detector Only Worked for Chrome — Now Multi-Browser [IMPROVEMENT]
+
+**Files changed:** `utils.py`
+
+**Status:** FIXED ✅
+
+### Summary
+
+Previously the screen/tab detector relied on browser-specific title matching (Chrome-centric lists and patterns), which caused the detector to miss legitimate exam tabs in other browsers (for example Edge or Firefox) because their window title formats differ. The detector was effectively Chrome-only.
+
+### What we changed
+
+- Removed the complex `BROWSERS_CONFIG` and long hard-coded allowed-title lists.
+- Replaced it with a simple `ALLOWED_BROWSERS` list containing browser name keywords (e.g. `"Chrome"`, `"Microsoft Edge"`, `"Firefox"`).
+- Simplified `screenDetection()` logic to:
+  - detect whether the active window belongs to a browser by checking if any allowed browser keyword appears in the title, and
+  - allow the tab when the window title contains the substring `"Exam"`.
+
+This minimal rule (browser keyword + presence of "Exam") makes detection robust against variations in browser title formatting (profiles, extra tab text, localization differences, etc.).
+
+### Implementation notes
+
+- File edited: `utils.py`
+  - Removed `BROWSERS_CONFIG`, `ALL_KEYWORDS`, and `ALL_ALLOWED_TITLES`.
+  - Added `ALLOWED_BROWSERS = ["Google Chrome","Chrome","Microsoft Edge","Edge","Mozilla Firefox","Firefox"]`.
+  - `screenDetection()` now uses `is_browser = any(keyword in current_title for keyword in ALLOWED_BROWSERS)` and `contains_exam = "Exam" in current_title` to decide.
+
+### Verification
+
+- Manually tested on Chrome and Edge window title examples (including Edge titles like `"Exam and 1 more page - Personal - Microsoft Edge"`) — detector now accepts legitimate exam tabs.
+- The simplified logic avoids brittle title-pattern matching and is future-proof for other browsers that include "Exam" in the title.
+
+### Impact
+
+- More reliable detection across browsers (Chrome, Edge, Firefox).
+- Easier maintenance — add new browser keywords to `ALLOWED_BROWSERS` if needed.
+
+## 🐞 Bug 53: Camera Race Condition in Detection Threads [FIXED]
 
 **Description:**
 When multiple detection threads (face, head movement, MTOP, electronic device, etc.) attempted to access the camera simultaneously, a race condition occurred. Each thread tried to read frames directly from the camera, leading to unpredictable behavior, missed frames, and failures in slower detection systems (especially YOLO-based electronic device detection). This caused some threads to starve, others to skip frames, and overall system instability.
@@ -1099,7 +1136,7 @@ When multiple detection threads (face, head movement, MTOP, electronic device, e
 - All detection threads now receive synchronized frame copies, regardless of their processing speed.
 - System stability and detection reliability are greatly improved.
 
-## 🐞 Bug 52: Camera Thread Wait Eliminated with Double Buffering [IMPROVEMENT]
+## 🐞 Bug 54: Camera Thread Wait Eliminated with Double Buffering [IMPROVEMENT]
 
 **Description:**
 Previously, the camera producer thread could be forced to wait if a detection (consumer) thread held the lock while reading the current frame. This lock contention could cause the camera thread to miss real-time frame updates, reducing system responsiveness and potentially dropping frames.

@@ -76,9 +76,19 @@ mpDraw = mp.solutions.drawing_utils  # Draw the required Things for BBox
 faceDetection = mpFaceDetection.FaceDetection(0.5)# Increased sensitivity: 0.75 -> 0.5 for better multiple person detection
 
 #Screen Related
+# List of supported browsers (just need to detect if we're in a browser)
+ALLOWED_BROWSERS = [
+    "Google Chrome", 
+    "Chrome", 
+    "Microsoft Edge", 
+    "Edge", 
+    "Mozilla Firefox", 
+    "Firefox"
+]
+
 shorcuts = []
 active_window = None # Store the initial active window and its title
-active_window_title = "Google Chrome"  # Updated for Chrome browser
+active_window_title = "Exam — Google Chrome"  # Default exam window title
 exam_window_title = active_window_title
 
 #ED Related
@@ -971,57 +981,35 @@ def screenDetection():
     new_active_window = gw.getActiveWindow()
     frame = capture_screen()
 
-    # Titles that are allowed for the exam tab
-    allowed_exam_titles = [
-        "Exam — Google Chrome",
-        "Exam - Google Chrome", 
-        "localhost:5000 — Google Chrome",
-        "localhost:5000 - Google Chrome",
-        "Google Chrome",  # Generic Chrome (when tab title doesn't show)
-        "Chrome"  # Sometimes just shows as Chrome
-    ]
-
     if new_active_window is not None:
         current_title = new_active_window.title
-        
-        # Debug prints
+
+        # Debug
         print(f"[DEBUG] Current window title: '{current_title}'")
         print(f"[DEBUG] Previous window title: '{active_window_title}'")
-        print(f"[DEBUG] Contains 'Google Chrome': {'Google Chrome' in current_title}")
-        print(f"[DEBUG] Contains 'Chrome': {'Chrome' in current_title}")
-        print(f"[DEBUG] Contains ' — ': {' — ' in current_title}")
-        print(f"[DEBUG] Contains ' - ': {' - ' in current_title}")
-        print(f"[DEBUG] In allowed list: {current_title in allowed_exam_titles}")
 
-        # --- CASE 1: User switched to another app (not Chrome at all) ---
-        if "Google Chrome" not in current_title and "Chrome" not in current_title:
-            print(f"[DEBUG] CASE 1: Not Chrome - '{current_title}'")
+        # Simple logic: Check if we're in a browser and if it contains "Exam"
+        is_browser = any(keyword in current_title for keyword in ALLOWED_BROWSERS)
+        contains_exam = "Exam" in current_title
+        
+        if is_browser and contains_exam:
+            print(f"[DEBUG] In browser with Exam tab - ALLOWED")
+            textScreen = "Stay in the Test"
+        elif is_browser and not contains_exam:
+            print(f"[DEBUG] In browser but not Exam tab - VIOLATION")
+            if current_title != active_window_title:
+                print("Switched to Another Tab:", current_title)
+                active_window = new_active_window
+                active_window_title = current_title
+            textScreen = "Move away from the Test"
+        else:
+            print(f"[DEBUG] Not in supported browser - VIOLATION")
             if current_title != active_window_title:
                 print("Moved to Another Application:", current_title)
                 active_window = new_active_window
-                active_window_title = new_active_window.title
+                active_window_title = current_title
             textScreen = "Move away from the Test"
 
-        # --- CASE 2: User is in Chrome but potentially wrong tab ---
-        elif current_title not in allowed_exam_titles:
-            print(f"[DEBUG] CASE 2: Chrome but not in allowed list - '{current_title}'")
-            # Only flag as violation if it's a specific tab title (contains " — " or " - ")
-            if " — " in current_title or " - " in current_title:
-                print(f"[DEBUG] CASE 2a: Specific tab detected (contains dash) - VIOLATION")
-                if current_title != active_window_title:
-                    print("Switched to Another Tab:", current_title)
-                    active_window = new_active_window
-                    active_window_title = new_active_window.title
-                textScreen = "Move away from the Test"
-            else:
-                print(f"[DEBUG] CASE 2b: Generic Chrome title - ALLOWED")
-                # Generic Chrome title, assume it's okay
-                textScreen = "Stay in the Test"
-
-        # --- CASE 3: User is in the correct exam tab ---
-        else:
-            print(f"[DEBUG] CASE 3: In allowed exam tab - '{current_title}'")
-            textScreen = "Stay in the Test"
     else:
         print(f"[DEBUG] No active window detected")
         textScreen = "No active window detected"
