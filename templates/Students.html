@@ -114,9 +114,13 @@
 									<a href="/updateStudent/{{row.0}}" data-toggle="modal" data-target="#modaledit{{row.0}}">
 										<i class='bx bxs-edit' style="color: #5f9ea0;"></i>
 									</a>
-									<a href="/deleteStudent/{{ row.0 }}" onclick="return confirm('Are You Sure For Delete?')">
-										<i class='bx bxs-message-square-x' style="color: #aa2e49;"></i>
-									</a>
+									<form method="POST" action="/deleteStudent" style="display: inline;" 
+										  onsubmit="return confirm('Are You Sure You Want To Delete This Student? This action cannot be undone.')">
+										<input type="hidden" name="student_id" value="{{ row.0 }}">
+										<button type="submit" style="background: none; border: none; cursor: pointer; padding: 0;">
+											<i class='bx bxs-message-square-x' style="color: #aa2e49;"></i>
+										</button>
+									</form>
 
 								</td>
 							</tr>

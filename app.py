@@ -261,13 +261,24 @@ def insertStudent():
         mysql.connection.commit()
         return redirect(url_for('adminStudents'))
 
-@app.route('/deleteStudent/<string:stdId>', methods=['GET'])
-def deleteStudent(stdId):
-    flash("Record Has Been Deleted Successfully")
-    cur = mysql.connection.cursor()
-    cur.execute("DELETE FROM students WHERE ID=%s", (stdId,))
-    mysql.connection.commit()
-    return redirect(url_for('adminStudents'))
+@app.route('/deleteStudent', methods=['POST'])
+def deleteStudent():
+    if request.method == 'POST':
+        stdId = request.form.get('student_id')
+        if not stdId:
+            flash("Invalid student ID", category='error')
+            return redirect(url_for('adminStudents'))
+        
+        try:
+            cur = mysql.connection.cursor()
+            cur.execute("DELETE FROM students WHERE ID=%s", (stdId,))
+            mysql.connection.commit()
+            cur.close()
+            flash("Record Has Been Deleted Successfully", category='success')
+        except Exception as e:
+            flash(f"Error deleting student: {str(e)}", category='error')
+        
+        return redirect(url_for('adminStudents'))
 
 @app.route('/updateStudent', methods=['POST', 'GET'])
 def updateStudent():
