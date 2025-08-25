@@ -170,66 +170,90 @@ High – Security vulnerability and bad REST practice.
 
 ```
 
-## 🐞 Bug 6: Passwords Stored in Plain Text
+## ✅ Bug 6: Passwords Stored in Plain Text [FIXED]
 
 ### 📌 Description
 
-Currently, student passwords are stored in the database in plain text. This is a serious security vulnerability because if the database is ever exposed or breached, all user credentials will be compromised immediately.
+**Status:** FIXED ✅
 
-### 🔢 Code Involved
+Previously, student passwords were stored in the database in plain text, creating a critical security vulnerability. If the database was ever exposed or breached, all user credentials would be compromised immediately. This has been completely resolved.
 
-````python
-def insertStudent(name, email, password):
-cur.execute("""
-INSERT INTO students (Name, Email, Password, Role)
-VALUES (%s, %s, %s, %s)
-""", (name, email, password, 'STUDENT'))
-mysql.connection.commit()
-cur.close()
+### � How It Was Fixed
 
-def updateStudent(id_data, name, email, password):
-cur = mysql.connection.cursor()
-cur.execute("""
-UPDATE students
-SET Name=%s, Email=%s, Password=%s
-WHERE ID=%s
-""", (name, email, password, id_data))
-mysql.connection.commit()
-cur.close()
+**1. Password Hashing Implementation:**
 
-- `insertStudent()` function (when registering new users)
-- `updateStudent()` function (when modifying passwords)
+- Added `werkzeug.security` library for secure password hashing
+- All new passwords are now hashed using PBKDF2 with SHA-256
+- Updated all password-related functions to use secure hashing
 
-Example:
+**2. Migration Script Created:**
 
-```sql
-INSERT INTO students (Name, Email, Password, Role) VALUES (...)
-python
-Copy code
-cur.execute("""
-    UPDATE students
-    SET Name=%s, Email=%s, Password=%s
-    WHERE ID=%s
-""", (...))
-Violation of cybersecurity best practices
+- `migrate_passwords.py` script created to safely migrate existing plain text passwords
+- Script includes verification, confirmation prompts, and rollback capabilities
+- Handles edge cases and provides detailed logging
 
-Fails to meet security standards for handling credentials
+**3. Application Updates:**
 
-✅ Recommendation
-Use bcrypt, werkzeug.security, or similar libraries to hash passwords before storing.
+- **Login function**: Now uses `check_password_hash()` for secure verification
+- **Insert function**: New users get hashed passwords automatically
+- **Update function**: Password changes are properly hashed before storage
 
-On login, compare the hashed password using a secure method.
+**4. Admin Dashboard Security:**
+
+- Removed password field from admin view (security best practice)
+- Admin can no longer see even hashed passwords
+- Password updates require entering new passwords (not pre-filled)
+
+### 🔢 Code Changes
+
+**Before (Insecure):**
+
+```python
+# Plain text password storage
+cur.execute("INSERT INTO students (Name, Email, Password, Role) VALUES (%s, %s, %s, %s)",
+           (name, email, password, 'STUDENT'))
+
+# Plain text password login
+cur.execute("SELECT * FROM students WHERE Email=%s AND Password=%s", (username, password))
+```
+
+**After (Secure):**
 
 ```python
 from werkzeug.security import generate_password_hash, check_password_hash
 
-# Example usage
+# Hashed password storage
 hashed_password = generate_password_hash(password)
-is_valid = check_password_hash(stored_hashed_password, entered_password)
-🏷️ Severity
-Critical
+cur.execute("INSERT INTO students (Name, Email, Password, Role) VALUES (%s, %s, %s, %s)",
+           (name, email, hashed_password, 'STUDENT'))
 
-````
+# Secure password verification
+cur.execute("SELECT * FROM students WHERE Email=%s", (username,))
+data = cur.fetchone()
+if data and check_password_hash(stored_password, password):
+    # Login successful
+```
+
+### 📁 Files Modified
+
+1. **`app.py`**: Updated login, insertStudent, and updateStudent functions
+2. **`migrate_passwords.py`**: One-time migration script for existing passwords
+3. **`PASSWORD_MIGRATION_README.md`**: Complete migration documentation
+4. **`templates/Students.html`**: Removed password display from admin dashboard
+
+### 🛡️ Security Benefits
+
+- **Database Breach Protection**: Even if database is compromised, passwords remain secure
+- **One-Way Hashing**: Passwords cannot be "unhashed" - only verified
+- **Salt Protection**: Each password gets unique salt to prevent rainbow table attacks
+- **Industry Standard**: Uses PBKDF2 with SHA-256, widely accepted secure method
+- **Admin Security**: Administrators can no longer view user passwords
+
+### 🏷️ Severity
+
+~~Critical~~ → **Resolved** ✅
+
+**Fix Date:** August 2025
 
 ## ✅ Bug 7: Recorded Videos and Audio Do Not Play in Admin Dashboard [FIXED]
 

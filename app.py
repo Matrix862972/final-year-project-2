@@ -3,6 +3,7 @@ from concurrent.futures import ThreadPoolExecutor
 from flask import Flask, render_template, request, jsonify, session,redirect,url_for,Response,flash
 import os
 from flask_mysqldb import MySQL
+from werkzeug.security import generate_password_hash, check_password_hash
 import json
 import io
 import numpy as np
@@ -84,19 +85,24 @@ def login():
         username = request.form['username']
         password = request.form['password']
         cur = mysql.connection.cursor()
-        cur.execute("SELECT * FROM students WHERE Email=%s AND Password=%s", (username, password))
+        cur.execute("SELECT * FROM students WHERE Email=%s", (username,))
         data = cur.fetchone()
         if data is None:
             flash('Your Email or Password is incorrect, try again.', category='error')
             return redirect(url_for('main'))
         else:
-            id, name, email, password, role, created_at, updated_at = data
-            studentInfo={ "Id": id, "Name": name, "Email": email, "Password": password}
-            if role == 'STUDENT':
-                utils.Student_Name = name
-                return redirect(url_for('rules'))
+            id, name, email, stored_password, role, created_at, updated_at = data
+            # Verify password using hash comparison
+            if check_password_hash(stored_password, password):
+                studentInfo={ "Id": id, "Name": name, "Email": email, "Password": stored_password}
+                if role == 'STUDENT':
+                    utils.Student_Name = name
+                    return redirect(url_for('rules'))
+                else:
+                    return redirect(url_for('adminStudents'))
             else:
-                return redirect(url_for('adminStudents'))
+                flash('Your Email or Password is incorrect, try again.', category='error')
+                return redirect(url_for('main'))
 
 @app.route('/logout')
 def logout():
@@ -236,7 +242,8 @@ def adminResultDetailsVideo(videoInfo):
 @app.route('/adminStudents')
 def adminStudents():
     cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM students where Role='STUDENT'")
+    # Select all fields except password for security reasons
+    cur.execute("SELECT ID, Name, Email, Role, Created_at, Updated_at FROM students where Role='STUDENT'")
     data = cur.fetchall()
     cur.close()
     return render_template('Students.html', students=data)
@@ -247,8 +254,10 @@ def insertStudent():
         name = request.form['username']
         email = request.form['email']
         password = request.form['password']
+        # Hash the password before storing
+        hashed_password = generate_password_hash(password)
         cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO students (Name, Email, Password, Role) VALUES (%s, %s, %s, %s)", (name, email, password,'STUDENT'))
+        cur.execute("INSERT INTO students (Name, Email, Password, Role) VALUES (%s, %s, %s, %s)", (name, email, hashed_password,'STUDENT'))
         mysql.connection.commit()
         return redirect(url_for('adminStudents'))
 
@@ -267,12 +276,14 @@ def updateStudent():
         name = request.form['name']
         email = request.form['email']
         password = request.form['password']
+        # Hash the password before storing
+        hashed_password = generate_password_hash(password)
         cur = mysql.connection.cursor()
         cur.execute("""
                UPDATE students
                SET Name=%s, Email=%s, Password=%s
                WHERE ID=%s
-            """, (name, email, password, id_data))
+            """, (name, email, hashed_password, id_data))
         mysql.connection.commit()
         return redirect(url_for('adminStudents'))
 
