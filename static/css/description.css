@@ -10,7 +10,8 @@ body {
     width: 100%;
     font-family: 'Lato', sans-serif;
     margin: 0;  
-    background-color: #e2e2e2;
+    background-color: #1a1a1a;
+    color: #ffd700;
 }
 
 a:active {
@@ -23,13 +24,13 @@ a:active {
     width: 2.8vmin; }
   
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px #000; }
+    box-shadow: inset 0 0 5px #444; }
    
 ::-webkit-scrollbar-thumb {
-    background: var(--bg-color-dark-blue); }
+    background: #ffd700; }
   
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--bg-color-blue);
+    background: #e6c200;
 }
 
 
@@ -38,13 +39,13 @@ a:active {
 
 :root {
     --transition-visible: transform 4s .25s cubic-bezier(0,1,.3,1), opacity .8s .25s ease-out;
-    --bg-color-blue: #3192af;
-    --bg-color-dark-blue: #06113C;
-    --bg-color-orange-9900: #ff9900;
-    --bg-color-orange-a600: #ffa600;
-    --bg-img-grad-orange: linear-gradient(35deg, #ff9900, #f0ec12);
-    --bg-img-grad-blue: linear-gradient(35deg, #486781, #1ac0cc);
-    --box-shadow-gray: 0 3px 5px 0 rgba(51, 50, 50, 0.582), 0 3px 6px 0 rgba(68, 68, 68, 0.733);
+    --bg-color-blue: #ffd700;
+    --bg-color-dark-blue: #2a2a2a;
+    --bg-color-orange-9900: #ffd700;
+    --bg-color-orange-a600: #ffd700;
+    --bg-img-grad-orange: linear-gradient(35deg, #ffd700, #e6c200);
+    --bg-img-grad-blue: linear-gradient(35deg, #2a2a2a, #ffd700);
+    --box-shadow-gray: 0 3px 5px 0 rgba(255, 215, 0, 0.3), 0 3px 6px 0 rgba(255, 215, 0, 0.4);
 }    
 
 /* Patterns */
@@ -58,8 +59,9 @@ a {
     margin: auto; 
     padding: 2.2rem 0;
     text-align: center;
-    color: #5f9ea0;
-    font: bold 9vmin "Yanone Kaffeesatz", sans-serif;   
+    color: #ffd700;
+    font: bold 9vmin "Yanone Kaffeesatz", sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);   
 }
 
 @media (max-width: 55rem) {
@@ -77,10 +79,11 @@ nav{
    position: fixed;
    top:0;
    width: 100%;
-   background-color: #5f9ea0;
+   background-color: #2a2a2a;
    overflow: auto;
    height: auto;
    z-index: 1;
+   box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
 }
 .left-links{
    flex:1 1 200px;
@@ -90,18 +93,21 @@ nav{
     font-size: 17px;
     font-weight: bolder;
     margin-left: 30px;
+    color: #ffd700;
 }
 .links {
    display: inline-block;
    text-align: center;
    padding: 14px;
-   color: rgb(0, 0, 0);
+   color: #ffd700;
    text-decoration: none;
    font-size: 17px;
    font-weight: bolder;
 }
 .links:hover {
-   color: white;
+   color: #e6c200;
+   transform: translateY(-2px);
+   transition: all 0.3s ease;
 }
 
 
@@ -119,13 +125,14 @@ nav{
 }
 
 .quote {
-    color: black;
+    color: #ffd700;
     font-weight: bold;
     font-size: 2.1vmax;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .author {
-    color:#33323294;    
+    color: #ccc;    
     font-size: 2.5vmin;
 }
 
@@ -150,20 +157,21 @@ nav{
 
 .container2 > div:nth-child(n + 1):hover{
     transform: scale(1.07);
-    box-shadow: 0 3px 5px 0 #5f9ea0, 0 3px 6px 0 #5f9ea0;
+    box-shadow: 0 3px 5px 0 #ffd700, 0 3px 6px 0 #ffd700;
 }
 
 .box1, .box2, .box3, .box4 ,.box5,.box6{
-    color: #292727;
+    color: #ffd700;
     text-align: center;
     letter-spacing: .05rem;
     line-height: 1.5rem;
     width: 100%;
     height: 100%;
     padding: 0 1rem;
-    border: .05rem solid #ccc;
+    border: .05rem solid #444;
     box-shadow: var(--box-shadow-gray);
-    background-color: #fff;
+    background-color: #2a2a2a;
+    transition: all 0.3s ease;
 }
 
 .img-box1, .img-box2, .img-box3 ,.img-box4,.img-box5,.img-box6{
@@ -197,13 +205,16 @@ nav{
     margin: auto;    
     padding: 3vmax;
     line-height: 4vmin;
-    background-color: #5f9ea0;
-    
+    background-color: #2a2a2a;
+    color: #ffd700;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
 }
 .title2 {
-    
+    color: #ffd700;
     font: 6vmin "Yanone Kaffeesatz", sans-serif;      
-    margin-bottom: 2vmax;    
+    margin-bottom: 2vmax;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);    
 }
 .container3 ul li{
     text-align: left;
@@ -215,19 +226,25 @@ nav{
 }
 
 .next {
-  background-color: #5f9ea0;
-  color: white;
+  background-color: #ffd700;
+  color: #1a1a1a;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: all 0.3s ease;
 }
 .nextButton a {
   text-decoration: none;
   display: inline-block;
   padding: 10px 30px;
   font-size: 20px;
+  color: #1a1a1a;
 }
 
 .nextButton a:hover {
-  background-color: #fff;
-  color: black;
+  background-color: #e6c200;
+  color: #1a1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
 }
 
 
@@ -240,10 +257,12 @@ nav{
     display: grid;    
     grid-template-columns: 1fr;
     justify-items: center;
-    background-color: #5f9ea0;
+    background-color: #2a2a2a;
+    color: #ffd700;
     font-size: 2.5vmin;
     font-weight: bold;
-    text-decoration: none;     
+    text-decoration: none;
+    border-top: 2px solid #ffd700;     
 }
 
 

@@ -21,7 +21,7 @@ for(var i = 0 ; i < 4 ; i++){
     var ch = document.createElement("button");
     ch.setAttribute("data-index",i);
     ch.setAttribute("class","btn rounded-pill mb-2");
-    ch.setAttribute("style","background:#5f9ea0");
+    ch.setAttribute("style","background:#ffd700; color:#1a1a1a; font-weight:bold; transition:all 0.3s ease;");
     choiceArray.push(ch);
     divArray.push(dv);
 }
@@ -122,7 +122,7 @@ function viewResult(){
 
     var scoreButton = document.createElement("button");     //Submit User score
     scoreButton.setAttribute("class","btn rounded-pill mb-2 ml-3 mt-2");
-    scoreButton.setAttribute("style","background:#5f9ea0");
+    scoreButton.setAttribute("style","background:#ffd700; color:#1a1a1a; font-weight:bold; transition:all 0.3s ease;");
     scoreButton.textContent = "Submit";
     completeTest.appendChild(scoreButton);
 

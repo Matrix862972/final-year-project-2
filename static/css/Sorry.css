@@ -9,11 +9,12 @@
         }
 
         body {
-            background-color: #e2e2e2 !important;
+            background-color: #1a1a1a !important;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: "Poppins", sans-serif;
+            color: #ffd700;
         }
 
         nav {
@@ -21,12 +22,13 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: #5f9ea0;
+            background-color: #2a2a2a;
             overflow: auto;
             height: auto;
             justify-content: space-between;
             align-items: center;
             z-index: 2;
+            box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
         }
 
         .left-links {
@@ -39,34 +41,48 @@
             font-size: 17px;
             font-weight: bolder;
             margin-left: 30px;
+            color: #ffd700;
         }
 
         .links {
             display: inline-block;
             text-align: center;
             padding: 14px;
-            color: #fff;
+            color: #ffd700;
             text-decoration: none;
             font-size: 17px;
             font-weight: bolder;
+            transition: all 0.3s ease;
+        }
+        
+        .links:hover {
+            color: #e6c200;
+            transform: translateY(-2px);
         }
 
         section {
             position: fixed;
             height: 100%;
             width: 100%;
-            background: #e2e2e2;
+            background: #1a1a1a;
         }
 
         button {
             font-size: 18px;
             font-weight: 400;
-            color: #fff;
+            color: #1a1a1a;
             padding: 14px 22px;
             border: none;
-            background: #4070f4;
-            border-radius: 6px;
+            background: #ffd700;
+            border-radius: 25px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
         }
 
         .modal-container {
@@ -84,9 +100,10 @@
             width: 380px;
             flex: 0 0 auto;
             padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            background-color: #2a2a2a;
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4), 0 0 40px rgba(255, 215, 0, 0.1);
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s ease;
@@ -104,14 +121,16 @@
 
         .modal-box i {
             font-size: 70px;
-            color: #4070f4;
+            color: #ffd700;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
         .modal-box h2 {
             margin-top: 20px;
             font-size: 25px;
             font-weight: 500;
-            color: #333;
+            color: #ffd700;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
 
         .modal-box ul {
@@ -123,7 +142,7 @@
         .modal-box ul li {
             margin-bottom: 10px;
             font-size: 18px;
-            color: #333;
+            color: #ffd700;
         }
 
         .modal-box .buttons {
@@ -132,20 +151,32 @@
 
         .modal-box button {
             font-size: 17px;
-            padding: 6px 12px;
+            padding: 10px 20px;
             margin: 0 10px;
-            background-color: #5f9ea0;
+            background-color: #ffd700;
+            color: #1a1a1a;
             font-weight: bold;
+            border-radius: 25px;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .modal-box button:hover {
+            background-color: #e6c200;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
         }
 
         footer {
-            background-color: #5f9ea0;
+            background-color: #2a2a2a;
             text-align: center;
             padding: 10px 0;
             position: absolute;
             bottom: 0;
             width: 100%;
             z-index: 2;
+            border-top: 2px solid #ffd700;
+            box-shadow: 0 -2px 4px rgba(255, 215, 0, 0.3);
         }
 
         .container8 {
@@ -157,10 +188,12 @@
             font-size: 2.5vmin;
             font-weight: bold;
             text-decoration: none;
+            color: #ffd700;
         }
 
         .box-footer1 {
             font-size: 16px;
             font-weight: bold;
             padding: 5px;
+            color: #ffd700;
         }

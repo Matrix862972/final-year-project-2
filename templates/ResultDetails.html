@@ -83,64 +83,65 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<ul class="breadcrumb">
-							<li>
-								<a href="{{url_for('adminResults')}}">Result</a>
+						<ul class="breadcrumb" style="background: transparent !important; padding: 0;">
+							<li style="background: transparent !important;">
+								<a href="{{url_for('adminResults')}}" style="color: #ffd700 !important; text-decoration: none;">Result</a>
 							</li>
-							<li><i class='bx bx-chevron-right' ></i></li>
-							<li>
-								<a class="active" href="#">{{resultDetials['Result'][0]['Name']}}</a>
+							<li style="background: transparent !important;"><i class='bx bx-chevron-right' style="color: #ffd700 !important;"></i></li>
+							<li style="background: transparent !important;">
+								<a class="active" href="#" style="color: #ffd700 !important; text-decoration: none; font-weight: 600;">{{resultDetials['Result'][0]['Name']}}</a>
 							</li>
 						</ul>
 					</div>
 					<div class="container">
 						<img src="{{ url_for('static', filename='Profiles/') }}{{ resultDetials['Result'][0]['Link'] }}" alt="" style="width: 100px;">
-						<p>{{ resultDetials['Result'][0]['Name'] }}</p>
+						<p style="color: #ffd700; font-weight: 600; font-size: 18px;">{{ resultDetials['Result'][0]['Name'] }}</p>
 					</div>
 					<div class="status">
 						<ul class="features">
-							<li><span>Exam Status : </span> {{ resultDetials['Result'][0]['Status'] }}</li>
-							<li><span>Trust Score :</span> {{ resultDetials['Result'][0]['TrustScore'] }}%</li>
-							<li><span>Total Score : </span>{{ resultDetials['Result'][0]['TotalMark'] }}% </li>
+							<li style="color: #ffd700;"><span style="color: #ffd700; font-weight: 600;">Exam Status : </span> {{ resultDetials['Result'][0]['Status'] }}</li>
+							<li style="color: #ffd700;"><span style="color: #ffd700; font-weight: 600;">Trust Score :</span> {{ resultDetials['Result'][0]['TrustScore'] }}%</li>
+							<li style="color: #ffd700;"><span style="color: #ffd700; font-weight: 600;">Total Score : </span>{{ resultDetials['Result'][0]['TotalMark'] }}% </li>
 						</ul>
 					</div>
-					<h4 style="margin-top: 30px;">Violation Records</h4>
+					<h4 style="margin-top: 30px; color: #ffd700; font-weight: bold;">Violation Records</h4>
 					<table>
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Time</th>
-								<th>Duration</th>
+								<th style="color: #ffd700; font-weight: bold;">Name</th>
+								<th style="color: #ffd700; font-weight: bold;">Time</th>
+								<th style="color: #ffd700; font-weight: bold;">Duration</th>
+								<th style="color: #ffd700; font-weight: bold;">Link</th>
 							</tr>
 						</thead>
 						<tbody>
 						{% if resultDetials['Violation']|length %}
 							  {% for violation in resultDetials['Violation'] %}
 							<tr>
-								<td>
+								<td style="color: #ffd700;">
 									{{ violation['Name'] }}
 								</td>
-								<td>
+								<td style="color: #ffd700;">
 									{{ violation['Time'] }}
 								</td>
-								<td>{{ violation['Duration'] }}</td>
+								<td style="color: #ffd700;">{{ violation['Duration'] }}</td>
 								<td>
 				{% set Type = violation['Link'].split('.') %}
 				{% if Type[1] == 'mp4' %}
 				{% set clean_link = violation['Link'].replace('static\\', '').replace('static/', '').replace('\\', '/').replace(' ', '') %}
-				<a href="{{ url_for('static', filename=clean_link) }}" target="_blank">Video Link</a>
+				<a href="{{ url_for('static', filename=clean_link) }}" target="_blank" style="color: #ffd700; text-decoration: none; font-weight: 600;">Video Link</a>
 									{% elif Type[1] == 'wav' %}
-									<a href="#" name="{{ violation['Link'] }}" onclick="playAudio(name)">Audio Link</a>
+									<a href="#" name="{{ violation['Link'] }}" onclick="playAudio(name)" style="color: #ffd700; text-decoration: none; font-weight: 600;">Audio Link</a>
 									{% else %}
-									<a href="#"></a>
+									<a href="#" style="color: #ffd700; text-decoration: none;">No Link</a>
 									{% endif %}
 								</td>
 							</tr>
 						 {% endfor %}
 						{% else %}
 								<tr>
-								<td colspan="3">
-									<p class="text-center">No violation record is found.</p>
+								<td colspan="4">
+									<p class="text-center" style="color: #ffd700; font-style: italic;">No violation record is found.</p>
 								</td>
 							</tr>
 						{% endif %}
@@ -157,13 +158,15 @@
 	  <span class="overlay1"></span>
 	  <div class="modal-box">
 		<img src="{{ url_for('static', filename='img/mic-unmute.png') }}" alt="Icon" width="70" height="70" />
-		<h2>Your audio record</h2>
+		<h2 style="color: #ffd700; font-weight: bold;">Your audio record</h2>
 		<br>
 		<audio controls id="audio">
 		  <source src="" type="audio/wav" id= "audioSource">
 		</audio>
 		<div class="buttons">
-		  <button class="close-btn">Close</button>
+		  <button class="close-btn" style="background: #ffd700; color: #1a1a1a; border: none; padding: 12px 24px; border-radius: 6px; font-weight: bold; transition: all 0.3s ease; cursor: pointer;" 
+			onmouseover="this.style.background='#e6c200'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(255, 215, 0, 0.3)'" 
+			onmouseout="this.style.background='#ffd700'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">Close</button>
 		</div>
 	  </div>
 	</section>

@@ -22,7 +22,7 @@
 			<span class="text">Admin Dashboard</span>
 		</a>
 		<ul class="side-menu top">
-			<li >
+			<li>
 				<a href="{{url_for('adminStudents')}}">
 					<i class='bx bxs-group' ></i>
 					<span class="text">Students</span>
@@ -30,7 +30,7 @@
 			</li>
 			<li class="active">
 				<a href="{{url_for('adminResults')}}">
-					<i class='bx bxs-graduation' ></i>
+					<i class='bx bxs-graduation'></i>
 					<span class="text">Exam Results</span>
 				</a>
 			</li>
@@ -83,32 +83,38 @@
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Exam Result Records</h3>
+						<h3 style="color: #ffd700;">Exam Result Records</h3>
 					</div>
-					<table>
+					<table style="color: #e0e0e0;">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Date</th>
-								<th>Status</th>
-								<th>Total Mark</th>
+								<th style="color: #ffd700; font-weight: bold;">Name</th>
+								<th style="color: #ffd700; font-weight: bold;">Date</th>
+								<th style="color: #ffd700; font-weight: bold;">Status</th>
+								<th style="color: #ffd700; font-weight: bold;">Total Mark</th>
+								<th style="color: #ffd700; font-weight: bold;">Actions</th>
 							</tr>
 						</thead>
 						<tbody>
 						{% for result in results %}
 							<tr>
 								<td>
-									<p>{{ result['Name'] }}</p>
+									<p style="color: #ffd700; margin: 0; font-weight: 600;">{{ result['Name'] }}</p>
 								</td>
-								<td>{{ result['Date'] }} </td>
+								<td style="color: #ffd700;">{{ result['Date'] }} </td>
 								<td>
-									{% set bgColor = "bg-success" if result['Status']=='Pass' else 'bg-danger'  %}
-									<p><kbd class="{{bgColor}}">{{ result['Status'] }}</kbd></p>
+									{% if result['Status']=='Pass' %}
+										<span class="status" style="background: #28a745; color: #fff; font-size: 10px; padding: 6px 16px; border-radius: 20px; font-weight: 700;">{{ result['Status'] }}</span>
+									{% else %}
+										<span class="status" style="background: #dc3545; color: #fff; font-size: 10px; padding: 6px 16px; border-radius: 20px; font-weight: 700;">{{ result['Status'] }}</span>
+									{% endif %}
 								</td>
-								<td>{{ result['TotalMark'] }}% </td>
+								<td style="color: #ffd700;">{{ result['TotalMark'] }}% </td>
 								<td>
-									<a href="{{ url_for('adminResultDetails', resultId=result['Id']) }}">
-										<button type="button" class="btn btn-outline-info">Details</button>
+									<a href="{{ url_for('adminResultDetails', resultId=result['Id']) }}" style="text-decoration: none;">
+										<button type="button" style="background: #ffd700; color: #1a1a1a; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; transition: all 0.3s ease; cursor: pointer;" 
+											onmouseover="this.style.background='#e6c200'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(255, 215, 0, 0.3)'" 
+											onmouseout="this.style.background='#ffd700'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">Details</button>
 									</a>
 								</td>
 							</tr>

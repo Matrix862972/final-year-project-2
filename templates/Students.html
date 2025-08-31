@@ -22,7 +22,7 @@
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">Admin Dashboard</span>
+			<span class="text" style="text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);">Admin Dashboard</span>
 		</a>
 		<ul class="side-menu top">
 
@@ -55,11 +55,11 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<span class="text">The Online Exam Proctor</span>
+			<span class="text" style="text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);">The Online Exam Proctor</span>
 			<div>
 				<a href="#">
 					<i class='bx bxs-user' ></i>
-					<span class="text">Profile</span>
+					<span class="text" style="text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);">Profile</span>
 				</a>
 			</div>
 
@@ -70,7 +70,7 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
+					<h1 style="text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);">Dashboard</h1>
 					<ul class="breadcrumb">
 						<li>
 							<a href="#">Dashboard</a>
@@ -112,7 +112,7 @@
 								<td>{{row.3}}</td>
 								<td>
 									<a href="/updateStudent/{{row.0}}" data-toggle="modal" data-target="#modaledit{{row.0}}">
-										<i class='bx bxs-edit' style="color: #5f9ea0;"></i>
+										<i class='bx bxs-edit' style="color: #ffd700;"></i>
 									</a>
 									<form method="POST" action="/deleteStudent" style="display: inline;" 
 										  onsubmit="return confirm('Are You Sure You Want To Delete This Student? This action cannot be undone.')">
@@ -126,9 +126,9 @@
 							</tr>
 								<div id="modaledit{{row.0}}" class="modal fade" role="dialog">
 								   <div class="modal-dialog">
-									  <div class="modal-content" style="background : #e2e2e2;">
+									  <div class="modal-content" style="background: #2a2a2a; color: #ffd700; border: 2px solid #ffd700;">
 										 <div class="modal-header">
-											<h4 class="modal-title">Update Information</h4>
+											<h4 class="modal-title" style="color: #ffd700;">Update Information</h4>
 										 </div>
 										 <div class="modal-body">
 											<form action="{{url_for('updateStudent')}}" method="POST">
@@ -146,7 +146,7 @@
 												  <input type="password" class="form-control" name="password" placeholder="Enter new password" required>
 											   </div>
 											   <div class="form-group">
-												  <button class="btn" style="background : #5f9ea0;" type="submit">Update</button>
+												  <button class="btn" style="background: #ffd700; color: #1a1a1a; font-weight: bold; border-radius: 25px;" type="submit">Update</button>
 											   </div>
 											</form>
 										 </div>
@@ -170,9 +170,9 @@
 <script src="{{url_for('static', filename='js/TrStudent.js')}}"></script>
 	<div id="myModal" class="modal fade" role="dialog">
 	   <div class="modal-dialog">
-		  <div class="modal-content" style="background : #e2e2e2;">
+		  <div class="modal-content" style="background: #2a2a2a; color: #ffd700; border: 2px solid #ffd700;">
 			 <div class="modal-header">
-				<h4 class="modal-title">Add New Student</h4>
+				<h4 class="modal-title" style="color: #ffd700;">Add New Student</h4>
 			 </div>
 			 <div class="modal-body">
 				<form action="{{ url_for('insertStudent') }}" method="POST">
@@ -189,7 +189,7 @@
 					  <input type="password" class="form-control" name="password" required>
 				   </div>
 				   <div class="form-group" >
-					  <button class="btn" style="background:#5f9ea0" type="submit">Add</button>
+					  <button class="btn" style="background: #ffd700; color: #1a1a1a; font-weight: bold; border-radius: 25px;" type="submit">Add</button>
 				   </div>
 				</form>
 			 </div>

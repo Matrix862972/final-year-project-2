@@ -7,6 +7,8 @@
 body{
     font-family: 'Poppins', sans-serif;
     overflow: hidden;
+    background: #1a1a1a;
+    color: #ffd700;
 }
 
 .wave{
@@ -24,6 +26,7 @@ body{
     grid-template-columns: repeat(2, 1fr);
     grid-gap :7rem;
     padding: 0 2rem;
+    background: #1a1a1a;
 }
 
 .img{
@@ -37,6 +40,10 @@ body{
 	justify-content: flex-start;
 	align-items: center;
 	text-align: center;
+	background: #2a2a2a;
+	border-radius: 20px;
+	padding: 3rem 2rem;
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .img img{
@@ -53,9 +60,10 @@ form{
 
 .login-content h2{
 	margin: 15px 0;
-	color: #5f9ea0;
+	color: #ffd700;
 	text-transform: uppercase;
 	font-size: 2.9rem;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
 }
 
 .login-content .input-div{
@@ -64,7 +72,7 @@ form{
     grid-template-columns: 7% 93%;
     margin: 25px 0;
     padding: 5px 0;
-    border-bottom: 2px solid #d9d9d9;
+    border-bottom: 2px solid #444;
 }
 
 .login-content .input-div.one{
@@ -72,7 +80,7 @@ form{
 }
 
 .i{
-	color: #d9d9d9;
+	color: #ffd700;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -103,7 +111,7 @@ form{
 	bottom: -2px;
 	width: 0%;
 	height: 2px;
-	background-color: #5f9ea0;
+	background-color: #ffd700;
 	transition: .4s;
 }
 
@@ -125,7 +133,7 @@ form{
 }
 
 .input-div.focus > .i > i{
-	color: #5f9ea0;
+	color: #ffd700;
 }
 
 .input-div > div > input{
@@ -139,8 +147,29 @@ form{
 	background: none;
 	padding: 0.5rem 0.7rem;
 	font-size: 1.2rem;
-	color: #555;
+	color: #ffd700;
 	font-family: 'poppins', sans-serif;
+	caret-color: white;
+}
+
+/* Fix browser autocomplete styling */
+.input-div > div > input:-webkit-autofill,
+.input-div > div > input:-webkit-autofill:hover,
+.input-div > div > input:-webkit-autofill:focus,
+.input-div > div > input:-webkit-autofill:active {
+	-webkit-box-shadow: 0 0 0 30px #2a2a2a inset !important;
+	-webkit-text-fill-color: #ffd700 !important;
+	background-color: transparent !important;
+	background: transparent !important;
+}
+
+/* Fix input focus and selection states */
+.input-div > div > input:focus,
+.input-div > div > input:active,
+.input-div > div > input:focus-visible {
+	background: transparent !important;
+	background-color: transparent !important;
+	color: #ffd700 !important;
 }
 
 .input-div.pass{
@@ -167,19 +196,23 @@ a:hover{
 	border-radius: 25px;
 	outline: none;
 	border: none;
-	background-color: #5f9ea0;
+	background-color: #ffd700;
 	background-size: 200%;
 	font-size: 1.2rem;
-	color: #fff;
+	color: #1a1a1a;
 	font-family: 'Poppins', sans-serif;
 	text-transform: uppercase;
 	margin: 1rem 0;
 	cursor: pointer;
 	transition: .5s;
 	margin-top: 25px;
+	font-weight: bold;
 }
 .btn:hover{
 	background-position: right;
+	background-color: #e6c200;
+	transform: translateY(-2px);
+	box-shadow: 0 4px 8px rgba(255, 215, 0, 0.3);
 }
 
 

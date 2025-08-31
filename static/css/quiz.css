@@ -1,38 +1,105 @@
 body{
-    background: #e2e2e2;
+    background: #1a1a1a;
+    color: #ffd700;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
 }
 header{
-    background: #5f9ea0;
+    background: #2a2a2a;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
 }
 header nav{
     position : fixed;
     overflow : hidden;
+    z-index: 1000;
 }
 header nav span{
     font-size: 17px;
     font-weight : bold;
-    color: white;
+    color: #ffd700;
     margin-left: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 .card{
     border-radius: 2em;
-    box-shadow: 0 5px 10px #5f9ea0
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4), 0 0 30px rgba(255, 215, 0, 0.1);
+    background: #2a2a2a;
+    border: 2px solid #444;
+    transition: all 0.3s ease;
+}
+.card:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 215, 0, 0.6), 0 0 40px rgba(255, 215, 0, 0.2);
 }
 .card-body{
-    background:#F5F5F5;border-radius: 1em
+    background: #1a1a1a;
+    border-radius: 1em;
+    color: #ffd700;
+    padding: 1.5rem;
 }
 footer {
       position: absolute;
       bottom: 0;
       width: 100%;
-      font-align:center;
       text-align: center;
       padding-top: 12px;
       margin: auto;
       font-size: 2.5vmin;
       font-weight: bold;
-      background-color: #5f9ea0;
-      color: black;
+      background-color: #2a2a2a;
+      color: #ffd700;
+      border-top: 2px solid #ffd700;
+      box-shadow: 0 -2px 4px rgba(255, 215, 0, 0.3);
+}
+
+/* Enhanced Quiz Styling */
+.btn-primary {
+    background-color: #ffd700;
+    border-color: #ffd700;
+    color: #1a1a1a;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e6c200;
+    border-color: #e6c200;
+    color: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 215, 0, 0.4);
+}
+
+.form-check-input:checked {
+    background-color: #ffd700;
+    border-color: #ffd700;
+}
+
+.form-check-label {
+    color: #ffd700;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #ffd700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.text-primary {
+    color: #ffd700 !important;
+}
+
+.border-primary {
+    border-color: #ffd700 !important;
+}
+
+.question-container {
+    background: #2a2a2a;
+    border-radius: 1rem;
+    padding: 2rem;
+    margin: 1rem 0;
+    border: 2px solid #444;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
 }
 
 

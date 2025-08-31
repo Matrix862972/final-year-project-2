@@ -1,24 +1,39 @@
 
+body {
+    background: #1a1a1a;
+    color: #ffd700;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
 nav{
-    background: #5f9ea0;
+    background: #2a2a2a;
     height: 50px;
     display: flex;
     align-items: center;
     margin-bottom: 60px;
+    box-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);
 }
 nav span{
     font-size: 17px;
     font-weight: bolder;
     margin-left: 30px;
-    color: black;
+    color: #ffd700;
     
 }
 nav a{
     text-decoration: none;
-    color: black;
+    color: #ffd700;
     font-weight: bolder;
     margin-left: auto;
     margin-right: 50px;
+    transition: all 0.3s ease;
+}
+nav a:hover{
+    color: #e6c200;
+    transform: translateY(-2px);
 }
 .container{
     display: flex;
@@ -40,31 +55,34 @@ nav a{
 h1{
     margin: 0;
     animation: pulse 2s ease-in-out infinite;
-    color: #5f9ea0;
+    color: #ffd700;
     margin-bottom: 30px;
     text-align: center;
     margin-left: 80px;
-    text-shadow: 2px 2px rgb(31, 29, 29);
+    text-shadow: 2px 2px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
 }
 @keyframes pulse{
     0%{
         transform: scale(1);
+        text-shadow: 2px 2px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
     }
     50%{
         transform: scale(1.2);
+        text-shadow: 2px 2px rgba(0, 0, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.8);
     }
     100%{
         transform: scale(1);
+        text-shadow: 2px 2px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 215, 0, 0.5);
     }
 }
 .pag{
     width: 800px;
     box-sizing: border-box;
-    background: #e2e2e2;
-    border: 10px solid #5f9ea0;
+    background: #2a2a2a;
+    border: 10px solid #ffd700;
     padding: 20px;
     margin: 15px;
-    box-shadow: 0 8px 10px gray;
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3), 0 0 40px rgba(255, 215, 0, 0.1);
     border-radius: 20px;
     text-align: center;
     margin-left: 40px;
@@ -73,7 +91,8 @@ p{
     font-size: 17px;
     margin: 0;
     margin-top: 20px;
-    color: black;
+    color: #ffd700;
+    line-height: 1.6;
 }
 footer {
     position: absolute;
@@ -85,7 +104,9 @@ footer {
     height: 50px;
     font-size: 2.5vmin;
     font-weight: bold;
-    background-color: #5f9ea0;
-    color: black;
+    background-color: #2a2a2a;
+    color: #ffd700;
+    border-top: 2px solid #ffd700;
+    box-shadow: 0 -2px 4px rgba(255, 215, 0, 0.3);
 }
 
