@@ -106,6 +106,7 @@ def login():
 
 @app.route('/logout')
 def logout():
+    session.clear()  # Clear all session data for security
     return render_template('login.html')
 
 #Student Related

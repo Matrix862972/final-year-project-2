@@ -71,21 +71,60 @@ cur.execute("SELECT * FROM students WHERE Email=%s AND Password=%s", (username, 
 
 ``
 
-## 🐞 Bug 3: Logout Does Not Clear Session Data
+## ✅ Bug 3: Logout Does Not Clear Session Data [FIXED]
 
 ### 📍 File:
 
 `app.py`
 
-### 🧩 Description:
+### 🧩 Description (Original):
 
-The `/logout` route currently only renders the login page (`login.html`) but does **not** terminate the user session. As a result, any session variables (e.g., `session['user']`, `session['email']`, etc.) remain active after "logout".
-This means the user could still access authenticated routes depending on how access control is implemented elsewhere in the system.
+The `/logout` route previously only rendered the login page (`login.html`) but did **not** terminate the user session. As a result, any session variables (e.g., `session['user']`, `session['email']`, etc.) remained active after "logout". This meant the user could still access authenticated routes depending on how access control was implemented elsewhere in the system.
 
-⚠️ Impact:
-Security Risk: Users may still be considered "logged in".
+⚠️ Impact (Before Fix):
 
-Inconsistent User State: Frontend shows login page, but backend may still treat the user as authenticated.
+- Security Risk: Users may still be considered "logged in" after logout.
+- Inconsistent User State: Frontend showed login page, but backend still treated the user as authenticated.
+
+### 🔧 How It Was Fixed:
+
+- The `/logout` route was updated to call `session.clear()` before rendering the login page.
+- This ensures all session data is removed and the user is fully logged out.
+
+### 🔢 Code Changes:
+
+**Before (Insecure):**
+
+```python
+@app.route('/logout')
+def logout():
+    return render_template('login.html')
+```
+
+**After (Secure):**
+
+```python
+@app.route('/logout')
+def logout():
+    session.clear()  # Clear all session data for security
+    return render_template('login.html')
+```
+
+### 🛡️ Security Benefits:
+
+- Ensures users are fully logged out
+- Prevents unauthorized access to protected routes after logout
+- Aligns with web security best practices
+
+### 📁 Files Modified:
+
+1. **`app.py`**: Updated `/logout` route to clear session data
+
+### 🏷️ Severity:
+
+~~Security Risk~~ → **Resolved** ✅
+
+**Fix Date:** August 2025
 
 ### 🔢 Code Snippet:
 
@@ -164,6 +203,7 @@ Using GET for deletion was not secure and violated REST principles. Destructive 
 ### 🔧 How It Was Fixed:
 
 **1. Backend Security Updates:**
+
 - Changed route from `GET` to `POST` method only
 - Added proper form data validation with `request.form.get()`
 - Implemented error handling with try-catch blocks
@@ -171,6 +211,7 @@ Using GET for deletion was not secure and violated REST principles. Destructive 
 - Enhanced user feedback with categorized flash messages
 
 **2. Frontend Security Improvements:**
+
 - Replaced insecure `<a>` link with secure `<form>` submission
 - Added hidden input field for student ID (CSRF-safe)
 - Improved confirmation dialog with clearer warning message
@@ -180,6 +221,7 @@ Using GET for deletion was not secure and violated REST principles. Destructive 
 ### 🔢 Code Changes:
 
 **Before (Insecure):**
+
 ```python
 @app.route('/deleteStudent/<string:stdId>', methods=['GET'])
 def deleteStudent(stdId):
@@ -191,12 +233,16 @@ def deleteStudent(stdId):
 ```
 
 ```html
-<a href="/deleteStudent/{{ row.0 }}" onclick="return confirm('Are You Sure For Delete?')">
-    <i class='bx bxs-message-square-x' style="color: #aa2e49;"></i>
+<a
+  href="/deleteStudent/{{ row.0 }}"
+  onclick="return confirm('Are You Sure For Delete?')"
+>
+  <i class="bx bxs-message-square-x" style="color: #aa2e49;"></i>
 </a>
 ```
 
 **After (Secure):**
+
 ```python
 @app.route('/deleteStudent', methods=['POST'])
 def deleteStudent():
@@ -205,7 +251,7 @@ def deleteStudent():
         if not stdId:
             flash("Invalid student ID", category='error')
             return redirect(url_for('adminStudents'))
-        
+
         try:
             cur = mysql.connection.cursor()
             cur.execute("DELETE FROM students WHERE ID=%s", (stdId,))
@@ -214,17 +260,24 @@ def deleteStudent():
             flash("Record Has Been Deleted Successfully", category='success')
         except Exception as e:
             flash(f"Error deleting student: {str(e)}", category='error')
-        
+
         return redirect(url_for('adminStudents'))
 ```
 
 ```html
-<form method="POST" action="/deleteStudent" style="display: inline;" 
-      onsubmit="return confirm('Are You Sure You Want To Delete This Student? This action cannot be undone.')">
-    <input type="hidden" name="student_id" value="{{ row.0 }}">
-    <button type="submit" style="background: none; border: none; cursor: pointer; padding: 0;">
-        <i class='bx bxs-message-square-x' style="color: #aa2e49;"></i>
-    </button>
+<form
+  method="POST"
+  action="/deleteStudent"
+  style="display: inline;"
+  onsubmit="return confirm('Are You Sure You Want To Delete This Student? This action cannot be undone.')"
+>
+  <input type="hidden" name="student_id" value="{{ row.0 }}" />
+  <button
+    type="submit"
+    style="background: none; border: none; cursor: pointer; padding: 0;"
+  >
+    <i class="bx bxs-message-square-x" style="color: #aa2e49;"></i>
+  </button>
 </form>
 ```
 
